@@ -103,7 +103,7 @@ class DefaultOrm extends AbstractQueryProvider implements QueryProviderInterface
     /**
      * @return array
      */
-    private function getConfig()
+    protected function getConfig()
     {
         $config = $this->getServiceLocator()->get('config');
         if (isset($config['zf-doctrine-querybuilder-options'])) {
@@ -116,7 +116,7 @@ class DefaultOrm extends AbstractQueryProvider implements QueryProviderInterface
     /**
      * @return ORMFilterManager
      */
-    private function getFilterManager()
+    protected function getFilterManager()
     {
         return $this->getServiceLocator()->get(ORMFilterManager::class);
     }
@@ -124,7 +124,7 @@ class DefaultOrm extends AbstractQueryProvider implements QueryProviderInterface
     /**
      * @return ORMOrderByManager
      */
-    private function getOrderByManager()
+    protected function getOrderByManager()
     {
         return $this->getServiceLocator()->get(ORMOrderByManager::class);
     }

@@ -128,7 +128,7 @@ class DefaultOdm extends AbstractQueryProvider implements QueryProviderInterface
     /**
      * @return array
      */
-    private function getConfig()
+    protected function getConfig()
     {
         $config = $this->getServiceLocator()->get('config');
         if (isset($config['zf-doctrine-querybuilder-options'])) {
@@ -141,7 +141,7 @@ class DefaultOdm extends AbstractQueryProvider implements QueryProviderInterface
     /**
      * @return ODMFilterManager
      */
-    private function getFilterManager()
+    protected function getFilterManager()
     {
         return $this->getServiceLocator()->get(ODMFilterManager::class);
     }
@@ -149,7 +149,7 @@ class DefaultOdm extends AbstractQueryProvider implements QueryProviderInterface
     /**
      * @return ODMOrderByManager
      */
-    private function getOrderByManager()
+    protected function getOrderByManager()
     {
         return $this->getServiceLocator()->get(ODMOrderByManager::class);
     }
