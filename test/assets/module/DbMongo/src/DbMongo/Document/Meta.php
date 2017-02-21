@@ -37,11 +37,24 @@ class Meta
         $this->createdAt = $value;
     }
 
+    protected $description;
+
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function setDescription($value)
+    {
+        $this->description = $value;
+    }
+
     public function getArrayCopy()
     {
         return [
             'name' => $this->getName(),
             'createdAt' => $this->getCreatedAt(),
+            'description' => $this->getDescription(),
         ];
     }
 
