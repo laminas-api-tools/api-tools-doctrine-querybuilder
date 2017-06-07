@@ -303,6 +303,16 @@ To enable inner join add this to your configuration.
 ```
 
 
+There is also an ORM Query Type for LeftJoin.  This join type is commonly used to fetch an empty right side of a relationship.
+
+Left Join is not included by default in the `zf-doctrine-querybuilder.global.php.dist`.
+
+```php
+    ['type' => 'leftjoin', 'field' => 'report', 'alias' => 'r'],
+    ['type' => 'isnull', 'alias' => 'r', 'field' => 'id']
+```
+
+
 Included Filter Types
 ---------------------
 

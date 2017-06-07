@@ -888,4 +888,60 @@ class ORMFilterTest extends TestCase
 
         $this->assertEquals(2, $this->countResult($filters, 'Db\Entity\Album'));
     }
+
+    public function testLeftJoin()
+    {
+        $filters = [
+            [
+                'type' => 'leftjoin',
+                'alias' => 'a',
+                'field' => 'artist',
+            ],
+            [
+                'alias' => 'a',
+                'field' => 'name',
+                'type' => 'eq',
+                'value' => 'ArtistOne',
+            ],
+        ];
+
+        $this->assertEquals(3, $this->countResult($filters, 'Db\Entity\Album'));
+
+
+        $filters = [
+            [
+                'type' => 'leftjoin',
+                'parentAlias' => 'row',
+                'alias' => 'a',
+                'field' => 'artist',
+            ],
+            [
+                'alias' => 'a',
+                'field' => 'name',
+                'type' => 'eq',
+                'value' => 'ArtistTwo',
+            ],
+        ];
+
+        $this->assertEquals(2, $this->countResult($filters, 'Db\Entity\Album'));
+
+        /**
+         * ArtistThree has no shows
+         */
+        $filters = [
+            [
+                'type' => 'leftjoin',
+                'parentAlias' => 'row',
+                'alias' => 'a',
+                'field' => 'artist',
+            ],
+            [
+                'type' => 'isnull',
+                'field' => 'id',
+                'alias' => 'a',
+            ],
+        ];
+
+        $this->assertEquals(1, $this->countResult($filters, 'Db\Entity\Album'));
+    }
 }
