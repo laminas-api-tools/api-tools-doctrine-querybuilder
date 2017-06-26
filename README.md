@@ -289,23 +289,13 @@ You can inner join tables from an inner join using `parentAlias`:
     ['type' => 'innerjoin', 'parentAlias' => 'r', 'field' => 'owner', 'alias' => 'o'],
 ```
 
-To enable inner join add this to your configuration.
+Inner Join is commented by default in the `zf-doctrine-querybuilder.global.php.dist`.
 
-```php
-'zf-doctrine-querybuilder-filter-orm' => [
-    'aliases' => [
-        'innerjoin' => \ZF\Doctrine\QueryBuilder\Filter\ORM\InnerJoin::class,
-    ],
-    'factories' => [
-        \ZF\Doctrine\QueryBuilder\Filter\ORM\InnerJoin => \Zend\ServiceManager\Factory\InvokableFactory::class,
-    ],
-],
-```
 
 
 There is also an ORM Query Type for LeftJoin.  This join type is commonly used to fetch an empty right side of a relationship.
 
-Left Join is not included by default in the `zf-doctrine-querybuilder.global.php.dist`.
+Left Join is commented by default in the `zf-doctrine-querybuilder.global.php.dist`.
 
 ```php
     ['type' => 'leftjoin', 'field' => 'report', 'alias' => 'r'],
