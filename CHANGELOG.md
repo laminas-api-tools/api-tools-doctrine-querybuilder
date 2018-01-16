@@ -6,7 +6,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#42](https://github.com/zfcampus/zf-doctrine-querybuilder/pull/42) adds
+  `leftjoin` ORM query type.
 
 ### Changed
 
