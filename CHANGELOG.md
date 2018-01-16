@@ -45,7 +45,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#40](https://github.com/zfcampus/zf-doctrine-querybuilder/pull/40) fixes
+  ODM `isnull` and `isnotnull` query filters to give correct result with
+  nullable fields.
 
 ## 1.5.1 - 2016-11-14
 
