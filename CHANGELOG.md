@@ -8,6 +8,14 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
+### Changed
+
+- [#38](https://github.com/zfcampus/zf-doctrine-querybuilder/pull/38) changes
+  methods visibility in Query Providers to `protected`:
+    - `getConfig()`
+    - `getFilterManager()`
+    - `getOrderByManager()`
+
 ### Deprecated
 
 - Nothing.
