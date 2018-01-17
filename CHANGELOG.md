@@ -9,6 +9,9 @@ All notable changes to this project will be documented in this file, in reverse 
 - [#42](https://github.com/zfcampus/zf-doctrine-querybuilder/pull/42) adds
   `leftjoin` ORM query type.
 
+- [#44](https://github.com/zfcampus/zf-doctrine-querybuilder/pull/44) adds
+  support for PHP 7.2.
+
 ### Changed
 
 - [#38](https://github.com/zfcampus/zf-doctrine-querybuilder/pull/38) changes
@@ -23,7 +26,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Nothing.
+- [#44](https://github.com/zfcampus/zf-doctrine-querybuilder/pull/44) removes
+  support for HHVM.
 
 ### Fixed
 
