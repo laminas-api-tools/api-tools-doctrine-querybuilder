@@ -37,7 +37,7 @@
         "doctrine/doctrine-module": "^1.2",
         "zendframework/zend-hydrator": "^1.1 || ^2.2.1",
         "zendframework/zend-modulemanager": "^2.7.2",
-        "zendframework/zend-mvc": "^2.7.10 || ^3.0.2",
+        "zendframework/zend-mvc": "^2.7.13 || ^3.0.2",
         "zendframework/zend-servicemanager": "^2.7.6 || ^3.1.1",
         "zfcampus/zf-api-problem": "^1.2.2",
         "zfcampus/zf-apigility-doctrine": "^2.1",
