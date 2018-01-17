@@ -2,11 +2,23 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.5.2 - TBD
+## 1.6.0 - 2018-01-17
 
 ### Added
 
-- Nothing.
+- [#42](https://github.com/zfcampus/zf-doctrine-querybuilder/pull/42) adds
+  `leftjoin` ORM query type.
+
+- [#44](https://github.com/zfcampus/zf-doctrine-querybuilder/pull/44) adds
+  support for PHP 7.2.
+
+### Changed
+
+- [#38](https://github.com/zfcampus/zf-doctrine-querybuilder/pull/38) changes
+  methods visibility in Query Providers to `protected`:
+    - `getConfig()`
+    - `getFilterManager()`
+    - `getOrderByManager()`
 
 ### Deprecated
 
@@ -14,7 +26,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Nothing.
+- [#44](https://github.com/zfcampus/zf-doctrine-querybuilder/pull/44) removes
+  support for HHVM.
 
 ### Fixed
 
@@ -44,8 +57,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ## 1.5.0 - 2016-11-10
 
-Added
------
+### Added
 
 - [#32](https://github.com/zfcampus/zf-doctrine-querybuilder/pull/32) adds
   support for PHP 7.
@@ -55,19 +67,16 @@ Added
 - [#32](https://github.com/zfcampus/zf-doctrine-querybuilder/pull/32) exposes
   the module to [zendframework/zend-component-installer](https://github.com/zendframework/zend-component-installer).
 
-Deprecated
-----------
+### Deprecated
 
 - Nothing.
 
-Removed
--------
+### Removed
 
 - [#32](https://github.com/zfcampus/zf-doctrine-querybuilder/pull/32) removes
   support for PHP 5.4 and PHP 5.5.
 
-Fixed
------
+### Fixed
 
 - [#32](https://github.com/zfcampus/zf-doctrine-querybuilder/pull/32) adds a
   ton of tests to the module.

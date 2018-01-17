@@ -46,6 +46,7 @@ return [
             'orx'        => Filter\ORM\OrX::class,
             'andx'       => Filter\ORM\AndX::class,
             'innerjoin'  => Filter\ORM\InnerJoin::class,
+            'leftjoin'  => Filter\ORM\LeftJoin::class,
         ],
         'factories' => [
             Filter\ORM\Equals::class              => InvokableFactory::class,
@@ -65,6 +66,7 @@ return [
             Filter\ORM\OrX::class                 => InvokableFactory::class,
             Filter\ORM\AndX::class                => InvokableFactory::class,
             Filter\ORM\InnerJoin::class           => InvokableFactory::class,
+            Filter\ORM\LeftJoin::class            => InvokableFactory::class,
         ],
     ],
     'zf-doctrine-querybuilder-filter-odm' => [
