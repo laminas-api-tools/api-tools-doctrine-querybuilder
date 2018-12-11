@@ -2,11 +2,12 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.6.1 - TBD
+## 1.7.0 - 2018-12-11
 
 ### Added
 
-- Nothing.
+- [#50](https://github.com/zfcampus/zf-doctrine-querybuilder/pull/50) adds support for zend-hydrator version 3 releases, while retaining
+  compatibility with previous versions.
 
 ### Changed
 
