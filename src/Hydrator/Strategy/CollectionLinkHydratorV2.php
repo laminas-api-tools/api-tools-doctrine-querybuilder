@@ -15,9 +15,12 @@ use ZF\Hal\Link\Link;
 /**
  * A field-specific hydrator for collections.
  *
+ * This version is for use with zend-hyrator versions 1 and 2, and will be
+ * aliased to CollectionLink in those versions.
+ *
  * @returns Link
  */
-class CollectionLink extends AbstractCollectionStrategy implements StrategyInterface
+class CollectionLinkHydratorV2 extends AbstractCollectionStrategy implements StrategyInterface
 {
     protected $serviceManager;
 
