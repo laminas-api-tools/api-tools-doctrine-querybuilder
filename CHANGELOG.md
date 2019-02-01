@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
+- [#52](https://github.com/zfcampus/zf-doctrine-querybuilder/pull/52) adds support for PHP 7.3.
+
 - [#46](https://github.com/zfcampus/zf-doctrine-querybuilder/pull/46) adds support for DoctrineModule 2.1
   and DoctrineORMModule 2.1.
 
