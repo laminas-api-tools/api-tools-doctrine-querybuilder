@@ -6,12 +6,12 @@
 
 namespace ZFTest\Doctrine\QueryBuilder\Hydrator\Strategy;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use stdClass;
 use Zend\ServiceManager\ServiceManager;
 use ZF\Doctrine\QueryBuilder\Hydrator\Strategy\CollectionLink;
 
-class CollectionLinkTest extends PHPUnit_Framework_TestCase
+class CollectionLinkTest extends TestCase
 {
     private $mockValue;
 
@@ -20,7 +20,7 @@ class CollectionLinkTest extends PHPUnit_Framework_TestCase
      */
     private $hydrator;
 
-    public function setUp()
+    protected function setUp()
     {
         $this->mockValue = $this->getMockBuilder(stdClass::class)
             ->setMethods(['getTypeClass', 'getMapping', 'getOwner'])
