@@ -11,7 +11,7 @@ use Doctrine\ORM\EntityManager as ObjectManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\ClassMetadataFactory;
 use Doctrine\ORM\QueryBuilder;
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ProphecyInterface;
 use Zend\Http\Request;

@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 1.8.0 - TBD
+
+### Added
+
+- [#52](https://github.com/zfcampus/zf-doctrine-querybuilder/pull/52) adds support for PHP 7.3.
+
+- [#46](https://github.com/zfcampus/zf-doctrine-querybuilder/pull/46) adds support for DoctrineModule 2.1
+  and DoctrineORMModule 2.1.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 1.7.1 - TBD
 
 ### Added

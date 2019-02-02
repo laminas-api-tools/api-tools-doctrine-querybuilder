@@ -6,7 +6,7 @@
 
 namespace ZFTest\Doctrine\QueryBuilder\Query\Provider;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOdm;
