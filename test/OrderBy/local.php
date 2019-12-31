@@ -18,18 +18,18 @@ return array(
                 'port' => '27017',
                 'user' => '',
                 'password' => '',
-                'dbname' => 'zf_doctrine_querybuilder_filter_test',
+                'dbname' => 'laminas_doctrine_querybuilder_filter_test',
             ),
         ),
     ),
-    'zf-doctrine-querybuilder-orderby-orm' => array(
+    'api-tools-doctrine-querybuilder-orderby-orm' => array(
         'invokables' => array(
-            'field' => 'ZF\Doctrine\QueryBuilder\OrderBy\ORM\Field',
+            'field' => 'Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy\ORM\Field',
         ),
     ),
-    'zf-doctrine-querybuilder-orderby-odm' => array(
+    'api-tools-doctrine-querybuilder-orderby-odm' => array(
         'invokables' => array(
-            'field' => 'ZF\Doctrine\QueryBuilder\OrderBy\ODM\Field',
+            'field' => 'Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy\ODM\Field',
         ),
     ),
 );
