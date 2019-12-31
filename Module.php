@@ -1,20 +1,22 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZF\Doctrine\QueryBuilder;
+namespace Laminas\ApiTools\Doctrine\QueryBuilder;
 
-use Zend\ModuleManager\Feature\DependencyIndicatorInterface;
-use Zend\ModuleManager\ModuleManager;
+use Laminas\ModuleManager\Feature\DependencyIndicatorInterface;
+use Laminas\ModuleManager\ModuleManager;
 
 class Module implements DependencyIndicatorInterface
 {
     public function getAutoloaderConfig()
     {
         return array(
-            'Zend\Loader\StandardAutoloader' => array(
+            'Laminas\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
                     __NAMESPACE__ => __DIR__ . '/src/',
                 ),
@@ -33,29 +35,29 @@ class Module implements DependencyIndicatorInterface
         $serviceListener = $serviceManager->get('ServiceListener');
 
         $serviceListener->addServiceManager(
-            'ZfDoctrineQueryBuilderFilterManagerOrm',
-            'zf-doctrine-querybuilder-filter-orm',
-            'ZF\Doctrine\QueryBuilder\Filter\FilterInterface',
+            'LaminasDoctrineQueryBuilderFilterManagerOrm',
+            'api-tools-doctrine-querybuilder-filter-orm',
+            'Laminas\ApiTools\Doctrine\QueryBuilder\Filter\FilterInterface',
             'getDoctrineQueryBuilderFilterOrmConfig'
         );
 
         $serviceListener->addServiceManager(
-            'ZfDoctrineQueryBuilderFilterManagerOdm',
-            'zf-doctrine-querybuilder-filter-odm',
-            'ZF\Doctrine\QueryBuilder\Filter\FilterInterface',
+            'LaminasDoctrineQueryBuilderFilterManagerOdm',
+            'api-tools-doctrine-querybuilder-filter-odm',
+            'Laminas\ApiTools\Doctrine\QueryBuilder\Filter\FilterInterface',
             'getDoctrineQueryBuilderFilterOdmConfig'
         );
 
         $serviceListener->addServiceManager(
-            'ZfDoctrineQueryBuilderOrderByManagerOrm',
-            'zf-doctrine-querybuilder-orderby-orm',
-            'ZF\Doctrine\QueryBuilder\OrderBy\OrderByInterface',
+            'LaminasDoctrineQueryBuilderOrderByManagerOrm',
+            'api-tools-doctrine-querybuilder-orderby-orm',
+            'Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy\OrderByInterface',
             'getDoctrineQueryBuilderOrderByOrmConfig'
         );
         $serviceListener->addServiceManager(
-            'ZfDoctrineQueryBuilderOrderByManagerOdm',
-            'zf-doctrine-querybuilder-orderby-odm',
-            'ZF\Doctrine\QueryBuilder\OrderBy\OrderByInterface',
+            'LaminasDoctrineQueryBuilderOrderByManagerOdm',
+            'api-tools-doctrine-querybuilder-orderby-odm',
+            'Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy\OrderByInterface',
             'getDoctrineQueryBuilderOrderByOdmConfig'
         );
     }

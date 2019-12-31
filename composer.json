@@ -1,65 +1,70 @@
 {
-    "name": "zfcampus/zf-doctrine-querybuilder",
-    "type": "library",
+    "name": "laminas-api-tools/api-tools-doctrine-querybuilder",
     "description": "QueryBuilder filters for Doctrine",
+    "license": "BSD-3-Clause",
     "keywords": [
+        "laminas",
+        "api-tools",
         "api",
-        "apigility",
         "doctrine",
         "filter",
-        "module",
-        "zend",
-        "zf2"
+        "module"
     ],
-    "homepage": "https://github.com/zfcampus/zf-doctrine-querybuilder-filter",
-    "license": "BSD-3-Clause",
-    "authors": [
-        {
-            "name": "Tom Anderson",
-            "email": "tom.h.anderson@gmail.com"
-        }
-    ],
-    "require": {
-        "php": ">=5.4",
-        "doctrine/doctrine-module": "^0.8",
-        "zendframework/zend-modulemanager": "^2.5",
-        "zendframework/zend-mvc": "^2.5",
-        "zendframework/zend-servicemanager": "^2.5",
-        "zfcampus/zf-api-problem": "^1.1",
-        "zfcampus/zf-hal": "^1.2"
+    "homepage": "https://api-tools.getlaminas.org",
+    "support": {
+        "docs": "https://api-tools.getlaminas.org/documentation",
+        "issues": "https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/issues",
+        "source": "https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder",
+        "rss": "https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
     },
-    "require-dev": {
-        "doctrine/doctrine-mongo-odm-module": "0.*@dev",
-        "doctrine/doctrine-orm-module": "0.*@dev",
-        "phpunit/phpunit": "^4.1",
-        "zendframework/zendframework": "^2.5",
-        "zfcampus/zf-apigility-provider": "^1.1",
-        "squizlabs/php_codesniffer": "^2.0"
-    },
-    "suggest": {
-        "ext/mongo": "Mongo extension, if using ODM",
-        "doctrine/doctrine-mongo-odm-module": "v0.*, if you wish to use the Doctrine ODM",
-        "doctrine/doctrine-orm-module": "v0.*, if you wish to use the Doctrine ORM"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "autoload": {
-        "psr-4": {
-            "ZF\\Doctrine\\QueryBuilder\\": "src/"
-        },
-        "classmap": [
-          "Module.php"
-        ]
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "ZFTest\\Doctrine\\QueryBuilder\\": "test/"
-        }
+    "config": {
+        "sort-packages": true
     },
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev",
             "dev-develop": "1.1-dev"
         }
+    },
+    "require": {
+        "php": ">=5.4",
+        "doctrine/doctrine-module": "^0.8",
+        "laminas-api-tools/api-tools-api-problem": "^1.1",
+        "laminas-api-tools/api-tools-hal": "^1.2",
+        "laminas/laminas-modulemanager": "^2.5",
+        "laminas/laminas-mvc": "^2.5",
+        "laminas/laminas-servicemanager": "^2.5",
+        "laminas/laminas-zendframework-bridge": "^1.0"
+    },
+    "require-dev": {
+        "doctrine/doctrine-mongo-odm-module": "0.*@dev",
+        "doctrine/doctrine-orm-module": "0.*@dev",
+        "laminas-api-tools/api-tools-provider": "^1.1",
+        "laminas/laminas": "^2.5",
+        "phpunit/phpunit": "^4.1",
+        "squizlabs/php_codesniffer": "^2.0"
+    },
+    "suggest": {
+        "doctrine/doctrine-mongo-odm-module": "v0.*, if you wish to use the Doctrine ODM",
+        "doctrine/doctrine-orm-module": "v0.*, if you wish to use the Doctrine ORM",
+        "ext/mongo": "Mongo extension, if using ODM"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laminas\\ApiTools\\Doctrine\\QueryBuilder\\": "src/"
+        },
+        "classmap": [
+            "Module.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LaminasTest\\ApiTools\\Doctrine\\QueryBuilder\\": "test/"
+        }
+    },
+    "replace": {
+        "zfcampus/zf-doctrine-querybuilder": "self.version"
     }
 }
