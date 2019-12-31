@@ -1,12 +1,14 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2016 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
 use Doctrine\DBAL\Driver\PDOSqlite\Driver;
-use Zend\ServiceManager\Factory\InvokableFactory;
-use ZF\Doctrine\QueryBuilder\OrderBy;
+use Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy;
+use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
     'doctrine' => [
@@ -24,11 +26,11 @@ return [
                 'port' => '27017',
                 'user' => '',
                 'password' => '',
-                'dbname' => 'zf_doctrine_querybuilder_filter_test',
+                'dbname' => 'laminas_doctrine_querybuilder_filter_test',
             ],
         ],
     ],
-    'zf-doctrine-querybuilder-orderby-orm' => [
+    'api-tools-doctrine-querybuilder-orderby-orm' => [
         'aliases' => [
             'field' => OrderBy\ORM\Field::class,
         ],
@@ -36,7 +38,7 @@ return [
             OrderBy\ORM\Field::class => InvokableFactory::class,
         ],
     ],
-    'zf-doctrine-querybuilder-orderby-odm' => [
+    'api-tools-doctrine-querybuilder-orderby-odm' => [
         'aliases' => [
             'field' => OrderBy\ODM\Field::class,
         ],

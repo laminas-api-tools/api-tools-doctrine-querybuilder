@@ -1,22 +1,24 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2016 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZFTest\Doctrine\QueryBuilder\OrderBy;
+namespace LaminasTest\ApiTools\Doctrine\QueryBuilder\OrderBy;
 
 use DateTime;
 use Db\Entity;
 use Doctrine\ORM\Tools\SchemaTool;
-use ZFTest\Doctrine\QueryBuilder\TestCase;
+use LaminasTest\ApiTools\Doctrine\QueryBuilder\TestCase;
 
 class ORMOrderByTest extends TestCase
 {
     private function fetchResult($orderBy, $entity = 'Db\Entity\Artist')
     {
         $serviceManager = $this->getApplication()->getServiceManager();
-        $orderByManager = $serviceManager->get('ZfDoctrineQueryBuilderOrderByManagerOrm');
+        $orderByManager = $serviceManager->get('LaminasDoctrineQueryBuilderOrderByManagerOrm');
         $objectManager = $serviceManager->get('doctrine.entitymanager.orm_default');
 
         $queryBuilder = $objectManager->createQueryBuilder();

@@ -1,15 +1,17 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2016 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZFTest\Doctrine\QueryBuilder\Hydrator\Strategy;
+namespace LaminasTest\ApiTools\Doctrine\QueryBuilder\Hydrator\Strategy;
 
+use Laminas\ApiTools\Doctrine\QueryBuilder\Hydrator\Strategy\CollectionLink;
+use Laminas\ServiceManager\ServiceManager;
 use PHPUnit\Framework\TestCase;
 use stdClass;
-use Zend\ServiceManager\ServiceManager;
-use ZF\Doctrine\QueryBuilder\Hydrator\Strategy\CollectionLink;
 
 class CollectionLinkTest extends TestCase
 {
@@ -51,11 +53,11 @@ class CollectionLinkTest extends TestCase
 
 
         $config = [
-            'zf-hal' => [
+            'api-tools-hal' => [
                 'metadata_map' => [
                     $this->mockValue->getTypeClass()->name => [
                         'route_name' => 'my-route',
-                        'zf-doctrine-querybuilder-options' => [
+                        'api-tools-doctrine-querybuilder-options' => [
                             'filter_key' => 'my-filter-key',
                         ],
                     ],

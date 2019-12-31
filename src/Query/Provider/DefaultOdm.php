@@ -1,18 +1,20 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2016 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZF\Doctrine\QueryBuilder\Query\Provider;
+namespace Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider;
 
-use Zend\ServiceManager\ServiceLocatorInterface;
-use ZF\Apigility\Doctrine\Server\Paginator\Adapter\DoctrineOdmAdapter;
-use ZF\Apigility\Doctrine\Server\Query\Provider\AbstractQueryProvider;
-use ZF\Apigility\Doctrine\Server\Query\Provider\QueryProviderInterface;
-use ZF\Doctrine\QueryBuilder\Filter\Service\ODMFilterManager;
-use ZF\Doctrine\QueryBuilder\OrderBy\Service\ODMOrderByManager;
-use ZF\Rest\ResourceEvent;
+use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\Service\ODMFilterManager;
+use Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy\Service\ODMOrderByManager;
+use Laminas\ApiTools\Doctrine\Server\Paginator\Adapter\DoctrineOdmAdapter;
+use Laminas\ApiTools\Doctrine\Server\Query\Provider\AbstractQueryProvider;
+use Laminas\ApiTools\Doctrine\Server\Query\Provider\QueryProviderInterface;
+use Laminas\ApiTools\Rest\ResourceEvent;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class DefaultOdm extends AbstractQueryProvider implements QueryProviderInterface
 {
@@ -131,8 +133,8 @@ class DefaultOdm extends AbstractQueryProvider implements QueryProviderInterface
     protected function getConfig()
     {
         $config = $this->getServiceLocator()->get('config');
-        if (isset($config['zf-doctrine-querybuilder-options'])) {
-            return $config['zf-doctrine-querybuilder-options'];
+        if (isset($config['api-tools-doctrine-querybuilder-options'])) {
+            return $config['api-tools-doctrine-querybuilder-options'];
         }
 
         return [];
