@@ -1,8 +1,8 @@
 <?php
 
-namespace ZFTest\Doctrine\QueryBuilder\Hydrator\Strategy;
+namespace LaminasTest\ApiTools\Doctrine\QueryBuilder\Hydrator\Strategy;
 
-use \ZF\Doctrine\QueryBuilder\Hydrator\Strategy\CollectionLink;
+use \Laminas\ApiTools\Doctrine\QueryBuilder\Hydrator\Strategy\CollectionLink;
 use PHPUnit_Framework_TestCase;
 
 class CollectionLinkTest extends PHPUnit_Framework_TestCase
@@ -40,11 +40,11 @@ class CollectionLinkTest extends PHPUnit_Framework_TestCase
 
 
         $config = [
-            'zf-hal' => [
+            'api-tools-hal' => [
                 'metadata_map' => [
                     $this->mockValue->getTypeClass()->name => [
                         'route_name' => 'my-route',
-                        'zf-doctrine-querybuilder-options' => [
+                        'api-tools-doctrine-querybuilder-options' => [
                             'filter_key' => 'my-filter-key',
                         ],
                     ],
@@ -52,7 +52,7 @@ class CollectionLinkTest extends PHPUnit_Framework_TestCase
             ],
         ];
 
-        $mock = $this->getMock('Zend\ServiceManager\ServiceManager', ['get']);
+        $mock = $this->getMock('Laminas\ServiceManager\ServiceManager', ['get']);
         $mock->expects($this->any())
                 ->method('get')
                 ->with($this->equalTo('Config'))
