@@ -1,21 +1,23 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2016 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZFTest\Doctrine\QueryBuilder\Filter;
+namespace LaminasTest\ApiTools\Doctrine\QueryBuilder\Filter;
 
 use DateTime;
 use DbMongo\Document;
-use ZFTest\Doctrine\QueryBuilder\TestCase;
+use LaminasTest\ApiTools\Doctrine\QueryBuilder\TestCase;
 
 class ODMFilterTest extends TestCase
 {
     private function countResult($filters, $entity = 'DbMongo\Document\Meta')
     {
         $serviceManager = $this->getApplication()->getServiceManager();
-        $filterManager = $serviceManager->get('ZfDoctrineQueryBuilderFilterManagerOdm');
+        $filterManager = $serviceManager->get('LaminasDoctrineQueryBuilderFilterManagerOdm');
         $objectManager = $serviceManager->get('doctrine.documentmanager.odm_default');
         $queryBuilder = $objectManager->createQueryBuilder($entity);
         # NOTE:  the metadata is an array with one element in testing :\

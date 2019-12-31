@@ -1,9 +1,9 @@
-ZF Doctrine QueryBuilder
+Laminas Doctrine QueryBuilder
 ========================
 
-[![Build Status](https://travis-ci.org/zfcampus/zf-doctrine-querybuilder.svg?branch=master)](https://travis-ci.org/zfcampus/zf-doctrine-querybuilder)
-[![Coverage Status](https://coveralls.io/repos/github/zfcampus/zf-doctrine-querybuilder/badge.svg?branch=master)](https://coveralls.io/github/zfcampus/zf-doctrine-querybuilder?branch=master)
-[![Total Downloads](https://poser.pugx.org/zfcampus/zf-doctrine-querybuilder/downloads)](https://packagist.org/packages/zfcampus/zf-doctrine-querybuilder)
+[![Build Status](https://travis-ci.org/laminas-api-tools/api-tools-doctrine-querybuilder.svg?branch=master)](https://travis-ci.org/laminas-api-tools/api-tools-doctrine-querybuilder)
+[![Coverage Status](https://coveralls.io/repos/github/laminas-api-tools/api-tools-doctrine-querybuilder/badge.svg?branch=master)](https://coveralls.io/github/laminas-api-tools/api-tools-doctrine-querybuilder?branch=master)
+[![Total Downloads](https://poser.pugx.org/laminas-api-tools/api-tools-doctrine-querybuilder/downloads)](https://packagist.org/packages/laminas-api-tools/api-tools-doctrine-querybuilder)
 
 This library provides query builder directives from array parameters. This library was designed
 to apply filters from an HTTP request to give an API fluent filter and order-by dialects.
@@ -40,42 +40,42 @@ Installation of this module uses composer. For composer documentation, please re
 [getcomposer.org](http://getcomposer.org/).
 
 ```bash
-$ composer require zfcampus/zf-doctrine-querybuilder
+$ composer require laminas-api-tools/api-tools-doctrine-querybuilder
 ```
 
-Once installed, add `ZF\Doctrine\QueryBuilder` to your list of modules inside
+Once installed, add `Laminas\ApiTools\Doctrine\QueryBuilder` to your list of modules inside
 `config/application.config.php`.
 
-> ### zf-component-installer
+> ### laminas-component-installer
 >
-> If you use [zf-component-installer](https://github.com/zendframework/zf-component-installer),
-> that plugin will install zf-doctrine-querybuilder as a module for you.
+> If you use [laminas-component-installer](https://github.com/laminas/laminas-component-installer),
+> that plugin will install api-tools-doctrine-querybuilder as a module for you.
 
 
 Configuring the Module
 ----------------------
 
-Copy `config/zf-doctrine-querybuilder.global.php.dist` to `config/autoload/zf-doctrine-querybuilder.global.php`
+Copy `config/api-tools-doctrine-querybuilder.global.php.dist` to `config/autoload/api-tools-doctrine-querybuilder.global.php`
 and edit the list of aliases for orm and odm to those you want enabled by default.
 
 
-Use With Apigility Doctrine
+Use With Laminas API Tools Doctrine
 ---------------------------
 
-To enable all filters you may override the default query providers in `zf-apigility-doctrine`.
-Add this to your `zf-doctrine-querybuilder.global.php` config file and filters and order-by will be applied
+To enable all filters you may override the default query providers in `api-tools-doctrine`.
+Add this to your `api-tools-doctrine-querybuilder.global.php` config file and filters and order-by will be applied
 if they are in `$_GET['filter']` or `$_GET['order-by']` request. These `$_GET` keys are customizable
-through `zf-doctrine-querybuilder-options`:
+through `api-tools-doctrine-querybuilder-options`:
 
 ```php
-'zf-apigility-doctrine-query-provider' => [
+'api-tools-doctrine-query-provider' => [
     'aliases' => [
-        'default_orm' => \ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOrm::class,
-        'default_odm' => \ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOdm::class,
+        'default_orm' => \Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider\DefaultOrm::class,
+        'default_odm' => \Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider\DefaultOdm::class,
     ],
     'factories' => [
-        \ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOrm::class => \ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOrmFactory::class,
-        \ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOdm::class => \ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOdmFactory::class,
+        \Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider\DefaultOrm::class => \Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider\DefaultOrmFactory::class,
+        \Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider\DefaultOdm::class => \Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider\DefaultOdmFactory::class,
     ],
 ],
 ```
@@ -86,20 +86,20 @@ Use
 
 Configuration example
 ```php
-'zf-doctrine-querybuilder-orderby-orm' => [
+'api-tools-doctrine-querybuilder-orderby-orm' => [
     'aliases' => [
-        'field' => \ZF\Doctrine\QueryBuilder\OrderBy\ORM\Field::class,
+        'field' => \Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy\ORM\Field::class,
     ],
     'factories' => [
-        \ZF\Doctrine\QueryBuilder\OrderBy\ORM\Field::class => \Zend\ServiceManager\Factory\InvokableFactory::class,
+        \Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy\ORM\Field::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,
     ],
 ],
-'zf-doctrine-querybuilder-filter-orm' => [
+'api-tools-doctrine-querybuilder-filter-orm' => [
     'aliases' => [
-        'eq' => \ZF\Doctrine\QueryBuilder\Filter\ORM\Equals::class,
+        'eq' => \Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM\Equals::class,
     ],
     'factories' => [
-        \ZF\Doctrine\QueryBuilder\Filter\ORM\Equals::class => \Zend\ServiceManager\Factory\InvokableFactory::class,
+        \Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM\Equals::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,
     ],
 ],
 ```
@@ -129,8 +129,8 @@ Resource example
 $serviceLocator = $this->getApplication()->getServiceLocator();
 $objectManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
 
-$filterManager = $serviceLocator->get('ZfDoctrineQueryBuilderFilterManagerOrm');
-$orderByManager = $serviceLocator->get('ZfDoctrineQueryBuilderOrderByManagerOrm');
+$filterManager = $serviceLocator->get('LaminasDoctrineQueryBuilderFilterManagerOrm');
+$orderByManager = $serviceLocator->get('LaminasDoctrineQueryBuilderOrderByManagerOrm');
 
 $queryBuilder = $objectManager->createQueryBuilder();
 $queryBuilder->select('row')
@@ -273,7 +273,7 @@ The default alias is 'row' and refers to the entity at the heart of the REST res
 There is not a filter to add other entities to the return data. That is, only the original target resource,
 by default 'row', will be returned regardless of what filters or order by are applied through this module.
 
-Inner Join is not included by default in the `zf-doctrine-querybuilder.global.php.dist`.
+Inner Join is not included by default in the `api-tools-doctrine-querybuilder.global.php.dist`.
 
 This example joins the report field through the inner join already defined on the row entity then filters
 for `r.id = 2`:
@@ -292,12 +292,12 @@ You can inner join tables from an inner join using `parentAlias`:
 To enable inner join add this to your configuration.
 
 ```php
-'zf-doctrine-querybuilder-filter-orm' => [
+'api-tools-doctrine-querybuilder-filter-orm' => [
     'aliases' => [
-        'innerjoin' => \ZF\Doctrine\QueryBuilder\Filter\ORM\InnerJoin::class,
+        'innerjoin' => \Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM\InnerJoin::class,
     ],
     'factories' => [
-        \ZF\Doctrine\QueryBuilder\Filter\ORM\InnerJoin => \Zend\ServiceManager\Factory\InvokableFactory::class,
+        \Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM\InnerJoin => \Laminas\ServiceManager\Factory\InvokableFactory::class,
     ],
 ],
 ```

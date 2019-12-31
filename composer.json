@@ -1,68 +1,73 @@
 {
-    "name": "zfcampus/zf-doctrine-querybuilder",
-    "description": "Apigility Doctrine QueryBuilder module",
-    "type": "library",
+    "name": "laminas-api-tools/api-tools-doctrine-querybuilder",
+    "description": "Laminas API Tools Doctrine QueryBuilder module",
     "license": "BSD-3-Clause",
     "keywords": [
+        "laminas",
+        "api-tools",
         "api",
-        "apigility",
         "doctrine",
-        "filter",
-        "zend",
-        "zf"
+        "filter"
     ],
-    "homepage": "https://apigility.org",
+    "homepage": "https://api-tools.getlaminas.org",
     "support": {
-        "irc": "irc://irc.freenode.net/apigility",
-        "source": "https://github.com/zfcampus/zf-doctrine-querybuilder",
-        "issues": "https://github.com/zfcampus/zf-doctrine-querybuilder/issues"
+        "docs": "https://api-tools.getlaminas.org/documentation",
+        "issues": "https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/issues",
+        "source": "https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder",
+        "rss": "https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
+    },
+    "config": {
+        "sort-packages": true
     },
     "extra": {
         "branch-alias": {
             "dev-master": "1.5-dev",
             "dev-develop": "1.6-dev"
         },
-        "zf": {
+        "laminas": {
             "module": [
-                "ZF\\Doctrine\\QueryBuilder"
+                "Laminas\\ApiTools\\Doctrine\\QueryBuilder"
             ]
         }
     },
     "require": {
         "php": "^5.6 || ^7.0",
         "doctrine/doctrine-module": "^1.2",
-        "zendframework/zend-hydrator": "^1.1 || ^2.2.1",
-        "zendframework/zend-modulemanager": "^2.7.2",
-        "zendframework/zend-mvc": "^2.7.10 || ^3.0.2",
-        "zendframework/zend-servicemanager": "^2.7.6 || ^3.1.1",
-        "zfcampus/zf-api-problem": "^1.2.2",
-        "zfcampus/zf-apigility-doctrine": "^2.1",
-        "zfcampus/zf-hal": "^1.4.2"
+        "laminas-api-tools/api-tools-api-problem": "^1.2.2",
+        "laminas-api-tools/api-tools-doctrine": "^2.1",
+        "laminas-api-tools/api-tools-hal": "^1.4.2",
+        "laminas/laminas-hydrator": "^1.1 || ^2.2.1",
+        "laminas/laminas-modulemanager": "^2.7.2",
+        "laminas/laminas-mvc": "^2.7.10 || ^3.0.2",
+        "laminas/laminas-servicemanager": "^2.7.6 || ^3.1.1",
+        "laminas/laminas-zendframework-bridge": "^1.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^5.6",
-        "zendframework/zend-coding-standard": "~1.0.0",
         "doctrine/doctrine-mongo-odm-module": "^0.11",
         "doctrine/doctrine-orm-module": "^1.1",
-        "zendframework/zend-i18n": "^2.7.3",
-        "zendframework/zend-log": "^2.9.1",
-        "zendframework/zend-serializer": "^2.8",
-        "zendframework/zend-test": "^2.6.1 || ^3.0.1",
-        "zfcampus/zf-apigility-provider": "^1.2"
+        "laminas-api-tools/api-tools-provider": "^1.2",
+        "laminas/laminas-coding-standard": "~1.0.0",
+        "laminas/laminas-i18n": "^2.7.3",
+        "laminas/laminas-log": "^2.9.1",
+        "laminas/laminas-serializer": "^2.8",
+        "laminas/laminas-test": "^2.6.1 || ^3.0.1",
+        "phpunit/phpunit": "^5.6"
     },
     "suggest": {
-        "ext/mongo": "Mongo extension, if using ODM",
         "doctrine/doctrine-mongo-odm-module": "^0.11, if you wish to use the Doctrine ODM",
-        "doctrine/doctrine-orm-module": "^1.1, if you wish to use the Doctrine ORM"
+        "doctrine/doctrine-orm-module": "^1.1, if you wish to use the Doctrine ORM",
+        "ext/mongo": "Mongo extension, if using ODM"
     },
     "autoload": {
         "psr-4": {
-            "ZF\\Doctrine\\QueryBuilder\\": "src/"
+            "Laminas\\ApiTools\\Doctrine\\QueryBuilder\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ZFTest\\Doctrine\\QueryBuilder\\": "test/"
+            "LaminasTest\\ApiTools\\Doctrine\\QueryBuilder\\": "test/"
         }
     },
     "scripts": {
@@ -75,5 +80,8 @@
         "cs-fix": "phpcbf",
         "test": "phpunit",
         "test-coverage": "phpunit --coverage-clover clover.xml"
+    },
+    "replace": {
+        "zfcampus/zf-doctrine-querybuilder": "self.version"
     }
 }
