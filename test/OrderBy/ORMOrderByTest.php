@@ -1,18 +1,18 @@
 <?php
 
-namespace ZFTest\Doctrine\QueryBuilder\OrderBy;
+namespace LaminasTest\ApiTools\Doctrine\QueryBuilder\OrderBy;
 
-use Doctrine\ORM\Tools\SchemaTool;
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use DateTime;
 use Db\Entity;
+use Doctrine\ORM\Tools\SchemaTool;
+use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
 class ORMOrderByTest extends AbstractHttpControllerTestCase
 {
     private function fetchResult($orderBy, $entity = 'Db\Entity\Artist')
     {
         $serviceManager = $this->getApplication()->getServiceManager();
-        $orderByManager = $serviceManager->get('ZfDoctrineQueryBuilderOrderByManagerOrm');
+        $orderByManager = $serviceManager->get('LaminasDoctrineQueryBuilderOrderByManagerOrm');
         $objectManager = $serviceManager->get('doctrine.entitymanager.orm_default');
 
         $queryBuilder = $objectManager->createQueryBuilder();

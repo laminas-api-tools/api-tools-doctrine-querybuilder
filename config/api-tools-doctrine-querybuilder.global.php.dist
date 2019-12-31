@@ -1,8 +1,26 @@
 <?php
 
-namespace Db;
+/**
+ * @see       https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
+ */
 
 return array(
+    'api-tools-doctrine-querybuilder-options' => array(
+        'filter_key' => 'filter',
+        'order_by_key' => 'order-by',
+    ),
+    'api-tools-doctrine-querybuilder-orderby-orm' => array(
+        'invokables' => array(
+            'field' => 'Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy\ORM\Field',
+        ),
+    ),
+    'api-tools-doctrine-querybuilder-orderby-odm' => array(
+        'invokables' => array(
+            'field' => 'Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy\ODM\Field',
+        ),
+    ),
     'api-tools-doctrine-querybuilder-filter-orm' => array(
         'invokables' => array(
             'eq' => 'Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM\Equals',
@@ -18,6 +36,7 @@ return array(
             'between' => 'Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM\Between',
             'like' => 'Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM\Like',
             'notlike' => 'Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM\NotLike',
+            'ismemberof' => 'Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM\IsMemberOf',
             'orx' => 'Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM\OrX',
             'andx' => 'Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM\AndX',
         ),
@@ -38,46 +57,6 @@ return array(
             'between' => 'Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ODM\Between',
             'like' => 'Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ODM\Like',
             'regex' => 'Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ODM\Regex',
-        ),
-    ),
-
-    'doctrine' => array(
-        'driver' => array(
-           'db_driver' => array(
-                'class' => 'Doctrine\ORM\Mapping\Driver\XmlDriver',
-                'paths' => array(__DIR__ . '/xml'),
-            ),
-            'orm_default' => array(
-                'drivers' => array(
-                    __NAMESPACE__ . '\Entity' => 'db_driver',
-                ),
-            ),
-        ),
-    ),
-
-    'view_manager' => array(
-        'display_not_found_reason' => true,
-        'display_exceptions' => true,
-        'json_exceptions' => array(
-            'display' => true,
-            'ajax_only' => true,
-            'show_trace' => true
-        ),
-
-        'doctype'                  => 'HTML5',
-        'not_found_template'       => 'error/404',
-        'exception_template'       => 'error/index',
-        'template_map' => array(
-            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
-            'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
-            'error/404'               => __DIR__ . '/../view/error/404.phtml',
-            'error/index'             => __DIR__ . '/../view/error/index.phtml',
-        ),
-        'template_path_stack' => array(
-            __DIR__ . '/../view',
-        ),
-        'strategies' => array(
-            'ViewJsonStrategy',
         ),
     ),
 );

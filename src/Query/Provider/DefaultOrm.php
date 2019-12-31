@@ -1,20 +1,20 @@
 <?php
 
-namespace ZF\Doctrine\QueryBuilder\Query\Provider;
+namespace Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider;
 
-use ZF\Apigility\Doctrine\Server\Query\Provider\QueryProviderInterface;
-use ZF\Apigility\Doctrine\Server\Paginator\Adapter\DoctrineOrmAdapter;
-use DoctrineModule\Persistence\ObjectManagerAwareInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Zend\Paginator\Adapter\AdapterInterface;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use ZF\Rest\ResourceEvent;
+use DoctrineModule\Persistence\ObjectManagerAwareInterface;
+use Laminas\ApiTools\Doctrine\Server\Paginator\Adapter\DoctrineOrmAdapter;
+use Laminas\ApiTools\Doctrine\Server\Query\Provider\QueryProviderInterface;
+use Laminas\ApiTools\Rest\ResourceEvent;
+use Laminas\Paginator\Adapter\AdapterInterface;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Class FetchAllOrm
  *
- * @package ZF\Apigility\Doctrine\Server\Query\Provider
+ * @package Laminas\ApiTools\Doctrine\Server\Query\Provider
  */
 class DefaultOrm implements ObjectManagerAwareInterface, QueryProviderInterface, ServiceLocatorAwareInterface
 {
@@ -89,7 +89,7 @@ class DefaultOrm implements ObjectManagerAwareInterface, QueryProviderInterface,
         if (isset($request[$this->getFilterKey()])) {
             $metadata = $this->getObjectManager()->getClassMetadata($entityClass);
             $filterManager = $this->getServiceLocator()->getServiceLocator()
-                ->get('ZfDoctrineQueryBuilderFilterManagerOrm');
+                ->get('LaminasDoctrineQueryBuilderFilterManagerOrm');
             $filterManager->filter(
                 $queryBuilder,
                 $metadata,
@@ -100,7 +100,7 @@ class DefaultOrm implements ObjectManagerAwareInterface, QueryProviderInterface,
         if (isset($request[$this->getOrderByKey()])) {
             $metadata = $this->getObjectManager()->getClassMetadata($entityClass);
             $orderByManager = $this->getServiceLocator()->getServiceLocator()
-                ->get('ZfDoctrineQueryBuilderOrderByManagerOrm');
+                ->get('LaminasDoctrineQueryBuilderOrderByManagerOrm');
             $orderByManager->orderBy(
                 $queryBuilder,
                 $metadata,
@@ -148,8 +148,8 @@ class DefaultOrm implements ObjectManagerAwareInterface, QueryProviderInterface,
     {
         $config = $this->getServiceLocator()->getServiceLocator()->get('Config');
 
-        if (isset($config['zf-doctrine-querybuilder-options']['filter_key'])) {
-            $filterKey = $config['zf-doctrine-querybuilder-options']['filter_key'];
+        if (isset($config['api-tools-doctrine-querybuilder-options']['filter_key'])) {
+            $filterKey = $config['api-tools-doctrine-querybuilder-options']['filter_key'];
         } else {
             $filterKey = 'filter';
         }
@@ -164,8 +164,8 @@ class DefaultOrm implements ObjectManagerAwareInterface, QueryProviderInterface,
     {
         $config = $this->getServiceLocator()->getServiceLocator()->get('Config');
 
-        if (isset($config['zf-doctrine-querybuilder-options']['order_by_key'])) {
-            $orderByKey = $config['zf-doctrine-querybuilder-options']['order_by_key'];
+        if (isset($config['api-tools-doctrine-querybuilder-options']['order_by_key'])) {
+            $orderByKey = $config['api-tools-doctrine-querybuilder-options']['order_by_key'];
         } else {
             $orderByKey = 'order-by';
         }
