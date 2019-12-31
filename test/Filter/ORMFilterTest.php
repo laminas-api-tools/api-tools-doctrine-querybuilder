@@ -1,11 +1,11 @@
 <?php
 
-namespace ZFTest\Doctrine\QueryBuilder\Filter;
+namespace LaminasTest\ApiTools\Doctrine\QueryBuilder\Filter;
 
-use Doctrine\ORM\Tools\SchemaTool;
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use DateTime;
 use Db\Entity;
+use Doctrine\ORM\Tools\SchemaTool;
+use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
 class ORMFilterTest extends AbstractHttpControllerTestCase
 {
@@ -15,7 +15,7 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
     private function countResult($filters, $entity = 'Db\Entity\Artist')
     {
         $serviceManager = $this->getApplication()->getServiceManager();
-        $filterManager = $serviceManager->get('ZfDoctrineQueryBuilderFilterManagerOrm');
+        $filterManager = $serviceManager->get('LaminasDoctrineQueryBuilderFilterManagerOrm');
         $objectManager = $this->objectManager;
 
         $queryBuilder = $objectManager->createQueryBuilder();
