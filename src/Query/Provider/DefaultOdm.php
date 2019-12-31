@@ -1,15 +1,15 @@
 <?php
 
-namespace ZF\Doctrine\QueryBuilder\Query\Provider;
+namespace Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider;
 
-use ZF\Apigility\Doctrine\Server\Query\Provider\QueryProviderInterface;
-use ZF\Apigility\Doctrine\Server\Paginator\Adapter\DoctrineOdmAdapter;
-use DoctrineModule\Persistence\ObjectManagerAwareInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManger\ServiceLocatorInterface;
-use ZF\Rest\ResourceEvent;
+use DoctrineModule\Persistence\ObjectManagerAwareInterface;
+use Laminas\ApiTools\Doctrine\Server\Paginator\Adapter\DoctrineOdmAdapter;
+use Laminas\ApiTools\Doctrine\Server\Query\Provider\QueryProviderInterface;
+use Laminas\ApiTools\Rest\ResourceEvent;
+use Laminas\ServiceManager\AbstractPluginManager;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManger\ServiceLocatorInterface;
 
 class DefaultOdm implements QueryProviderInterface, ServiceLocatorAwareInterface
 {
@@ -78,7 +78,7 @@ class DefaultOdm implements QueryProviderInterface, ServiceLocatorAwareInterface
 
         if (isset($request['filter'])) {
             $metadata = $this->getObjectManager()->getMetadataFactory()->getAllMetadata();
-            $filterManager = $this->getServiceLocator()->get('ZfDoctrineQueryBuilderFilterManagerOrm');
+            $filterManager = $this->getServiceLocator()->get('LaminasDoctrineQueryBuilderFilterManagerOrm');
             $filterManager->filter(
                 $queryBuilder,
                 $metadata[0],
@@ -88,7 +88,7 @@ class DefaultOdm implements QueryProviderInterface, ServiceLocatorAwareInterface
 
         if (isset($request['order-by'])) {
             $metadata = $this->getObjectManager()->getMetadataFactory()->getAllMetadata();
-            $orderByManager = $this->getServiceLocator()->get('ZfDoctrineQueryBuilderOrderByManagerOrm');
+            $orderByManager = $this->getServiceLocator()->get('LaminasDoctrineQueryBuilderOrderByManagerOrm');
             $orderByManager->orderBy(
                 $queryBuilder,
                 $metadata[0],
