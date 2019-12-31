@@ -1,18 +1,30 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2013-2016 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZF\Doctrine\QueryBuilder;
+namespace Laminas\ApiTools\Doctrine\QueryBuilder;
 
 return [
     'service_manager' => [
         'aliases' => [
-            'ZfDoctrineQueryBuilderFilterManagerOrm' => Filter\Service\ORMFilterManager::class,
-            'ZfDoctrineQueryBuilderFilterManagerOdm' => Filter\Service\ODMFilterManager::class,
-            'ZfDoctrineQueryBuilderOrderByManagerOrm' => OrderBy\Service\ORMOrderByManager::class,
-            'ZfDoctrineQueryBuilderOrderByManagerOdm' => OrderBy\Service\ODMOrderByManager::class,
+            'LaminasDoctrineQueryBuilderFilterManagerOrm' => Filter\Service\ORMFilterManager::class,
+            'LaminasDoctrineQueryBuilderFilterManagerOdm' => Filter\Service\ODMFilterManager::class,
+            'LaminasDoctrineQueryBuilderOrderByManagerOrm' => OrderBy\Service\ORMOrderByManager::class,
+            'LaminasDoctrineQueryBuilderOrderByManagerOdm' => OrderBy\Service\ODMOrderByManager::class,
+
+            // Legacy Zend Framework aliases
+            'ZfDoctrineQueryBuilderFilterManagerOrm' => 'LaminasDoctrineQueryBuilderFilterManagerOrm',
+            'ZfDoctrineQueryBuilderFilterManagerOdm' => 'LaminasDoctrineQueryBuilderFilterManagerOdm',
+            'ZfDoctrineQueryBuilderOrderByManagerOrm' => 'LaminasDoctrineQueryBuilderOrderByManagerOrm',
+            'ZfDoctrineQueryBuilderOrderByManagerOdm' => 'LaminasDoctrineQueryBuilderOrderByManagerOdm',
+            \ZF\Doctrine\QueryBuilder\Filter\Service\ORMFilterManager::class => Filter\Service\ORMFilterManager::class,
+            \ZF\Doctrine\QueryBuilder\Filter\Service\ODMFilterManager::class => Filter\Service\ODMFilterManager::class,
+            \ZF\Doctrine\QueryBuilder\OrderBy\Service\ORMOrderByManager::class => OrderBy\Service\ORMOrderByManager::class,
+            \ZF\Doctrine\QueryBuilder\OrderBy\Service\ODMOrderByManager::class => OrderBy\Service\ODMOrderByManager::class,
         ],
         'factories' => [
             Filter\Service\ORMFilterManager::class => Filter\Service\ORMFilterManagerFactory::class,

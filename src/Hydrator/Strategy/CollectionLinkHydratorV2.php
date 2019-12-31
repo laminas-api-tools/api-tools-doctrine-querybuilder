@@ -1,21 +1,23 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2016 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZF\Doctrine\QueryBuilder\Hydrator\Strategy;
+namespace Laminas\ApiTools\Doctrine\QueryBuilder\Hydrator\Strategy;
 
 use DoctrineModule\Stdlib\Hydrator\Strategy\AbstractCollectionStrategy;
-use Zend\Filter\FilterChain;
-use Zend\Hydrator\Strategy\StrategyInterface;
-use Zend\ServiceManager\ServiceManager;
-use ZF\Hal\Link\Link;
+use Laminas\ApiTools\Hal\Link\Link;
+use Laminas\Filter\FilterChain;
+use Laminas\Hydrator\Strategy\StrategyInterface;
+use Laminas\ServiceManager\ServiceManager;
 
 /**
  * A field-specific hydrator for collections.
  *
- * This version is for use with zend-hyrator versions 1 and 2, and will be
+ * This version is for use with laminas-hyrator versions 1 and 2, and will be
  * aliased to CollectionLink in those versions.
  *
  * @returns Link
@@ -40,12 +42,12 @@ class CollectionLinkHydratorV2 extends AbstractCollectionStrategy implements Str
     {
         $config = $this->getServiceManager()->get('config');
         if (! method_exists($value, 'getTypeClass')
-            || ! isset($config['zf-hal']['metadata_map'][$value->getTypeClass()->name])
+            || ! isset($config['api-tools-hal']['metadata_map'][$value->getTypeClass()->name])
         ) {
             return;
         }
 
-        $config = $config['zf-hal']['metadata_map'][$value->getTypeClass()->name];
+        $config = $config['api-tools-hal']['metadata_map'][$value->getTypeClass()->name];
         $mapping = $value->getMapping();
 
         $filter = new FilterChain();
@@ -56,8 +58,8 @@ class CollectionLinkHydratorV2 extends AbstractCollectionStrategy implements Str
         $link->setRoute($config['route_name']);
         $link->setRouteParams(['id' => null]);
 
-        if (isset($config['zf-doctrine-querybuilder-options']['filter_key'])) {
-            $filterKey = $config['zf-doctrine-querybuilder-options']['filter_key'];
+        if (isset($config['api-tools-doctrine-querybuilder-options']['filter_key'])) {
+            $filterKey = $config['api-tools-doctrine-querybuilder-options']['filter_key'];
         } else {
             $filterKey = 'filter';
         }
