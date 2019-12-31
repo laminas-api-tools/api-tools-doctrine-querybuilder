@@ -1,10 +1,12 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2016 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZFTest\Doctrine\QueryBuilder\Query\Provider;
+namespace LaminasTest\ApiTools\Doctrine\QueryBuilder\Query\Provider;
 
 use Doctrine\MongoDB\Cursor;
 use Doctrine\ODM\MongoDB\DocumentManager as ObjectManager;
@@ -12,16 +14,16 @@ use Doctrine\ODM\MongoDB\Mapping\ClassMetadata;
 use Doctrine\ODM\MongoDB\Mapping\ClassMetadataFactory;
 use Doctrine\ODM\MongoDB\Query\Builder as QueryBuilder;
 use Doctrine\ODM\MongoDB\Query\Query;
+use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\Service\ODMFilterManager;
+use Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy\Service\ODMOrderByManager;
+use Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider\DefaultOdm;
+use Laminas\ApiTools\Doctrine\Server\Paginator\Adapter\DoctrineOdmAdapter;
+use Laminas\ApiTools\Rest\ResourceEvent;
+use Laminas\Http\Request;
+use Laminas\ServiceManager\ServiceLocatorInterface;
+use Laminas\Stdlib\Parameters;
 use PHPUnit_Framework_TestCase as TestCase;
 use Prophecy\Prophecy\ProphecyInterface;
-use Zend\Http\Request;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Stdlib\Parameters;
-use ZF\Apigility\Doctrine\Server\Paginator\Adapter\DoctrineOdmAdapter;
-use ZF\Doctrine\QueryBuilder\Filter\Service\ODMFilterManager;
-use ZF\Doctrine\QueryBuilder\OrderBy\Service\ODMOrderByManager;
-use ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOdm;
-use ZF\Rest\ResourceEvent;
 
 class DefaultOdmTest extends TestCase
 {
@@ -107,7 +109,7 @@ class DefaultOdmTest extends TestCase
         $filterManager->filter($this->queryBuilder->reveal(), $metadata, 'foo-filter-renamed')->shouldBeCalledTimes(1);
 
         $this->serviceLocator->get('config')->willReturn([
-            'zf-doctrine-querybuilder-options' => [
+            'api-tools-doctrine-querybuilder-options' => [
                 'filter_key' => 'renamed-filter-param',
             ],
         ]);
@@ -161,7 +163,7 @@ class DefaultOdmTest extends TestCase
         $orderByManager->orderBy($this->queryBuilder->reveal(), $metadata, 'FooOrderBy')->shouldBeCalledTimes(1);
 
         $this->serviceLocator->get('config')->willReturn([
-            'zf-doctrine-querybuilder-options' => [
+            'api-tools-doctrine-querybuilder-options' => [
                 'order_by_key' => 'renamed-order-by-param',
             ],
         ]);

@@ -1,13 +1,15 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2016 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZFTest\Doctrine\QueryBuilder;
+namespace LaminasTest\ApiTools\Doctrine\QueryBuilder;
 
-use Zend\Mvc\Application;
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
+use Laminas\Mvc\Application;
+use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
 class TestCase extends AbstractHttpControllerTestCase
 {
@@ -16,7 +18,7 @@ class TestCase extends AbstractHttpControllerTestCase
         $r = (new \ReflectionClass(Application::class))->getConstructor();
         $appVersion = $r->getNumberOfRequiredParameters() === 2 ? 2 : 3;
         if ($appVersion === 3) {
-            array_unshift($config['modules'], 'Zend\Router', 'Zend\Hydrator');
+            array_unshift($config['modules'], 'Laminas\Router', 'Laminas\Hydrator');
         }
 
         parent::setApplicationConfig($config);
