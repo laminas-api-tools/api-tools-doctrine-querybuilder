@@ -7,7 +7,7 @@ return array(
         'DoctrineMongoODMModule',
         'Db',
         'DbMongo',
-        'ZF\Doctrine\QueryBuilder',
+        'Laminas\ApiTools\Doctrine\QueryBuilder',
     ),
     'module_listener_options' => array(
         'config_glob_paths' => array(
@@ -17,7 +17,7 @@ return array(
             __DIR__ . '/../vendor',
             'DbMongo' => __DIR__ . '/module/DbMongo',
             'Db' => __DIR__ . '/module/Db',
-            'ZF\Doctrine\QueryBuilder' => __DIR__ . '/../../',
+            'Laminas\ApiTools\Doctrine\QueryBuilder' => __DIR__ . '/../../',
         ),
     ),
 );
