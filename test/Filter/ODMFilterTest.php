@@ -1,18 +1,18 @@
 <?php
 
-namespace ZFTest\Doctrine\QueryBuilder\Filter;
+namespace LaminasTest\ApiTools\Doctrine\QueryBuilder\Filter;
 
-use Zend\Http\Request;
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use DateTime;
 use DbMongo\Document;
+use Laminas\Http\Request;
+use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
 class ODMFilterTest extends AbstractHttpControllerTestCase
 {
     private function countResult($filters, $entity = 'DbMongo\Document\Meta')
     {
         $serviceManager = $this->getApplication()->getServiceManager();
-        $filterManager = $serviceManager->get('ZfDoctrineQueryBuilderFilterManagerOdm');
+        $filterManager = $serviceManager->get('LaminasDoctrineQueryBuilderFilterManagerOdm');
         $objectManager = $serviceManager->get('doctrine.documentmanager.odm_default');
         $queryBuilder = $objectManager->createQueryBuilder($entity);
         # NOTE:  the metadata is an array with one element in testing :\

@@ -1,21 +1,21 @@
 <?php
 
-namespace ZF\Doctrine\QueryBuilder\Query\Provider;
+namespace Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider;
 
-use ZF\Apigility\Doctrine\Server\Query\Provider\QueryProviderInterface;
-use ZF\Apigility\Doctrine\Server\Paginator\Adapter\DoctrineOrmAdapter;
-use DoctrineModule\Persistence\ObjectManagerAwareInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Zend\Paginator\Adapter\AdapterInterface;
-use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use ZF\Rest\ResourceEvent;
+use DoctrineModule\Persistence\ObjectManagerAwareInterface;
+use Laminas\ApiTools\Doctrine\Server\Paginator\Adapter\DoctrineOrmAdapter;
+use Laminas\ApiTools\Doctrine\Server\Query\Provider\QueryProviderInterface;
+use Laminas\ApiTools\Rest\ResourceEvent;
+use Laminas\Paginator\Adapter\AdapterInterface;
+use Laminas\ServiceManager\AbstractPluginManager;
+use Laminas\ServiceManager\ServiceLocatorAwareInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Class FetchAllOrm
  *
- * @package ZF\Apigility\Doctrine\Server\Query\Provider
+ * @package Laminas\ApiTools\Doctrine\Server\Query\Provider
  */
 class DefaultOrm implements ObjectManagerAwareInterface, QueryProviderInterface, ServiceLocatorAwareInterface
 {
@@ -88,7 +88,7 @@ class DefaultOrm implements ObjectManagerAwareInterface, QueryProviderInterface,
 
         if (isset($request['filter'])) {
             $metadata = $this->getObjectManager()->getMetadataFactory()->getAllMetadata();
-            $filterManager = $this->getServiceLocator()->get('ZfDoctrineQueryBuilderFilterManagerOrm');
+            $filterManager = $this->getServiceLocator()->get('LaminasDoctrineQueryBuilderFilterManagerOrm');
             $filterManager->filter(
                 $queryBuilder,
                 $metadata[0],
@@ -98,7 +98,7 @@ class DefaultOrm implements ObjectManagerAwareInterface, QueryProviderInterface,
 
         if (isset($request['order-by'])) {
             $metadata = $this->getObjectManager()->getMetadataFactory()->getAllMetadata();
-            $orderByManager = $this->getServiceLocator()->get('ZfDoctrineQueryBuilderOrderByManagerOrm');
+            $orderByManager = $this->getServiceLocator()->get('LaminasDoctrineQueryBuilderOrderByManagerOrm');
             $orderByManager->orderBy(
                 $queryBuilder,
                 $metadata[0],
