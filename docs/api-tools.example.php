@@ -1,7 +1,7 @@
 <?php
 
 /**
- * An example for zf-doctrine-querybuilder
+ * An example for api-tools-doctrine-querybuilder
  *
  * This example uses arrays for multiple filter and orderby plugin managers
  * because it's possible to break your use of filters into component plugin
@@ -11,11 +11,11 @@
 
 namespace ApplicationApi;
 
-use ZF\Apigility\Provider\ApigilityProviderInterface;
-use ZF\Apigility\Doctrine\Server\Event\DoctrineResourceEvent;
-use Zend\Mvc\MvcEvent;
+use Laminas\ApiTools\Doctrine\Server\Event\DoctrineResourceEvent;
+use Laminas\ApiTools\Provider\ApiToolsProviderInterface;
+use Laminas\Mvc\MvcEvent;
 
-class Module implements ApigilityProviderInterface
+class Module implements ApiToolsProviderInterface
 {
     public function onBootstrap(MvcEvent $e)
     {
@@ -23,7 +23,7 @@ class Module implements ApigilityProviderInterface
         $services = $application->getServiceManager();
         $sharedEvents = $services->get('SharedEventManager');
 
-        $sharedEvents->attach('ZF\Apigility\Doctrine\DoctrineResource',
+        $sharedEvents->attach('Laminas\ApiTools\Doctrine\DoctrineResource',
             DoctrineResourceEvent::EVENT_FETCH_ALL_PRE, function ($e) use ($application)
             {
                 $objectManager = $application->getServiceManager()->get('doctrine.entitymanager.orm_default');
@@ -43,10 +43,10 @@ class Module implements ApigilityProviderInterface
                     case 'Db\Entity\Album':
                         return;
                         break;
-                    // Do apply ZF Doctrine QueryBuilder
+                    // Do apply Laminas Doctrine QueryBuilder
                     case 'Db\Entity\Artist':
-                        $filterManagers[] = $application->getServiceManager()->get('ZfDoctrineQueryBuilderFilterManagerOrm');
-                        $orderByManagers[] = $application->getServiceManager()->get('ZfDoctrineQueryBuilderOrderByManagerOrm');
+                        $filterManagers[] = $application->getServiceManager()->get('LaminasDoctrineQueryBuilderFilterManagerOrm');
+                        $orderByManagers[] = $application->getServiceManager()->get('LaminasDoctrineQueryBuilderOrderByManagerOrm');
                         break;
                     default:
                         return;

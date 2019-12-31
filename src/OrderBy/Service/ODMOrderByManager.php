@@ -1,15 +1,17 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZF\Doctrine\QueryBuilder\OrderBy\Service;
+namespace Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy\Service;
 
-use ZF\Doctrine\QueryBuilder\OrderBy\OrderByInterface;
-use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\Exception;
 use Doctrine\ODM\MongoDB\Query\Builder;
+use Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy\OrderByInterface;
+use Laminas\ServiceManager\AbstractPluginManager;
+use Laminas\ServiceManager\Exception;
 
 class ODMOrderByManager extends AbstractPluginManager
 {
