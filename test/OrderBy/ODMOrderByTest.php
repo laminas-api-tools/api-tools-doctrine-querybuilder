@@ -1,21 +1,23 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2016 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZFTest\Doctrine\QueryBuilder\OrderBy;
+namespace LaminasTest\ApiTools\Doctrine\QueryBuilder\OrderBy;
 
 use DateTime;
 use DbMongo\Document;
-use ZFTest\Doctrine\QueryBuilder\TestCase;
+use LaminasTest\ApiTools\Doctrine\QueryBuilder\TestCase;
 
 class ODMOrderByTest extends TestCase
 {
     private function fetchResult($orderBy, $entity = 'DbMongo\Document\Meta')
     {
         $serviceManager = $this->getApplication()->getServiceManager();
-        $orderByManager = $serviceManager->get('ZfDoctrineQueryBuilderOrderByManagerOdm');
+        $orderByManager = $serviceManager->get('LaminasDoctrineQueryBuilderOrderByManagerOdm');
         $objectManager = $serviceManager->get('doctrine.documentmanager.odm_default');
         $queryBuilder = $objectManager->createQueryBuilder($entity);
         # NOTE:  the metadata is an array with one element in testing :\

@@ -1,11 +1,13 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2016 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-use Zend\ServiceManager\Factory\InvokableFactory;
-use ZF\Doctrine\QueryBuilder\Filter;
+use Laminas\ApiTools\Doctrine\QueryBuilder\Filter;
+use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
     'doctrine' => [
@@ -23,11 +25,11 @@ return [
                 'port' => '27017',
                 'user' => '',
                 'password' => '',
-                'dbname' => 'zf_doctrine_querybuilder_filter_test',
+                'dbname' => 'laminas_doctrine_querybuilder_filter_test',
             ],
         ],
     ],
-    'zf-doctrine-querybuilder-filter-orm' => [
+    'api-tools-doctrine-querybuilder-filter-orm' => [
         'aliases' => [
             'eq'         => Filter\ORM\Equals::class,
             'neq'        => Filter\ORM\NotEquals::class,
@@ -67,7 +69,7 @@ return [
             Filter\ORM\InnerJoin::class           => InvokableFactory::class,
         ],
     ],
-    'zf-doctrine-querybuilder-filter-odm' => [
+    'api-tools-doctrine-querybuilder-filter-odm' => [
         'aliases' => [
             'eq'        => Filter\ODM\Equals::class,
             'neq'       => Filter\ODM\NotEquals::class,

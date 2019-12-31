@@ -3,11 +3,11 @@
 namespace Db;
 
 use Doctrine\ORM\Mapping\Driver\XmlDriver;
-use Zend\ServiceManager\Factory\InvokableFactory;
-use ZF\Doctrine\QueryBuilder\Filter;
+use Laminas\ApiTools\Doctrine\QueryBuilder\Filter;
+use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
-    'zf-doctrine-querybuilder-filter-orm' => [
+    'api-tools-doctrine-querybuilder-filter-orm' => [
         'aliases' => [
             'eq'        => Filter\ORM\Equals::class,
             'neq'       => Filter\ORM\NotEquals::class,
@@ -43,7 +43,7 @@ return [
             Filter\ORM\AndX::class                => InvokableFactory::class,
         ],
     ],
-    'zf-doctrine-querybuilder-filter-odm' => [
+    'api-tools-doctrine-querybuilder-filter-odm' => [
         'aliases' => [
             'eq'        => Filter\ODM\Equals::class,
             'neq'       => Filter\ODM\NotEquals::class,
