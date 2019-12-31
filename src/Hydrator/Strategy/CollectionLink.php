@@ -1,13 +1,13 @@
 <?php
 
-namespace ZF\Doctrine\QueryBuilder\Hydrator\Strategy;
+namespace Laminas\ApiTools\Doctrine\QueryBuilder\Hydrator\Strategy;
 
-use Zend\Stdlib\Hydrator\Strategy\StrategyInterface;
 use DoctrineModule\Stdlib\Hydrator\Strategy\AbstractCollectionStrategy;
-use ZF\Hal\Link\Link;
-use Zend\ServiceManager\ServiceManager;
-use Zend\ServiceManager\ServiceManagerAwareInterface;
-use Zend\Filter\FilterChain;
+use Laminas\ApiTools\Hal\Link\Link;
+use Laminas\Filter\FilterChain;
+use Laminas\ServiceManager\ServiceManager;
+use Laminas\ServiceManager\ServiceManagerAwareInterface;
+use Laminas\Stdlib\Hydrator\Strategy\StrategyInterface;
 
 /**
  * A field-specific hydrator for collections.
@@ -36,11 +36,11 @@ class CollectionLink extends AbstractCollectionStrategy implements
     {
         $config = $this->getServiceManager()->get('Config');
         if (!method_exists($value, 'getTypeClass')
-            || !isset($config['zf-hal']['metadata_map'][$value->getTypeClass()->name])) {
+            || !isset($config['api-tools-hal']['metadata_map'][$value->getTypeClass()->name])) {
             return;
         }
 
-        $config = $config['zf-hal']['metadata_map'][$value->getTypeClass()->name];
+        $config = $config['api-tools-hal']['metadata_map'][$value->getTypeClass()->name];
         $mapping = $value->getMapping();
 
         $filter = new FilterChain();
@@ -51,8 +51,8 @@ class CollectionLink extends AbstractCollectionStrategy implements
         $link->setRoute($config['route_name']);
         $link->setRouteParams(array('id' => null));
 
-        if (isset($config['zf-doctrine-querybuilder-options']['filter_key'])) {
-            $filterKey = $config['zf-doctrine-querybuilder-options']['filter_key'];
+        if (isset($config['api-tools-doctrine-querybuilder-options']['filter_key'])) {
+            $filterKey = $config['api-tools-doctrine-querybuilder-options']['filter_key'];
         } else {
             $filterKey = 'filter';
         }
