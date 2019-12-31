@@ -1,18 +1,18 @@
 <?php
 
-namespace ZFTest\Doctrine\QueryBuilder\OrderBy;
+namespace LaminasTest\ApiTools\Doctrine\QueryBuilder\OrderBy;
 
-use Zend\Http\Request;
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use DateTime;
 use DbMongo\Document;
+use Laminas\Http\Request;
+use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
 class ODMOrderByTest extends AbstractHttpControllerTestCase
 {
     private function fetchResult($orderBy, $entity = 'DbMongo\Document\Meta')
     {
         $serviceManager = $this->getApplication()->getServiceManager();
-        $orderByManager = $serviceManager->get('ZfDoctrineQueryBuilderOrderByManagerOdm');
+        $orderByManager = $serviceManager->get('LaminasDoctrineQueryBuilderOrderByManagerOdm');
         $objectManager = $serviceManager->get('doctrine.documentmanager.odm_default');
         $queryBuilder = $objectManager->createQueryBuilder($entity);
         # NOTE:  the metadata is an array with one element in testing :\
