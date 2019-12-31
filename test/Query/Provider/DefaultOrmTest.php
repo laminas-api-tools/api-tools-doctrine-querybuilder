@@ -1,27 +1,29 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2016 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZFTest\Doctrine\QueryBuilder\Query\Provider;
+namespace LaminasTest\ApiTools\Doctrine\QueryBuilder\Query\Provider;
 
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager as ObjectManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\ClassMetadataFactory;
 use Doctrine\ORM\QueryBuilder;
+use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\Service\ORMFilterManager;
+use Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy\Service\ORMOrderByManager;
+use Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider\DefaultOrm;
+use Laminas\ApiTools\Doctrine\Server\Paginator\Adapter\DoctrineOrmAdapter;
+use Laminas\ApiTools\Rest\ResourceEvent;
+use Laminas\Http\Request;
+use Laminas\ServiceManager\ServiceLocatorInterface;
+use Laminas\Stdlib\Parameters;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ProphecyInterface;
-use Zend\Http\Request;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Stdlib\Parameters;
-use ZF\Apigility\Doctrine\Server\Paginator\Adapter\DoctrineOrmAdapter;
-use ZF\Doctrine\QueryBuilder\Filter\Service\ORMFilterManager;
-use ZF\Doctrine\QueryBuilder\OrderBy\Service\ORMOrderByManager;
-use ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOrm;
-use ZF\Rest\ResourceEvent;
 
 class DefaultOrmTest extends TestCase
 {
@@ -103,7 +105,7 @@ class DefaultOrmTest extends TestCase
         $filterManager->filter($this->queryBuilder->reveal(), $metadata, 'foo-filter-renamed')->shouldBeCalledTimes(1);
 
         $this->serviceLocator->get('config')->willReturn([
-            'zf-doctrine-querybuilder-options' => [
+            'api-tools-doctrine-querybuilder-options' => [
                 'filter_key' => 'renamed-filter-param',
             ],
         ]);
@@ -151,7 +153,7 @@ class DefaultOrmTest extends TestCase
         $orderByManager->orderBy($this->queryBuilder->reveal(), $metadata, 'FooOrderBy')->shouldBeCalledTimes(1);
 
         $this->serviceLocator->get('config')->willReturn([
-            'zf-doctrine-querybuilder-options' => [
+            'api-tools-doctrine-querybuilder-options' => [
                 'order_by_key' => 'renamed-order-by-param',
             ],
         ]);
