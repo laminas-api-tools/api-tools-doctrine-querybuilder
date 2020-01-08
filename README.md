@@ -1,7 +1,7 @@
 Laminas Doctrine QueryBuilder
 ========================
 
-[![Build Status](https://travis-ci.org/laminas-api-tools/api-tools-doctrine-querybuilder.svg?branch=master)](https://travis-ci.org/laminas-api-tools/api-tools-doctrine-querybuilder)
+[![Build Status](https://travis-ci.com/laminas-api-tools/api-tools-doctrine-querybuilder.svg?branch=master)](https://travis-ci.com/laminas-api-tools/api-tools-doctrine-querybuilder)
 [![Coverage Status](https://coveralls.io/repos/github/laminas-api-tools/api-tools-doctrine-querybuilder/badge.svg?branch=master)](https://coveralls.io/github/laminas-api-tools/api-tools-doctrine-querybuilder?branch=master)
 [![Total Downloads](https://poser.pugx.org/laminas-api-tools/api-tools-doctrine-querybuilder/downloads)](https://packagist.org/packages/laminas-api-tools/api-tools-doctrine-querybuilder)
 
