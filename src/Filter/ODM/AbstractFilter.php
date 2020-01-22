@@ -8,74 +8,51 @@
 
 namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ODM;
 
-use DateTime;
 use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\FilterInterface;
+use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\TypeCastInterface;
 
 abstract class AbstractFilter implements FilterInterface
 {
     abstract public function filter($queryBuilder, $metadata, $option);
 
-    protected function typeCastField($metadata, $field, $value, $format = null, $doNotTypecastDatetime = false)
+    /**
+     * @var TypeCastInterface
+     */
+    protected $typeCaster;
+
+    public function __construct(array $params = [])
     {
-        if (! isset($metadata->fieldMappings[$field])) {
-            return $value;
-        }
+        $this->setTypeCaster($params['type_caster'] ?? new TypeCaster());
+    }
 
-        switch ($metadata->fieldMappings[$field]['type']) {
-            case 'int':
-                settype($value, 'integer');
-                break;
-            case 'boolean':
-                settype($value, 'boolean');
-                break;
-            case 'float':
-                settype($value, 'float');
-                break;
-            case 'string':
-                settype($value, 'string');
-                break;
-            case 'bin_data_custom':
-                break;
-            case 'bin_data_func':
-                break;
-            case 'bin_data_md5':
-                break;
-            case 'bin_data':
-                break;
-            case 'bin_data_uuid':
-                break;
-            case 'collection':
-                break;
-            case 'custom_id':
-                break;
-            case 'date':
-                if ($value && ! $doNotTypecastDatetime) {
-                    if (! $format) {
-                        $format = 'Y-m-d H:i:s';
-                    }
-                    $value = DateTime::createFromFormat($format, $value);
-                }
-                break;
-            case 'file':
-                break;
-            case 'hash':
-                break;
-            case 'id':
-                break;
-            case 'increment':
-                break;
-            case 'key':
-                break;
-            case 'object_id':
-                break;
-            case 'raw_type':
-                break;
-            case 'timestamp':
-                break;
-            default:
-                break;
-        }
+    /**
+     * @param TypeCastInterface $typeCaster
+     * @return $this
+     */
+    public function setTypeCaster(TypeCastInterface $typeCaster)
+    {
+        $this->typeCaster = $typeCaster;
+        return $this;
+    }
 
-        return $value;
+    /**
+     * @return TypeCastInterface
+     */
+    protected function getTypeCaster()
+    {
+        return $this->typeCaster;
+    }
+
+    /**
+     * @param object $metadata
+     * @param string $field
+     * @param string|int|float $value
+     * @param string|null $format
+     * @param bool $doNotTypecastDatetime
+     * @return mixed
+     */
+    protected function typeCastField($metadata, string $field, $value, string $format = null, bool $doNotTypecastDatetime = false)
+    {
+        return $this->getTypeCaster()->typeCastField($metadata, $field, $value, $format, $doNotTypecastDatetime);
     }
 }

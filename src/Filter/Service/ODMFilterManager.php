@@ -10,10 +10,12 @@ namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\Service;
 
 use Doctrine\ODM\MongoDB\Mapping\ClassMetadata as Metadata;
 use Doctrine\ODM\MongoDB\Query\Builder as QueryBuilder;
-use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\FilterInterface;
+use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\TypeCastInterface;
+use RuntimeException;
 use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\Exception;
-use RuntimeException;
+use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\FilterInterface;
+use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ODM\TypeCaster;
 
 class ODMFilterManager extends AbstractPluginManager
 {
@@ -29,7 +31,13 @@ class ODMFilterManager extends AbstractPluginManager
                 throw new RuntimeException('Array element "type" is required for all filters');
             }
 
-            $filter = $this->get(strtolower($option['type']), [$this]);
+            $typeCaster = $this->resolveTypeCaster();
+
+            $filter = $this->get(strtolower($option['type']), [
+                0 => $this,
+                'filter_manager' => $this,
+                'type_caster' => $typeCaster,
+            ]);
             $filter->filter($queryBuilder, $metadata, $option);
         }
     }
@@ -71,5 +79,19 @@ class ODMFilterManager extends AbstractPluginManager
         } catch (Exception\InvalidServiceException $e) {
             throw new Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
+    }
+
+    /**
+     * @return TypeCastInterface
+     */
+    protected function resolveTypeCaster()
+    {
+        if (\property_exists($this, 'creationContext')) {
+            $serviceLocator = $this->creationContext;
+        } else {
+            $serviceLocator = $this->getServiceLocator();
+        }
+
+        return $serviceLocator->get(TypeCaster::class);
     }
 }

@@ -31,6 +31,8 @@ return [
             Filter\Service\ODMFilterManager::class => Filter\Service\ODMFilterManagerFactory::class,
             OrderBy\Service\ORMOrderByManager::class => OrderBy\Service\ORMOrderByManagerFactory::class,
             OrderBy\Service\ODMOrderByManager::class => OrderBy\Service\ODMOrderByManagerFactory::class,
+            Filter\ORM\TypeCaster::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,
+            Filter\ODM\TypeCaster::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,
         ],
     ],
 ];
