@@ -6,9 +6,9 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM;
+namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter;
 
-class Like extends AbstractFilter
+class NotLike extends AbstractFilter
 {
     public function filter($queryBuilder, $metadata, $option)
     {
@@ -31,11 +31,9 @@ class Like extends AbstractFilter
         $queryBuilder->$queryType(
             $queryBuilder
                 ->expr()
-                ->like(
+                ->notlike(
                     $option['alias'] . '.' . $option['field'],
-                    $queryBuilder
-                        ->expr()
-                        ->literal($option['value'])
+                    $queryBuilder->expr()->literal($option['value'])
                 )
         );
     }

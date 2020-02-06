@@ -13,7 +13,7 @@ use Db\Entity;
 use Doctrine\ORM\Tools\SchemaTool;
 use LaminasTest\ApiTools\Doctrine\QueryBuilder\TestCase;
 
-class ORMFilterTest extends TestCase
+class FilterTest extends TestCase
 {
     protected $objectManager;
 

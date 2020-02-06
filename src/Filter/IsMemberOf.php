@@ -6,10 +6,15 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM;
+namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter;
 
-class NotLike extends AbstractFilter
+class IsMemberOf extends AbstractFilter
 {
+    /**
+     * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+     * @param $metadata
+     * @param $option
+     */
     public function filter($queryBuilder, $metadata, $option)
     {
         if (isset($option['where'])) {
@@ -28,13 +33,19 @@ class NotLike extends AbstractFilter
             $option['alias'] = 'row';
         }
 
+        $format = null;
+        if (isset($option['format'])) {
+            $format = $option['format'];
+        }
+
+        $value = $this->typeCastField($metadata, $option['field'], $option['value'], $format);
+
+        $parameter = uniqid('a');
         $queryBuilder->$queryType(
             $queryBuilder
                 ->expr()
-                ->notlike(
-                    $option['alias'] . '.' . $option['field'],
-                    $queryBuilder->expr()->literal($option['value'])
-                )
+                ->isMemberOf(':' . $parameter, $option['alias'] . '.' . $option['field'])
         );
+        $queryBuilder->setParameter($parameter, $value);
     }
 }

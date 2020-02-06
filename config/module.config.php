@@ -11,18 +11,18 @@ namespace Laminas\ApiTools\Doctrine\QueryBuilder;
 return [
     'service_manager' => [
         'aliases' => [
-            'LaminasDoctrineQueryBuilderFilterManagerOrm' => Filter\Service\ORMFilterManager::class,
-            'LaminasDoctrineQueryBuilderOrderByManagerOrm' => OrderBy\Service\ORMOrderByManager::class,
+            'LaminasDoctrineQueryBuilderFilterManagerOrm' => FilterManager::class,
+            'LaminasDoctrineQueryBuilderOrderByManagerOrm' => OrderByManager::class,
+            \ZF\Doctrine\QueryBuilder\FilterManager::class => FilterManager::class,
+            \ZF\Doctrine\QueryBuilder\OrderByManager::class => OrderByManager::class,
 
             // Legacy Zend Framework aliases
             'ZfDoctrineQueryBuilderFilterManagerOrm' => 'LaminasDoctrineQueryBuilderFilterManagerOrm',
             'ZfDoctrineQueryBuilderOrderByManagerOrm' => 'LaminasDoctrineQueryBuilderOrderByManagerOrm',
-            \ZF\Doctrine\QueryBuilder\Filter\Service\ORMFilterManager::class => Filter\Service\ORMFilterManager::class,
-            \ZF\Doctrine\QueryBuilder\OrderBy\Service\ORMOrderByManager::class => OrderBy\Service\ORMOrderByManager::class,
         ],
         'factories' => [
-            Filter\Service\ORMFilterManager::class => Filter\Service\ORMFilterManagerFactory::class,
-            OrderBy\Service\ORMOrderByManager::class => OrderBy\Service\ORMOrderByManagerFactory::class,
+            FilterManager::class => FilterManagerFactory::class,
+            OrderByManager::class => OrderByManagerFactory::class,
         ],
     ],
 ];

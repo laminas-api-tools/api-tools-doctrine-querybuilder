@@ -6,11 +6,11 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM;
+namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-class OrX extends AbstractFilter
+class AndX extends AbstractFilter
 {
     public function filter($queryBuilder, $metadata, $option)
     {
@@ -26,21 +26,20 @@ class OrX extends AbstractFilter
             $queryType = 'andWhere';
         }
 
-        $orX = $queryBuilder->expr()->orX();
-        $em  = $queryBuilder->getEntityManager();
-        $qb  = $em->createQueryBuilder();
+        $andX = $queryBuilder->expr()->andX();
+        $em   = $queryBuilder->getEntityManager();
+        $qb   = $em->createQueryBuilder();
 
         foreach ($option['conditions'] as $condition) {
-            $filter = $this->getFilterManager()
-                ->get(
-                    strtolower($condition['type']),
-                    [$this->getFilterManager()]
-                );
+            $filter = $this->getFilterManager()->get(
+                strtolower($condition['type']),
+                [$this->getFilterManager()]
+            );
             $filter->filter($qb, $metadata, $condition);
         }
 
         $dqlParts = $qb->getDqlParts();
-        $orX->addMultiple($dqlParts['where']->getParts());
+        $andX->addMultiple($dqlParts['where']->getParts());
         $queryBuilder->setParameters(
             new ArrayCollection(array_merge_recursive(
                 $queryBuilder->getParameters()->toArray(),
@@ -48,6 +47,6 @@ class OrX extends AbstractFilter
             ))
         );
 
-        $queryBuilder->$queryType($orX);
+        $queryBuilder->$queryType($andX);
     }
 }

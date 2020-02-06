@@ -6,7 +6,7 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy\Service;
+namespace Laminas\ApiTools\Doctrine\QueryBuilder;
 
 use Doctrine\ORM\QueryBuilder;
 use Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy\OrderByInterface;
@@ -14,7 +14,7 @@ use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\Exception;
 use RuntimeException;
 
-class ORMOrderByManager extends AbstractPluginManager
+class OrderByManager extends AbstractPluginManager
 {
     /**
      * @var string

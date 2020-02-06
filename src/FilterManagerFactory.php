@@ -6,11 +6,11 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy\Service;
+namespace Laminas\ApiTools\Doctrine\QueryBuilder;
 
 use Laminas\Mvc\Service\AbstractPluginManagerFactory;
 
-class ORMOrderByManagerFactory extends AbstractPluginManagerFactory
+class FilterManagerFactory extends AbstractPluginManagerFactory
 {
-    const PLUGIN_MANAGER_CLASS = ORMOrderByManager::class;
+    const PLUGIN_MANAGER_CLASS = FilterManager::class;
 }

@@ -6,9 +6,9 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM;
+namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter;
 
-class IsNotNull extends AbstractFilter
+class Equals extends AbstractFilter
 {
     public function filter($queryBuilder, $metadata, $option)
     {
@@ -28,10 +28,19 @@ class IsNotNull extends AbstractFilter
             $option['alias'] = 'row';
         }
 
+        $format = null;
+        if (isset($option['format'])) {
+            $format = $option['format'];
+        }
+
+        $value = $this->typeCastField($metadata, $option['field'], $option['value'], $format);
+
+        $parameter = uniqid('a');
         $queryBuilder->$queryType(
             $queryBuilder
                 ->expr()
-                ->isNotNull($option['alias'] . '.' . $option['field'])
+                ->eq($option['alias'] . '.' . $option['field'], ':' . $parameter)
         );
+        $queryBuilder->setParameter($parameter, $value);
     }
 }

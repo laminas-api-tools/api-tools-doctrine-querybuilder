@@ -6,9 +6,9 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM;
+namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter;
 
-class NotIn extends AbstractFilter
+class GreaterThanOrEquals extends AbstractFilter
 {
     public function filter($queryBuilder, $metadata, $option)
     {
@@ -30,23 +30,14 @@ class NotIn extends AbstractFilter
 
         $format = isset($option['format']) ? $option['format'] : null;
 
-        $queryValues = [];
-        foreach ($option['values'] as $value) {
-            $queryValues[] = $this->typeCastField(
-                $metadata,
-                $option['field'],
-                $value,
-                $format,
-                $doNotTypecastDatetime = true
-            );
-        }
+        $value = $this->typeCastField($metadata, $option['field'], $option['value'], $format);
 
         $parameter = uniqid('a');
         $queryBuilder->$queryType(
             $queryBuilder
                 ->expr()
-                ->notIn($option['alias'] . '.' . $option['field'], ':' . $parameter)
+                ->gte($option['alias'] . '.' . $option['field'], ':' . $parameter)
         );
-        $queryBuilder->setParameter($parameter, $queryValues);
+        $queryBuilder->setParameter($parameter, $value);
     }
 }

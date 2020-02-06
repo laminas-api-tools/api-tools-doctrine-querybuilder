@@ -6,20 +6,20 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM;
+namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter;
 
 use Exception;
 
-class LeftJoin extends AbstractFilter
+class InnerJoin extends AbstractFilter
 {
     public function filter($queryBuilder, $metadata, $option)
     {
         if (! isset($option['field']) || ! $option['field']) {
-            throw new Exception('Field must be specified for left  join');
+            throw new Exception('Field must be specified for inner join');
         }
 
         if (! isset($option['alias']) || ! $option['alias']) {
-            throw new Exception('Alias must be specified for left join');
+            throw new Exception('Alias must be specified for inner join');
         }
 
         if (! isset($option['parentAlias']) || ! $option['parentAlias']) {
@@ -46,7 +46,7 @@ class LeftJoin extends AbstractFilter
             $option['indexBy'] = null;
         }
 
-        $queryBuilder->leftJoin(
+        $queryBuilder->innerJoin(
             $option['parentAlias'] . '.' . $option['field'],
             $option['alias'],
             $option['conditionType'],

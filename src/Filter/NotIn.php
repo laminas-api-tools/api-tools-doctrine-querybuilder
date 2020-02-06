@@ -6,9 +6,9 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM;
+namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter;
 
-class In extends AbstractFilter
+class NotIn extends AbstractFilter
 {
     public function filter($queryBuilder, $metadata, $option)
     {
@@ -45,7 +45,7 @@ class In extends AbstractFilter
         $queryBuilder->$queryType(
             $queryBuilder
                 ->expr()
-                ->in($option['alias'] . '.' . $option['field'], ':' . $parameter)
+                ->notIn($option['alias'] . '.' . $option['field'], ':' . $parameter)
         );
         $queryBuilder->setParameter($parameter, $queryValues);
     }
