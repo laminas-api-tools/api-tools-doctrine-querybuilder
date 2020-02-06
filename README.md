@@ -40,7 +40,7 @@ Installation of this module uses composer. For composer documentation, please re
 [getcomposer.org](http://getcomposer.org/).
 
 ```bash
-$ composer require laminas-api-tools/api-tools-doctrine-querybuilder
+$ composer require laminas-api-tools/api-tools-doctrine-querybuilder-orm
 ```
 
 Once installed, add `Laminas\ApiTools\Doctrine\QueryBuilder` to your list of modules inside
@@ -56,7 +56,7 @@ Configuring the Module
 ----------------------
 
 Copy `config/api-tools-doctrine-querybuilder.global.php.dist` to `config/autoload/api-tools-doctrine-querybuilder.global.php`
-and edit the list of aliases for orm and odm to those you want enabled by default.
+and edit the list of aliases for orm to those you want enabled by default.
 
 
 Use With Laminas API Tools Doctrine
@@ -71,11 +71,9 @@ through `api-tools-doctrine-querybuilder-options`:
 'api-tools-doctrine-query-provider' => [
     'aliases' => [
         'default_orm' => \Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider\DefaultOrm::class,
-        'default_odm' => \Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider\DefaultOdm::class,
     ],
     'factories' => [
         \Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider\DefaultOrm::class => \Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider\DefaultOrmFactory::class,
-        \Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider\DefaultOdm::class => \Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider\DefaultOdmFactory::class,
     ],
 ],
 ```
@@ -306,8 +304,6 @@ Left Join is commented by default in the `api-tools-doctrine-querybuilder.global
 Included Filter Types
 ---------------------
 
-### ORM and ODM
-
 Equals:
 
 ```php
@@ -423,14 +419,6 @@ ignored. The `where` parameter on the OrX filter type is not ignored.
     ],
     'where' => 'and',
 ]
-```
-
-### ODM Only
-
-Regex:
-
-```php
-['type' => 'regex', 'field' => 'fieldName', 'value' => '/.*search.*/i']
 ```
 
 

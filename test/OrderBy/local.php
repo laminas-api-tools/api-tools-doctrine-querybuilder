@@ -21,13 +21,6 @@ return [
                     'memory' => true,
                 ],
             ],
-            'odm_default' => [
-                'server' => 'localhost',
-                'port' => '27017',
-                'user' => '',
-                'password' => '',
-                'dbname' => 'laminas_doctrine_querybuilder_filter_test',
-            ],
         ],
     ],
     'api-tools-doctrine-querybuilder-orderby-orm' => [
@@ -36,14 +29,6 @@ return [
         ],
         'factories' => [
             OrderBy\ORM\Field::class => InvokableFactory::class,
-        ],
-    ],
-    'api-tools-doctrine-querybuilder-orderby-odm' => [
-        'aliases' => [
-            'field' => OrderBy\ODM\Field::class,
-        ],
-        'factories' => [
-            OrderBy\ODM\Field::class => InvokableFactory::class,
         ],
     ],
 ];

@@ -33,23 +33,10 @@ class Module implements DependencyIndicatorInterface
         );
 
         $serviceListener->addServiceManager(
-            'LaminasDoctrineQueryBuilderFilterManagerOdm',
-            'api-tools-doctrine-querybuilder-filter-odm',
-            Filter\FilterInterface::class,
-            'getDoctrineQueryBuilderFilterOdmConfig'
-        );
-
-        $serviceListener->addServiceManager(
             'LaminasDoctrineQueryBuilderOrderByManagerOrm',
             'api-tools-doctrine-querybuilder-orderby-orm',
             OrderBy\OrderByInterface::class,
             'getDoctrineQueryBuilderOrderByOrmConfig'
-        );
-        $serviceListener->addServiceManager(
-            'LaminasDoctrineQueryBuilderOrderByManagerOdm',
-            'api-tools-doctrine-querybuilder-orderby-odm',
-            OrderBy\OrderByInterface::class,
-            'getDoctrineQueryBuilderOrderByOdmConfig'
         );
     }
 

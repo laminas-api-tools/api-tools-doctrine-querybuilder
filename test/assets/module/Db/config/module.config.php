@@ -43,38 +43,6 @@ return [
             Filter\ORM\AndX::class                => InvokableFactory::class,
         ],
     ],
-    'api-tools-doctrine-querybuilder-filter-odm' => [
-        'aliases' => [
-            'eq'        => Filter\ODM\Equals::class,
-            'neq'       => Filter\ODM\NotEquals::class,
-            'lt'        => Filter\ODM\LessThan::class,
-            'lte'       => Filter\ODM\LessThanOrEquals::class,
-            'gt'        => Filter\ODM\GreaterThan::class,
-            'gte'       => Filter\ODM\GreaterThanOrEquals::class,
-            'isnull'    => Filter\ODM\IsNull::class,
-            'isnotnull' => Filter\ODM\IsNotNull::class,
-            'in'        => Filter\ODM\In::class,
-            'notin'     => Filter\ODM\NotIn::class,
-            'between'   => Filter\ODM\Between::class,
-            'like'      => Filter\ODM\Like::class,
-            'regex'     => Filter\ODM\Regex::class,
-        ],
-        'factories' => [
-            Filter\ODM\Equals::class              => InvokableFactory::class,
-            Filter\ODM\NotEquals::class           => InvokableFactory::class,
-            Filter\ODM\LessThan::class            => InvokableFactory::class,
-            Filter\ODM\LessThanOrEquals::class    => InvokableFactory::class,
-            Filter\ODM\GreaterThan::class         => InvokableFactory::class,
-            Filter\ODM\GreaterThanOrEquals::class => InvokableFactory::class,
-            Filter\ODM\IsNull::class              => InvokableFactory::class,
-            Filter\ODM\IsNotNull::class           => InvokableFactory::class,
-            Filter\ODM\In::class                  => InvokableFactory::class,
-            Filter\ODM\NotIn::class               => InvokableFactory::class,
-            Filter\ODM\Between::class             => InvokableFactory::class,
-            Filter\ODM\Like::class                => InvokableFactory::class,
-            Filter\ODM\Regex::class               => InvokableFactory::class,
-        ],
-    ],
     'doctrine' => [
         'driver' => [
            'db_driver' => [
