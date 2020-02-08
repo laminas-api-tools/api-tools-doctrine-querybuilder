@@ -33,7 +33,7 @@
         }
     },
     "require": {
-        "php": "^5.6 || ^7.0",
+        "php": "^7.2",
         "doctrine/doctrine-module": "dev-develop",
         "doctrine/doctrine-orm-module": "dev-develop",
         "laminas/laminas-hydrator": "^3.0",
