@@ -12,7 +12,6 @@ env:
     - COMPOSER_ARGS="--no-interaction"
     - ADAPTER_DEPS="alcaeus/mongo-php-adapter"
     - COVERAGE_DEPS="php-coveralls/php-coveralls"
-    - MONGO_DRIVER=mongodb
 
 matrix:
   fast_finish: true
@@ -20,11 +19,9 @@ matrix:
     - php: 7.2
       env:
         - DEPS=lowest
-        - MONGO_DRIVER=mongo
     - php: 7.2
       env:
         - DEPS=latest
-        - MONGO_DRIVER=mongo
     - php: 7.3
       env:
         - DEPS=lowest
@@ -54,7 +51,6 @@ install:
   - if [[ $LEGACY_DEPS != '' ]]; then travis_retry composer update $COMPOSER_ARGS --with-dependencies $LEGACY_DEPS ; fi
   - if [[ $DEPS == 'latest' ]]; then travis_retry composer update $COMPOSER_ARGS ; fi
   - if [[ $DEPS == 'lowest' ]]; then travis_retry composer update --prefer-lowest --prefer-stable $COMPOSER_ARGS ; fi
-  - if [[ $MONGO_DRIVER == 'mongodb' ]]; then travis_retry composer require --dev $COMPOSER_ARGS $ADAPTER_DEPS ; fi
   - if [[ $TEST_COVERAGE == 'true' ]]; then travis_retry composer require --dev $COMPOSER_ARGS $COVERAGE_DEPS ; fi
   - stty cols 120 && composer show
 
