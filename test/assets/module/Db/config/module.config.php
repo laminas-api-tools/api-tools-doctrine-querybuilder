@@ -2,7 +2,7 @@
 
 namespace Db;
 
-use Doctrine\Mapping\Driver\XmlDriver;
+use Doctrine\ORM\Mapping\Driver\XmlDriver;
 use Laminas\ApiTools\Doctrine\QueryBuilder\Filter;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 

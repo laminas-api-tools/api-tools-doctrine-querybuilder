@@ -6,10 +6,10 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy\ORM;
+namespace Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy;
 
 use Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy\OrderByInterface;
-use Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy\Service\ORMOrderByManager;
+use Laminas\ApiTools\Doctrine\QueryBuilder\OrderByManager;
 
 abstract class AbstractOrderBy implements OrderByInterface
 {
@@ -22,7 +22,7 @@ abstract class AbstractOrderBy implements OrderByInterface
         $this->setOrderByManager($params[0]);
     }
 
-    public function setOrderByManager(ORMOrderByManager $orderByManager)
+    public function setOrderByManager(OrderByManager $orderByManager)
     {
         $this->orderByManager = $orderByManager;
 

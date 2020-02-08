@@ -10,7 +10,7 @@ namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter;
 
 use DateTime;
 use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\FilterInterface;
-use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\Service\FilterManager;
+use Laminas\ApiTools\Doctrine\QueryBuilder\FilterManager;
 
 abstract class AbstractFilter implements FilterInterface
 {

@@ -25,10 +25,10 @@ return [
     ],
     'api-tools-doctrine-querybuilder-orderby-orm' => [
         'aliases' => [
-            'field' => OrderBy\ORM\Field::class,
+            'field' => OrderBy\Field::class,
         ],
         'factories' => [
-            OrderBy\ORM\Field::class => InvokableFactory::class,
+            OrderBy\Field::class => InvokableFactory::class,
         ],
     ],
 ];
