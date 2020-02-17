@@ -6,15 +6,15 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace Laminas\ApiTools\Doctrine\QueryBuilder;
+namespace Laminas\ApiTools\Doctrine\QueryBuilder\ORM;
 
 return [
     'service_manager' => [
         'aliases' => [
             'LaminasDoctrineQueryBuilderFilterManagerOrm' => FilterManager::class,
             'LaminasDoctrineQueryBuilderOrderByManagerOrm' => OrderByManager::class,
-            \ZF\Doctrine\QueryBuilder\FilterManager::class => FilterManager::class,
-            \ZF\Doctrine\QueryBuilder\OrderByManager::class => OrderByManager::class,
+            \ZF\Doctrine\QueryBuilder\ORM\FilterManager::class => FilterManager::class,
+            \ZF\Doctrine\QueryBuilder\ORM\OrderByManager::class => OrderByManager::class,
 
             // Legacy Zend Framework aliases
             'ZfDoctrineQueryBuilderFilterManagerOrm' => 'LaminasDoctrineQueryBuilderFilterManagerOrm',

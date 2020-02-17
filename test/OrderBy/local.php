@@ -7,7 +7,7 @@
  */
 
 use Doctrine\DBAL\Driver\PDOSqlite\Driver;
-use Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy;
+use Laminas\ApiTools\Doctrine\QueryBuilder\ORM\OrderBy;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [

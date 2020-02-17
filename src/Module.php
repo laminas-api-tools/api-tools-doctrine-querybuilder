@@ -6,7 +6,7 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace Laminas\ApiTools\Doctrine\QueryBuilder;
+namespace Laminas\ApiTools\Doctrine\QueryBuilder\ORM;
 
 use Laminas\ModuleManager\Feature\DependencyIndicatorInterface;
 use Laminas\ModuleManager\Listener\ServiceListener;
@@ -43,7 +43,7 @@ class Module implements DependencyIndicatorInterface
     /**
      * Expected to return an array of modules on which the current one depends on
      *
-     * @return array
+     * @return string[]
      */
     public function getModuleDependencies()
     {

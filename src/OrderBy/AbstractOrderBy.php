@@ -6,10 +6,10 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy;
+namespace Laminas\ApiTools\Doctrine\QueryBuilder\ORM\OrderBy;
 
-use Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy\OrderByInterface;
-use Laminas\ApiTools\Doctrine\QueryBuilder\OrderByManager;
+use Laminas\ApiTools\Doctrine\QueryBuilder\ORM\OrderBy\OrderByInterface;
+use Laminas\ApiTools\Doctrine\QueryBuilder\ORM\OrderByManager;
 
 abstract class AbstractOrderBy implements OrderByInterface
 {

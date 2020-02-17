@@ -6,12 +6,12 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace LaminasTest\ApiTools\Doctrine\QueryBuilder\Filter;
+namespace LaminasTest\ApiTools\Doctrine\QueryBuilder\ORM    \Filter;
 
 use DateTime;
 use Db\Entity;
 use Doctrine\ORM\Tools\SchemaTool;
-use LaminasTest\ApiTools\Doctrine\QueryBuilder\TestCase;
+use LaminasTest\ApiTools\Doctrine\QueryBuilder\ORM\TestCase;
 
 class FilterTest extends TestCase
 {
@@ -32,6 +32,7 @@ class FilterTest extends TestCase
         $filterManager->filter($queryBuilder, $metadata[0], $filters);
 
         $result = $queryBuilder->getQuery()->getResult();
+
         return sizeof($result);
     }
 

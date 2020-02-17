@@ -6,7 +6,7 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-use Laminas\ApiTools\Doctrine\QueryBuilder\Filter;
+use Laminas\ApiTools\Doctrine\QueryBuilder\ORM\Filter;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [

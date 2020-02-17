@@ -3,7 +3,7 @@
 namespace Db;
 
 use Doctrine\ORM\Mapping\Driver\XmlDriver;
-use Laminas\ApiTools\Doctrine\QueryBuilder\Filter;
+use Laminas\ApiTools\Doctrine\QueryBuilder\ORM\Filter;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [

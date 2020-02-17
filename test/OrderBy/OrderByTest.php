@@ -6,14 +6,14 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace LaminasTest\ApiTools\Doctrine\QueryBuilder\OrderBy;
+namespace LaminasTest\ApiTools\Doctrine\QueryBuilder\ORM\OrderBy;
 
 use DateTime;
 use Db\Entity;
 use Doctrine\ORM\Tools\SchemaTool;
-use LaminasTest\ApiTools\Doctrine\QueryBuilder\TestCase;
+use LaminasTest\ApiTools\Doctrine\QueryBuilder\ORM\TestCase;
 
-class ORMOrderByTest extends TestCase
+class OrderByTest extends TestCase
 {
     private function fetchResult($orderBy, $entity = 'Db\Entity\Artist')
     {

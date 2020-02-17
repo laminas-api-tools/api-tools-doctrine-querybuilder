@@ -11,7 +11,7 @@ return [
         'DoctrineModule',
         'DoctrineORMModule',
         'Db',
-        'Laminas\ApiTools\Doctrine\QueryBuilder',
+        'Laminas\ApiTools\Doctrine\QueryBuilder\ORM',
     ],
     'module_listener_options' => [
         'config_glob_paths' => [
