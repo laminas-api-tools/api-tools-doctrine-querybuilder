@@ -28,7 +28,7 @@
         },
         "laminas": {
             "module": [
-                "Laminas\\ApiTools\\Doctrine\\QueryBuilder"
+                "Laminas\\ApiTools\\Doctrine\\QueryBuilder\\ORM"
             ]
         }
     },
