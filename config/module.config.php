@@ -13,8 +13,6 @@ return [
         'aliases' => [
             'LaminasDoctrineQueryBuilderFilterManagerOrm' => FilterManager::class,
             'LaminasDoctrineQueryBuilderOrderByManagerOrm' => OrderByManager::class,
-            \ZF\Doctrine\QueryBuilder\ORM\FilterManager::class => FilterManager::class,
-            \ZF\Doctrine\QueryBuilder\ORM\OrderByManager::class => OrderByManager::class,
 
             // Legacy Zend Framework aliases
             'ZfDoctrineQueryBuilderFilterManagerOrm' => 'LaminasDoctrineQueryBuilderFilterManagerOrm',
