@@ -11,12 +11,8 @@ namespace Laminas\ApiTools\Doctrine\QueryBuilder\ORM;
 return [
     'service_manager' => [
         'aliases' => [
-            'LaminasDoctrineQueryBuilderFilterManagerOrm' => FilterManager::class,
-            'LaminasDoctrineQueryBuilderOrderByManagerOrm' => OrderByManager::class,
-
-            // Legacy Zend Framework aliases
-            'ZfDoctrineQueryBuilderFilterManagerOrm' => 'LaminasDoctrineQueryBuilderFilterManagerOrm',
-            'ZfDoctrineQueryBuilderOrderByManagerOrm' => 'LaminasDoctrineQueryBuilderOrderByManagerOrm',
+            'LaminasDoctrineQueryBuilderOrmFilterManager' => FilterManager::class,
+            'LaminasDoctrineQueryBuilderOrmOrderByManager' => OrderByManager::class,
         ],
         'factories' => [
             FilterManager::class => FilterManagerFactory::class,

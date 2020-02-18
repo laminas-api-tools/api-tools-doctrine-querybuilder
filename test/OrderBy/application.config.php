@@ -20,7 +20,7 @@ return [
         'module_paths' => [
             __DIR__ . '/../vendor',
             'Db' => __DIR__ . '/../assets/module/Db',
-            'Laminas\ApiTools\Doctrine\QueryBuilder\ORM' => __DIR__ . '/../..',
+            'Laminas\ApiTools\Doctrine\QueryBuilder\ORM' => __DIR__ . '/../../src',
         ],
     ],
 ];

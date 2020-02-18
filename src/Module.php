@@ -26,14 +26,14 @@ class Module implements DependencyIndicatorInterface
         $serviceListener = $serviceManager->get('ServiceListener');
 
         $serviceListener->addServiceManager(
-            'LaminasDoctrineQueryBuilderFilterManagerOrm',
+            'LaminasDoctrineQueryBuilderOrmFilterManager',
             'api-tools-doctrine-querybuilder-filter-orm',
             Filter\FilterInterface::class,
             'getDoctrineQueryBuilderFilterOrmConfig'
         );
 
         $serviceListener->addServiceManager(
-            'LaminasDoctrineQueryBuilderOrderByManagerOrm',
+            'LaminasDoctrineQueryBuilderOrmOrderByManager',
             'api-tools-doctrine-querybuilder-orderby-orm',
             OrderBy\OrderByInterface::class,
             'getDoctrineQueryBuilderOrderByOrmConfig'
@@ -47,6 +47,6 @@ class Module implements DependencyIndicatorInterface
      */
     public function getModuleDependencies()
     {
-        return ['DoctrineModule'];
+        return ['DoctrineORMModule'];
     }
 }
