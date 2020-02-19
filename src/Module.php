@@ -16,7 +16,6 @@ class Module implements DependencyIndicatorInterface
 {
     public function getConfig()
     {
-        throw new \Exception('hit module get config');
         return include __DIR__ . '/../config/module.config.php';
     }
 
