@@ -9,7 +9,7 @@
 namespace Laminas\ApiTools\Doctrine\ORM\QueryBuilder;
 
 use Doctrine\ORM\QueryBuilder;
-use Laminas\ApiTools\Doctrine\ORM\QueryBuilder\Filter\FilterInterface;
+use Laminas\ApiTools\Doctrine\ORM\QueryBuilder\Filter\AbstractFilter;
 use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\Exception;
 use RuntimeException;
@@ -19,7 +19,7 @@ class FilterManager extends AbstractPluginManager
     /**
      * @var string
      */
-    protected $instanceOf = FilterInterface::class;
+    protected $instanceOf = AbstractFilter::class;
 
     public function filter(QueryBuilder $queryBuilder, $metadata, $filters)
     {

@@ -8,10 +8,9 @@
 
 namespace Laminas\ApiTools\Doctrine\ORM\QueryBuilder\OrderBy;
 
-use Laminas\ApiTools\Doctrine\ORM\QueryBuilder\OrderBy\OrderByInterface;
 use Laminas\ApiTools\Doctrine\ORM\QueryBuilder\OrderByManager;
 
-abstract class AbstractOrderBy implements OrderByInterface
+abstract class AbstractOrderBy
 {
     abstract public function orderBy($queryBuilder, $metadata, $option);
 

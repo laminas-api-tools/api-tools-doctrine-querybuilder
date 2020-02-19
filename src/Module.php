@@ -28,14 +28,14 @@ class Module implements DependencyIndicatorInterface
         $serviceListener->addServiceManager(
             'ApiToolsDoctrineOrmQueryBuilderFilterManager',
             'api-tools-doctrine-orm-querybuilder-filter',
-            Filter\FilterInterface::class,
+            Filter\AbstractFilter::class,
             'getDoctrineOrmQueryBuilderFilterConfig'
         );
 
         $serviceListener->addServiceManager(
             'ApiToolsDoctrineOrmQueryBuilderOrderByManager',
             'api-tools-doctrine-orm-querybuilder-orderby',
-            OrderBy\OrderByInterface::class,
+            OrderBy\AbstractOrderBy::class,
             'getDoctrineQueryBuilderOrmOrderByConfig'
         );
     }

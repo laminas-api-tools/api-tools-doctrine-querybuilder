@@ -6,6 +6,8 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
+namespace LaminasTest\ApiTools\Doctrine\ORM\QueryBuilder\OrderBy;
+
 use Doctrine\DBAL\Driver\PDOSqlite\Driver;
 use Laminas\ApiTools\Doctrine\ORM\QueryBuilder\OrderBy;
 use Laminas\ServiceManager\Factory\InvokableFactory;

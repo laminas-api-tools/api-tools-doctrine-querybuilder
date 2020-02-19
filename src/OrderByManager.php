@@ -9,7 +9,6 @@
 namespace Laminas\ApiTools\Doctrine\ORM\QueryBuilder;
 
 use Doctrine\ORM\QueryBuilder;
-use Laminas\ApiTools\Doctrine\ORM\QueryBuilder\OrderBy\OrderByInterface;
 use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\Exception;
 use RuntimeException;
@@ -19,7 +18,7 @@ class OrderByManager extends AbstractPluginManager
     /**
      * @var string
      */
-    protected $instanceOf = OrderByInterface::class;
+    protected $instanceOf = OrderBy\AbstractOrderBy::class;
 
     public function orderBy(QueryBuilder $queryBuilder, $metadata, $orderBy)
     {

@@ -6,6 +6,8 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
+namespace LaminasTest\ApiTools\Doctrine\ORM\QueryBuilder\Filter;
+
 return [
     'modules' => [
         'DoctrineModule',
