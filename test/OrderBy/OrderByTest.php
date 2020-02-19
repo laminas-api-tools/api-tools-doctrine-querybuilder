@@ -11,14 +11,15 @@ namespace LaminasTest\ApiTools\Doctrine\ORM\QueryBuilder\OrderBy;
 use DateTime;
 use Db\Entity;
 use Doctrine\ORM\Tools\SchemaTool;
+use Laminas\ApiTools\Doctrine\ORM\QueryBuilder\OrderByManager;
 use LaminasTest\ApiTools\Doctrine\ORM\QueryBuilder\TestCase;
 
 class OrderByTest extends TestCase
 {
-    private function fetchResult($orderBy, $entity = 'Db\Entity\Artist')
+    private function fetchResult(array $orderBy, $entity = 'Db\Entity\Artist')
     {
         $serviceManager = $this->getApplication()->getServiceManager();
-        $orderByManager = $serviceManager->get('ApiToolsDoctrineOrmQueryBuilderOrderByManager');
+        $orderByManager = $serviceManager->get(OrderByManager::class);
         $objectManager = $serviceManager->get('doctrine.entitymanager.orm_default');
 
         $queryBuilder = $objectManager->createQueryBuilder();
