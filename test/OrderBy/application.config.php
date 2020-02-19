@@ -22,7 +22,6 @@ return [
         'module_paths' => [
             __DIR__ . '/../vendor',
             'Db' => __DIR__ . '/../assets/module/Db',
-            'Laminas\ApiTools\Doctrine\ORM\QueryBuilder' => __DIR__ . '/../../src',
         ],
     ],
 ];

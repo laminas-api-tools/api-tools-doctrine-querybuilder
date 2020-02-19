@@ -16,13 +16,13 @@ class Module implements DependencyIndicatorInterface
 {
     public function getConfig()
     {
+        throw new \Exception('hit module get config');
         return include __DIR__ . '/../config/module.config.php';
     }
 
     public function init(ModuleManager $moduleManager)
     {
         $serviceManager  = $moduleManager->getEvent()->getParam('ServiceManager');
-        /** @var ServiceListener $serviceListener */
         $serviceListener = $serviceManager->get('ServiceListener');
 
         $serviceListener->addServiceManager(
