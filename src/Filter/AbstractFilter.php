@@ -6,11 +6,11 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace Laminas\ApiTools\Doctrine\QueryBuilder\ORM\Filter;
+namespace Laminas\ApiTools\Doctrine\ORM\QueryBuilder\Filter;
 
 use DateTime;
-use Laminas\ApiTools\Doctrine\QueryBuilder\ORM\Filter\FilterInterface;
-use Laminas\ApiTools\Doctrine\QueryBuilder\ORM\FilterManager;
+use Laminas\ApiTools\Doctrine\ORM\QueryBuilder\Filter\FilterInterface;
+use Laminas\ApiTools\Doctrine\ORM\QueryBuilder\FilterManager;
 
 abstract class AbstractFilter implements FilterInterface
 {

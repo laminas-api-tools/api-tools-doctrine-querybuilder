@@ -7,7 +7,7 @@
  */
 
 use Doctrine\DBAL\Driver\PDOSqlite\Driver;
-use Laminas\ApiTools\Doctrine\QueryBuilder\ORM\OrderBy;
+use Laminas\ApiTools\Doctrine\ORM\QueryBuilder\OrderBy;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
@@ -23,7 +23,7 @@ return [
             ],
         ],
     ],
-    'api-tools-doctrine-querybuilder-orderby-orm' => [
+    'api-tools-doctrine-orm-querybuilder-orderby' => [
         'aliases' => [
             'field' => OrderBy\Field::class,
         ],

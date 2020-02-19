@@ -6,12 +6,12 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace LaminasTest\ApiTools\Doctrine\QueryBuilder\ORM    \Filter;
+namespace LaminasTest\ApiTools\Doctrine\ORM\QueryBuilder    \Filter;
 
 use DateTime;
 use Db\Entity;
 use Doctrine\ORM\Tools\SchemaTool;
-use LaminasTest\ApiTools\Doctrine\QueryBuilder\ORM\TestCase;
+use LaminasTest\ApiTools\Doctrine\ORM\QueryBuilder\TestCase;
 
 class FilterTest extends TestCase
 {
@@ -20,7 +20,7 @@ class FilterTest extends TestCase
     private function countResult($filters, $entity = 'Db\Entity\Artist')
     {
         $serviceManager = $this->getApplication()->getServiceManager();
-        $filterManager = $serviceManager->get('LaminasDoctrineQueryBuilderFilterManagerOrm');
+        $filterManager = $serviceManager->get('ApiToolsDoctrineOrmQueryBuilderFilterManager');
         $objectManager = $this->objectManager;
 
         $queryBuilder = $objectManager->createQueryBuilder();

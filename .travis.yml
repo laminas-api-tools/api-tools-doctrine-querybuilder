@@ -1,8 +1,5 @@
 language: php
 
-services:
-  - mongodb
-
 cache:
   directories:
     - $HOME/.composer/cache
@@ -10,7 +7,6 @@ cache:
 env:
   global:
     - COMPOSER_ARGS="--no-interaction"
-    - ADAPTER_DEPS="alcaeus/mongo-php-adapter"
     - COVERAGE_DEPS="php-coveralls/php-coveralls"
 
 matrix:

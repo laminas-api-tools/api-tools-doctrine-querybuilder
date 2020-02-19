@@ -6,7 +6,7 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace Laminas\ApiTools\Doctrine\QueryBuilder\ORM;
+namespace Laminas\ApiTools\Doctrine\ORM\QueryBuilder;
 
 use Laminas\ModuleManager\Feature\DependencyIndicatorInterface;
 use Laminas\ModuleManager\Listener\ServiceListener;
@@ -26,17 +26,17 @@ class Module implements DependencyIndicatorInterface
         $serviceListener = $serviceManager->get('ServiceListener');
 
         $serviceListener->addServiceManager(
-            'LaminasDoctrineQueryBuilderOrmFilterManager',
-            'api-tools-doctrine-querybuilder-filter-orm',
+            'ApiToolsDoctrineOrmQueryBuilderFilterManager',
+            'api-tools-doctrine-orm-querybuilder-filter',
             Filter\FilterInterface::class,
-            'getDoctrineQueryBuilderFilterOrmConfig'
+            'getDoctrineOrmQueryBuilderFilterConfig'
         );
 
         $serviceListener->addServiceManager(
-            'LaminasDoctrineQueryBuilderOrmOrderByManager',
-            'api-tools-doctrine-querybuilder-orderby-orm',
+            'ApiToolsDoctrineOrmQueryBuilderOrderByManager',
+            'api-tools-doctrine-orm-querybuilder-orderby',
             OrderBy\OrderByInterface::class,
-            'getDoctrineQueryBuilderOrderByOrmConfig'
+            'getDoctrineQueryBuilderOrmOrderByConfig'
         );
     }
 

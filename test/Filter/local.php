@@ -6,7 +6,7 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-use Laminas\ApiTools\Doctrine\QueryBuilder\ORM\Filter;
+use Laminas\ApiTools\Doctrine\ORM\QueryBuilder\Filter;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
@@ -22,7 +22,7 @@ return [
             ],
         ],
     ],
-    'api-tools-doctrine-querybuilder-filter-orm' => [
+    'api-tools-doctrine-orm-querybuilder-filter' => [
         'aliases' => [
             'eq'         => Filter\Equals::class,
             'neq'        => Filter\NotEquals::class,

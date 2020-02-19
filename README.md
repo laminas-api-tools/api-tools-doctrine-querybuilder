@@ -1,12 +1,13 @@
-Laminas Doctrine QueryBuilder
-========================
+Laminas Doctrine ORM QueryBuilder
+=================================
 
 [![Build Status](https://travis-ci.com/laminas-api-tools/api-tools-doctrine-querybuilder.svg?branch=master)](https://travis-ci.com/laminas-api-tools/api-tools-doctrine-querybuilder)
 [![Coverage Status](https://coveralls.io/repos/github/laminas-api-tools/api-tools-doctrine-querybuilder/badge.svg?branch=master)](https://coveralls.io/github/laminas-api-tools/api-tools-doctrine-querybuilder?branch=master)
 [![Total Downloads](https://poser.pugx.org/laminas-api-tools/api-tools-doctrine-querybuilder/downloads)](https://packagist.org/packages/laminas-api-tools/api-tools-doctrine-querybuilder)
 
 This library provides query builder directives from array parameters. This library was designed
-to apply filters from an HTTP request to give an API fluent filter and order-by dialects.
+to apply filters from an HTTP request to give an API fluent filter and order-by dialects but may 
+be used to apply any proper array onto an ORM QueryBuilder object.
 
 
 Philosophy
@@ -40,10 +41,10 @@ Installation of this module uses composer. For composer documentation, please re
 [getcomposer.org](http://getcomposer.org/).
 
 ```bash
-$ composer require laminas-api-tools/api-tools-doctrine-querybuilder-orm
+$ composer require laminas-api-tools/api-tools-doctrine-orm-querybuilder
 ```
 
-Once installed, add `Laminas\ApiTools\Doctrine\QueryBuilder` to your list of modules inside
+Once installed, add `Laminas\ApiTools\Doctrine\ORM\QueryBuilder` to your list of modules inside
 `config/application.config.php`.
 
 > ### laminas-component-installer
@@ -55,28 +56,30 @@ Once installed, add `Laminas\ApiTools\Doctrine\QueryBuilder` to your list of mod
 Configuring the Module
 ----------------------
 
-Copy `config/api-tools-doctrine-querybuilder.global.php.dist` to `config/autoload/api-tools-doctrine-querybuilder.global.php`
-and edit the list of aliases for orm to those you want enabled by default.
+Copy `config/api-tools-doctrine-orm-querybuilder.global.php.dist` to `config/autoload/api-tools-doctrine-orm-querybuilder.global.php`
+and edit the list of aliases for filter and order-by you want enabled.
 
 
 Use With Laminas API Tools Doctrine
----------------------------
+-----------------------------------
 
-To enable all filters you may override the default query providers in `api-tools-doctrine`.
-Add this to your `api-tools-doctrine-querybuilder.global.php` config file and filters and order-by will be applied
-if they are in `$_GET['filter']` or `$_GET['order-by']` request. These `$_GET` keys are customizable
-through `api-tools-doctrine-querybuilder-options`:
+A new repository must be written to provide the functionality once included with the QueryBuilder repository.
 
-```php
-'api-tools-doctrine-query-provider' => [
-    'aliases' => [
-        'default_orm' => \Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider\DefaultOrm::class,
-    ],
-    'factories' => [
-        \Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider\DefaultOrm::class => \Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider\DefaultOrmFactory::class,
-    ],
-],
-```
+~~To enable all filters you may override the default query providers in `api-tools-doctrine`.~~
+~~Add this to your `api-tools-doctrine-querybuilder.global.php` config file and filters and order-by will be applied~~
+~~if they are in `$_GET['filter']` or `$_GET['order-by']` request. These `$_GET` keys are customizable~~
+~~through `api-tools-doctrine-querybuilder-options`:~~
+
+~~```php~~
+~~'api-tools-doctrine-query-provider' => [~~
+~~    'aliases' => [~~
+~~        'default_orm' => \Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider\DefaultOrm::class,~~
+~~    ],~~
+~~    'factories' => [~~
+~~        \Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider\DefaultOrm::class => \Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider\DefaultOrmFactory::class,~~
+~~    ],~~
+~~],~~
+~~```~~
 
 
 Use
@@ -84,20 +87,20 @@ Use
 
 Configuration example
 ```php
-'api-tools-doctrine-querybuilder-orderby-orm' => [
+'api-tools-doctrine-orm-querybuilder-orderby' => [
     'aliases' => [
-        'field' => \Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy\ORM\Field::class,
+        'field' => \Laminas\ApiTools\Doctrine\ORM\QueryBuilder\OrderBy\Field::class,
     ],
     'factories' => [
-        \Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy\ORM\Field::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,
+        \Laminas\ApiTools\Doctrine\ORM\QueryBuilder\OrderBy\Field::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,
     ],
 ],
-'api-tools-doctrine-querybuilder-filter-orm' => [
+'api-tools-doctrine-orm-querybuilder-filter' => [
     'aliases' => [
-        'eq' => \Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM\Equals::class,
+        'eq' => \Laminas\ApiTools\Doctrine\ORM\QueryBuilder\Filter\Equals::class,
     ],
     'factories' => [
-        \Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM\Equals::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,
+        \Laminas\ApiTools\Doctrine\ORM\QueryBuilder\Filter\Equals::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,
     ],
 ],
 ```
@@ -124,18 +127,21 @@ $_GET = [
 
 Resource example
 ```php
+use Laminas\ApiTools\Doctrine\ORM\QueryBuilder\FilterManager;
+use Laminas\ApiTools\Doctrine\ORM\QueryBuilder\OrderByManager;
+
 $serviceLocator = $this->getApplication()->getServiceLocator();
 $objectManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
 
-$filterManager = $serviceLocator->get('LaminasDoctrineQueryBuilderFilterManagerOrm');
-$orderByManager = $serviceLocator->get('LaminasDoctrineQueryBuilderOrderByManagerOrm');
+$filterManager = $serviceLocator->get(FilterManger::class);
+$orderByManager = $serviceLocator->get(OrderByManager::class);
 
 $queryBuilder = $objectManager->createQueryBuilder();
 $queryBuilder->select('row')
     ->from($entity, 'row')
 ;
 
-$metadata = $objectManager->getMetadataFactory()->getMetadataFor(ENTITY_NAME); // $e->getEntity() using doctrine resource event
+$metadata = $objectManager->getMetadataFactory()->getMetadataFor($entity::class);
 $filterManager->filter($queryBuilder, $metadata, $_GET['filter']);
 $orderByManager->orderBy($queryBuilder, $metadata, $_GET['order-by']);
 
@@ -165,19 +171,19 @@ Javascript Example:
 ```javascript
 $(function () {
     $.ajax({
-        url: "http://localhost:8081/api/db/entity/user_data",
+        url: "http://localhost:8080/user",
         type: "GET",
         data: {
             'filter': [
                 {
-                    'field': 'cycle',
+                    'field': 'id',
                     'where': 'or',
                     'type': 'between',
                     'from': '1',
                     'to': '100'
                 },
                 {
-                    'field': 'cycle',
+                    'field': 'id',
                     'where': 'or',
                     'type': 'gte',
                     'value': '1000'
@@ -266,7 +272,7 @@ just `Y-m-d`, then add the format to the filter. For complete date format option
 Joining Entities and Aliasing Queries
 -------------------------------------
 
-There is an included ORM Query Type for Inner Join so for every filter type there is an optional `alias`.
+There is an included Query Type for Inner Join so for every filter type there is an optional `alias`.
 The default alias is 'row' and refers to the entity at the heart of the REST resource.
 There is not a filter to add other entities to the return data. That is, only the original target resource,
 by default 'row', will be returned regardless of what filters or order by are applied through this module.
@@ -291,7 +297,7 @@ Inner Join is commented by default in the `api-tools-doctrine-querybuilder.globa
 
 
 
-There is also an ORM Query Type for LeftJoin.  This join type is commonly used to fetch an empty right side of a relationship.
+There is also an Query Type for LeftJoin.  This join type is commonly used to fetch an empty right side of a relationship.
 
 Left Join is commented by default in the `api-tools-doctrine-querybuilder.global.php.dist`.
 
@@ -378,8 +384,6 @@ Like (`%` is used as a wildcard):
 ```php
 ['type' => 'like', 'field' => 'fieldName', 'value' => 'like%search']
 ```
-
-### ORM Only
 
 Is Member Of:
 

@@ -6,7 +6,7 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace LaminasTest\ApiTools\Doctrine\QueryBuilder\ORM;
+namespace LaminasTest\ApiTools\Doctrine\ORM\QueryBuilder;
 
 use Laminas\Mvc\Application;
 use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;

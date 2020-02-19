@@ -1,5 +1,5 @@
 {
-    "name": "laminas-api-tools/api-tools-doctrine-querybuilder",
+    "name": "laminas-api-tools/api-tools-doctrine-orm-querybuilder",
     "description": "Laminas API Tools Doctrine QueryBuilder module",
     "license": "BSD-3-Clause",
     "keywords": [
@@ -28,7 +28,7 @@
         },
         "laminas": {
             "module": [
-                "Laminas\\ApiTools\\Doctrine\\QueryBuilder\\ORM"
+                "Laminas\\ApiTools\\Doctrine\\ORM\\QueryBuilder"
             ]
         }
     },
@@ -53,12 +53,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Laminas\\ApiTools\\Doctrine\\QueryBuilder\\ORM\\": "src/"
+            "Laminas\\ApiTools\\Doctrine\\ORM\\QueryBuilder\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "LaminasTest\\ApiTools\\Doctrine\\QueryBuilder\\ORM\\": "test/"
+            "LaminasTest\\ApiTools\\Doctrine\\ORM\\QueryBuilder\\": "test/"
         }
     },
     "scripts": {
