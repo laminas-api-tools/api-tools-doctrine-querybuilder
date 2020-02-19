@@ -10,10 +10,6 @@ namespace Laminas\ApiTools\Doctrine\ORM\QueryBuilder;
 
 return [
     'service_manager' => [
-        'aliases' => [
-            'ApiToolsDoctrineOrmQueryBuilderFilterManager' => FilterManager::class,
-            'ApiToolsDoctrineOrmQueryBuilderOrderByManager' => OrderByManager::class,
-        ],
         'factories' => [
             FilterManager::class => FilterManagerFactory::class,
             OrderByManager::class => OrderByManagerFactory::class,
