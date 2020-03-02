@@ -9,38 +9,19 @@
 namespace Laminas\ApiTools\Doctrine\ORM\QueryBuilder;
 
 use Laminas\ModuleManager\Feature\DependencyIndicatorInterface;
-use Laminas\ModuleManager\Listener\ServiceListener;
-use Laminas\ModuleManager\ModuleManager;
+use Laminas\ModuleManager\Feature\ConfigProviderInterface;
 
-class Module implements DependencyIndicatorInterface
+class Module implements
+    ConfigProviderInterface,
+    DependencyIndicatorInterface
 {
     public function getConfig()
     {
         return include __DIR__ . '/../config/module.config.php';
     }
 
-    public function init(ModuleManager $moduleManager)
-    {
-        $serviceManager  = $moduleManager->getEvent()->getParam('ServiceManager');
-        $serviceListener = $serviceManager->get('ServiceListener');
-
-        $serviceListener->addServiceManager(
-            FilterManager::class,
-            'api-tools-doctrine-orm-querybuilder-filter',
-            Filter\AbstractFilter::class,
-            'getDoctrineOrmQueryBuilderFilterConfig'
-        );
-
-        $serviceListener->addServiceManager(
-            OrderByManager::class,
-            'api-tools-doctrine-orm-querybuilder-orderby',
-            OrderBy\AbstractOrderBy::class,
-            'getDoctrineQueryBuilderOrmOrderByConfig'
-        );
-    }
-
     /**
-     * Expected to return an array of modules on which the current one depends on
+     * Return an array of modules on which this depends on
      *
      * @return string[]
      */

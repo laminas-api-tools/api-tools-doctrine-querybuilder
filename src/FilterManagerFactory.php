@@ -1,16 +1,18 @@
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\ApiTools\Doctrine\ORM\QueryBuilder;
 
-use Laminas\Mvc\Service\AbstractPluginManagerFactory;
+use Interop\Container\ContainerInterface;
 
-class FilterManagerFactory extends AbstractPluginManagerFactory
+final class FilterManagerFactory
 {
-    const PLUGIN_MANAGER_CLASS = FilterManager::class;
+    public function __invoke(
+        ContainerInterface $container,
+        $requestedName,
+        array $options = null
+    ) {
+        $config = $container->get('config')['api-tools-doctrine-orm-querybuilder-filter'];
+
+        return new FilterManager($container, $config);
+    }
 }

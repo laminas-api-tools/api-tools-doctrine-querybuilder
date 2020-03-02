@@ -1,16 +1,18 @@
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\ApiTools\Doctrine\ORM\QueryBuilder;
 
-use Laminas\Mvc\Service\AbstractPluginManagerFactory;
+use Interop\Container\ContainerInterface;
 
-class OrderByManagerFactory extends AbstractPluginManagerFactory
+final class OrderByManagerFactory
 {
-    const PLUGIN_MANAGER_CLASS = OrderByManager::class;
+    public function __invoke(
+        ContainerInterface $container,
+        $requestedName,
+        array $options = null
+    ) {
+        $config = $container->get('config')['api-tools-doctrine-orm-querybuilder-orderby'];
+
+        return new OrderByManager($container, $config);
+    }
 }
