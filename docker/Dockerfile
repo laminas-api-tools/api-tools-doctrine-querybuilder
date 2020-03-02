@@ -7,12 +7,17 @@ COPY docker/entrypoint.sh /usr/local/bin/
 RUN chmod 755 /usr/local/bin/entrypoint.sh
 
 RUN apk add --no-cache \
-	autoconf \
-	make \
-	g++ \
-	bash \
-	git \
-	openssl-dev
+    autoconf \
+    bash \
+    g++ \
+    git \
+    icu \
+    icu-dev \
+    icu-libs \
+    libintl \
+    libxml2-dev \
+    make \
+    openssl-dev
 
 RUN docker-php-ext-configure intl
 RUN docker-php-ext-install intl
