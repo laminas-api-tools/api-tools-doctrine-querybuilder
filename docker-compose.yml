@@ -1,4 +1,4 @@
-version: "3"
+version: "3.7"
 services:
 
   php:
@@ -10,3 +10,8 @@ services:
         - XDEBUG=${XDEBUG:-0}
     volumes:
       - ./:/docker
+    environment:
+        - TRAVIS
+        - TRAVIS_JOB_ID
+        - TRAVIS_BRANCH
+        - TRAVIS_PULL_REQUEST
