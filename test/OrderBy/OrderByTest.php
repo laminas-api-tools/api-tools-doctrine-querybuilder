@@ -19,6 +19,9 @@ class OrderByTest extends TestCase
     private function fetchResult(array $orderBy, $entity = 'Db\Entity\Artist')
     {
         $serviceManager = $this->getApplication()->getServiceManager();
+
+        print_r($serviceManager->get('config')['service_manager']);
+
         $orderByManager = $serviceManager->get(OrderByManager::class);
         $objectManager = $serviceManager->get('doctrine.entitymanager.orm_default');
 
@@ -43,7 +46,6 @@ class OrderByTest extends TestCase
 
         $serviceManager = $this->getApplication()->getServiceManager();
         $objectManager = $serviceManager->get('doctrine.entitymanager.orm_default');
-        print_r($serviceManager->get('config')['service_manager']);
 
         $tool = new SchemaTool($objectManager);
         $res = $tool->createSchema($objectManager->getMetadataFactory()->getAllMetadata());
