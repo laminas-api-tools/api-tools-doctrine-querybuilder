@@ -20,8 +20,6 @@ class OrderByTest extends TestCase
     {
         $serviceManager = $this->getApplication()->getServiceManager();
 
-        print_r($serviceManager->get('config')['service_manager']);
-
         $orderByManager = $serviceManager->get(OrderByManager::class);
         $objectManager = $serviceManager->get('doctrine.entitymanager.orm_default');
 

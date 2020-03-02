@@ -1,0 +1,12 @@
+version: "3"
+services:
+
+  php:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      args:
+        - PHP_VERSION=${PHP_VERSION:-7.2}
+        - XDEBUG=${XDEBUG:-0}
+    volumes:
+      - ./:/docker
