@@ -6,51 +6,18 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace Laminas\ApiTools\Doctrine\QueryBuilder;
+namespace Laminas\ApiTools\Doctrine\ODM\QueryBuilder;
 
+use Laminas\ModuleManager\Feature\ConfigProviderInterface;
 use Laminas\ModuleManager\Feature\DependencyIndicatorInterface;
-use Laminas\ModuleManager\Listener\ServiceListener;
-use Laminas\ModuleManager\ModuleManager;
 
-class Module implements DependencyIndicatorInterface
+class Module implements
+    ConfigProviderInterface,
+    DependencyIndicatorInterface
 {
     public function getConfig()
     {
         return include __DIR__ . '/../config/module.config.php';
-    }
-
-    public function init(ModuleManager $moduleManager)
-    {
-        $serviceManager  = $moduleManager->getEvent()->getParam('ServiceManager');
-        /** @var ServiceListener $serviceListener */
-        $serviceListener = $serviceManager->get('ServiceListener');
-
-        $serviceListener->addServiceManager(
-            'LaminasDoctrineQueryBuilderFilterManagerOrm',
-            'api-tools-doctrine-querybuilder-filter-orm',
-            Filter\FilterInterface::class,
-            'getDoctrineQueryBuilderFilterOrmConfig'
-        );
-
-        $serviceListener->addServiceManager(
-            'LaminasDoctrineQueryBuilderFilterManagerOdm',
-            'api-tools-doctrine-querybuilder-filter-odm',
-            Filter\FilterInterface::class,
-            'getDoctrineQueryBuilderFilterOdmConfig'
-        );
-
-        $serviceListener->addServiceManager(
-            'LaminasDoctrineQueryBuilderOrderByManagerOrm',
-            'api-tools-doctrine-querybuilder-orderby-orm',
-            OrderBy\OrderByInterface::class,
-            'getDoctrineQueryBuilderOrderByOrmConfig'
-        );
-        $serviceListener->addServiceManager(
-            'LaminasDoctrineQueryBuilderOrderByManagerOdm',
-            'api-tools-doctrine-querybuilder-orderby-odm',
-            OrderBy\OrderByInterface::class,
-            'getDoctrineQueryBuilderOrderByOdmConfig'
-        );
     }
 
     /**
@@ -60,6 +27,6 @@ class Module implements DependencyIndicatorInterface
      */
     public function getModuleDependencies()
     {
-        return ['DoctrineModule'];
+        return ['DoctrineMongoODMModule'];
     }
 }

@@ -6,5 +6,5 @@
     <file>config</file>
     <file>src</file>
     <file>test</file>
-    <file>config/api-tools-doctrine-querybuilder.global.php.dist</file>
+    <file>config/api-tools-doctrine-odm-querybuilder.global.php.dist</file>
 </ruleset>

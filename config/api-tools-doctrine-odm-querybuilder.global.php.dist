@@ -6,24 +6,24 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace LaminasTest\ApiTools\Doctrine\ODM\QueryBuilder\Filter;
+namespace Laminas\ApiTools\Doctrine\ODM\QueryBuilder;
 
-use Laminas\ApiTools\Doctrine\ODM\QueryBuilder\Filter;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
-    'doctrine' => [
-        'connection' => [
-            'odm_default' => [
-                'server' => 'mongo',
-                'port' => '27017',
-                'user' => '',
-                'password' => '',
-                'dbname' => 'laminas_doctrine_querybuilder_filter_test',
-            ],
+    'api-tools-doctrine-querybuilder-options' => [
+        'filter_key' => 'filter',
+        'order_by_key' => 'order-by',
+    ],
+    'api-tools-doctrine-querybuilder-orderby-odm' => [
+        'aliases' => [
+            'field' => OrderBy\ODM\Field::class,
+        ],
+        'factories' => [
+            OrderBy\ODM\Field::class => InvokableFactory::class,
         ],
     ],
-    'api-tools-doctrine-odm-querybuilder-filter' => [
+    'api-tools-doctrine-querybuilder-filter-odm' => [
         'aliases' => [
             'eq'        => Filter\Equals::class,
             'neq'       => Filter\NotEquals::class,

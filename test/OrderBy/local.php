@@ -7,22 +7,14 @@
  */
 
 use Doctrine\DBAL\Driver\PDOSqlite\Driver;
-use Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy;
+use Laminas\ApiTools\Doctrine\ODM\QueryBuilder\OrderBy;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
     'doctrine' => [
         'connection' => [
-            'orm_default' => [
-                'configuration' => 'orm_default',
-                'eventmanager'  => 'orm_default',
-                'driverClass'   => Driver::class,
-                'params' => [
-                    'memory' => true,
-                ],
-            ],
             'odm_default' => [
-                'server' => 'localhost',
+                'server' => 'mongo',
                 'port' => '27017',
                 'user' => '',
                 'password' => '',
@@ -30,20 +22,12 @@ return [
             ],
         ],
     ],
-    'api-tools-doctrine-querybuilder-orderby-orm' => [
+    'api-tools-doctrine-odm-querybuilder-orderby' => [
         'aliases' => [
-            'field' => OrderBy\ORM\Field::class,
+            'field' => OrderBy\Field::class,
         ],
         'factories' => [
-            OrderBy\ORM\Field::class => InvokableFactory::class,
-        ],
-    ],
-    'api-tools-doctrine-querybuilder-orderby-odm' => [
-        'aliases' => [
-            'field' => OrderBy\ODM\Field::class,
-        ],
-        'factories' => [
-            OrderBy\ODM\Field::class => InvokableFactory::class,
+            OrderBy\Field::class => InvokableFactory::class,
         ],
     ],
 ];

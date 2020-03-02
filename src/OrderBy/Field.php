@@ -8,7 +8,16 @@
 
 namespace Laminas\ApiTools\Doctrine\ODM\QueryBuilder\OrderBy;
 
-interface OrderByInterface
+use Exception;
+
+class Field extends AbstractOrderBy
 {
-    public function orderBy($queryBuilder, $metadata, $option);
+    public function orderBy($queryBuilder, $metadata, $option)
+    {
+        if (! isset($option['direction']) || ! in_array(strtolower($option['direction']), ['asc', 'desc'])) {
+            throw new Exception('Invalid direction in orderby directive');
+        }
+
+        $queryBuilder->sort($option['field'], $option['direction']);
+    }
 }

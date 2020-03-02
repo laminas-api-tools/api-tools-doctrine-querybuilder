@@ -8,12 +8,18 @@
 
 return [
     'modules' => [
+        'Laminas\Cache',
+        'Laminas\Hydrator',
+        'Laminas\InputFilter',
+        'Laminas\Paginator',
+        'Laminas\I18n',
+        'Laminas\Filter',
+        'Laminas\Router',
+        'Laminas\Validator',
         'DoctrineModule',
-        'DoctrineORMModule',
         'DoctrineMongoODMModule',
-        'Db',
         'DbMongo',
-        'Laminas\ApiTools\Doctrine\QueryBuilder',
+        'Laminas\ApiTools\Doctrine\ODM\QueryBuilder',
     ],
     'module_listener_options' => [
         'config_glob_paths' => [
@@ -23,7 +29,6 @@ return [
             __DIR__ . '/../vendor',
             'DbMongo' => __DIR__ . '/../assets/module/DbMongo',
             'Db' => __DIR__ . '/../assets/module/Db',
-            'Laminas\ApiTools\Doctrine\QueryBuilder' => __DIR__ . '/../..',
         ],
     ],
 ];
