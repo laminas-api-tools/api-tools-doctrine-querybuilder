@@ -67,10 +67,10 @@
             "@cs-check",
             "@test"
         ],
-        "cs-check": "phpcs",
-        "cs-fix": "phpcbf",
-        "test": "phpunit --colors=always",
-        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
+        "cs-check": "vendor/bin/phpcs --standard=PSR2 src test config",
+        "cs-fix": "vendor/bin/phpcbf --standard=PSR2",
+        "test": "vendor/bin/phpunit --colors=always",
+        "test-coverage": "vendor/bin/phpunit --colors=always --coverage-clover build/logs/clover.xml"
     },
     "replace": {
         "zfcampus/zf-doctrine-querybuilder": "self.version"

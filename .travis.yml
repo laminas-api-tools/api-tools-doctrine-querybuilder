@@ -65,7 +65,7 @@ install:
   - composer show
 
 script:
-  - if [[ $TEST_COVERAGE == true ]]; then php vendor/bin/phpunit --coverage-clover build/logs/clover.xml ; else composer test; fi
+  - if [[ $TEST_COVERAGE == true ]]; then composer test-coverage ; else composer test; fi
   - if [[ $CHECK_CS == true ]]; then php vendor/bin/phpcs --standard=PSR2 src test config; fi
 
 after_script:
