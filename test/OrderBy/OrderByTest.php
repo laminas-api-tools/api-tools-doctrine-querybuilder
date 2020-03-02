@@ -43,6 +43,7 @@ class OrderByTest extends TestCase
 
         $serviceManager = $this->getApplication()->getServiceManager();
         $objectManager = $serviceManager->get('doctrine.entitymanager.orm_default');
+        print_r($serviceManager->get('config')['service_manager']);
 
         $tool = new SchemaTool($objectManager);
         $res = $tool->createSchema($objectManager->getMetadataFactory()->getAllMetadata());
