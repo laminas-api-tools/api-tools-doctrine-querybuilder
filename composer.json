@@ -85,6 +85,6 @@
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
     "replace": {
-        "zfcampus/zf-doctrine-querybuilder": "self.version"
+        "zfcampus/zf-doctrine-querybuilder": "^1.8.0"
     }
 }
