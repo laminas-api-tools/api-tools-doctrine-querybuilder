@@ -24,9 +24,12 @@ use Laminas\Stdlib\Parameters;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ProphecyInterface;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class DefaultOrmTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @var DefaultOrm|ProphecyInterface
      */

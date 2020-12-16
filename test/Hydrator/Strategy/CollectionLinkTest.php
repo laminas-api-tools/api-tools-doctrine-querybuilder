@@ -11,10 +11,13 @@ namespace LaminasTest\ApiTools\Doctrine\QueryBuilder\Hydrator\Strategy;
 use Laminas\ApiTools\Doctrine\QueryBuilder\Hydrator\Strategy\CollectionLink;
 use Laminas\ServiceManager\ServiceManager;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use stdClass;
 
 class CollectionLinkTest extends TestCase
 {
+    use ProphecyTrait;
+
     private $mockValue;
 
     /**

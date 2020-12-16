@@ -13,9 +13,12 @@ use Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider\DefaultOrmFactory;
 use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class DefaultOrmFactoryTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function testInvokableFactoryReturnsDefaultOrmQueryProvider()
     {
         $serviceLocator = $this->prophesize(ServiceLocatorInterface::class)->reveal();

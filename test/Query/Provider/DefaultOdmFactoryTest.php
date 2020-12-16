@@ -13,9 +13,12 @@ use Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider\DefaultOdmFactory;
 use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class DefaultOdmFactoryTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function testInvokableFactoryReturnsDefaultOdmQueryProvider()
     {
         $serviceLocator = $this->prophesize(ServiceLocatorInterface::class)->reveal();

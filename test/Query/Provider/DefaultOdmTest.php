@@ -23,10 +23,13 @@ use Laminas\Http\Request;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 use Laminas\Stdlib\Parameters;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ProphecyInterface;
 
 class DefaultOdmTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @var DefaultOdm|ProphecyInterface
      */
