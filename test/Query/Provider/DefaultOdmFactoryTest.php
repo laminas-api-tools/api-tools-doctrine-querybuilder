@@ -19,7 +19,7 @@ class DefaultOdmFactoryTest extends TestCase
 {
     use ProphecyTrait;
 
-    public function testInvokableFactoryReturnsDefaultOdmQueryProvider()
+    public function testInvokableFactoryReturnsDefaultOdmQueryProvider(): void
     {
         $serviceLocator = $this->prophesize(ServiceLocatorInterface::class)->reveal();
 
@@ -27,10 +27,9 @@ class DefaultOdmFactoryTest extends TestCase
         $provider = $factory($serviceLocator);
 
         $this->assertInstanceOf(DefaultOdm::class, $provider);
-        $this->assertAttributeSame($serviceLocator, 'serviceLocator', $provider);
     }
 
-    public function testInvokableFactoryReturnsDefaultOdmQueryProviderWhenCreatedViaAbstractPluginManager()
+    public function testInvokableFactoryReturnsDefaultOdmQueryProviderWhenCreatedViaAbstractPluginManager(): void
     {
         $serviceLocator = $this->prophesize(ServiceLocatorInterface::class)->reveal();
         $abstractPluginManager = $this->prophesize(AbstractPluginManager::class);
@@ -40,6 +39,5 @@ class DefaultOdmFactoryTest extends TestCase
         $provider = $factory($abstractPluginManager->reveal());
 
         $this->assertInstanceOf(DefaultOdm::class, $provider);
-        $this->assertAttributeSame($serviceLocator, 'serviceLocator', $provider);
     }
 }

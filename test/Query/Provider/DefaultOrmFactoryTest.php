@@ -19,7 +19,7 @@ class DefaultOrmFactoryTest extends TestCase
 {
     use ProphecyTrait;
 
-    public function testInvokableFactoryReturnsDefaultOrmQueryProvider()
+    public function testInvokableFactoryReturnsDefaultOrmQueryProvider(): void
     {
         $serviceLocator = $this->prophesize(ServiceLocatorInterface::class)->reveal();
 
@@ -27,10 +27,9 @@ class DefaultOrmFactoryTest extends TestCase
         $provider = $factory($serviceLocator);
 
         $this->assertInstanceOf(DefaultOrm::class, $provider);
-        $this->assertAttributeSame($serviceLocator, 'serviceLocator', $provider);
     }
 
-    public function testInvokableFactoryReturnsDefaultOrmQueryProviderWhenCreatedViaAbstractPluginManager()
+    public function testInvokableFactoryReturnsDefaultOrmQueryProviderWhenCreatedViaAbstractPluginManager(): void
     {
         $serviceLocator = $this->prophesize(ServiceLocatorInterface::class)->reveal();
         $abstractPluginManager = $this->prophesize(AbstractPluginManager::class);
@@ -40,6 +39,5 @@ class DefaultOrmFactoryTest extends TestCase
         $provider = $factory($abstractPluginManager->reveal());
 
         $this->assertInstanceOf(DefaultOrm::class, $provider);
-        $this->assertAttributeSame($serviceLocator, 'serviceLocator', $provider);
     }
 }
