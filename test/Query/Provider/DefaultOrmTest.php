@@ -47,7 +47,7 @@ class DefaultOrmTest extends TestCase
      */
     protected $serviceLocator;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->queryBuilder = $this->prophesize(QueryBuilder::class);
         $this->queryBuilder->select(Argument::any())->willReturn($this->queryBuilder->reveal());

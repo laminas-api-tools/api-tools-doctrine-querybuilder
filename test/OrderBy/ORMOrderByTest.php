@@ -33,7 +33,7 @@ class ORMOrderByTest extends TestCase
         return $result;
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->setApplicationConfig(
             include __DIR__ . '/application.config.php'

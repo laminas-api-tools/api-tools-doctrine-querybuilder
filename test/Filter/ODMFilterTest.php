@@ -30,7 +30,7 @@ class ODMFilterTest extends TestCase
         return sizeof($result);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->setApplicationConfig(
             include __DIR__ . '/application.config.php'
