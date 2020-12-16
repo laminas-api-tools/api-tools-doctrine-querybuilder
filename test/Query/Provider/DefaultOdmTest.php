@@ -50,7 +50,7 @@ class DefaultOdmTest extends TestCase
      */
     protected $serviceLocator;
 
-    protected function setUp(): void
+    public function setUp(): void
     {
         $this->queryBuilder = $this->prophesize(QueryBuilder::class);
 

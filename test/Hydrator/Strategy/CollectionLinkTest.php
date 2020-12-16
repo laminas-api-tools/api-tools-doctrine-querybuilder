@@ -25,7 +25,7 @@ class CollectionLinkTest extends TestCase
      */
     private $hydrator;
 
-    protected function setUp(): void
+    public function setUp(): void
     {
         $this->mockValue = $this->getMockBuilder(stdClass::class)
             ->setMethods(['getTypeClass', 'getMapping', 'getOwner'])
