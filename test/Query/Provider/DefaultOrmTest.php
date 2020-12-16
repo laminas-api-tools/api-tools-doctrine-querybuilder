@@ -215,9 +215,10 @@ class DefaultOrmTest extends TestCase
     {
         $entityClass = 'foo.entity.class';
 
-        $metadata = $this->prophesize(ClassMetadata::class)->reveal();
+        $metadata = $this->prophesize(ClassMetadata::class);
         $metadataFactory = $this->prophesize(ClassMetadataFactory::class);
-        $metadataFactory->getMetadataFor($entityClass)->willReturn($metadata);
+        $metadata->getIdentifier()->willReturn(['foo']);
+        $metadataFactory->getMetadataFor($entityClass)->willReturn($metadata->reveal());
 
         $this->objectManager->getMetadataFactory()->willReturn($metadataFactory->reveal());
 
