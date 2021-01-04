@@ -24,9 +24,12 @@ use Laminas\Stdlib\Parameters;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ProphecyInterface;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class DefaultOrmTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @var DefaultOrm|ProphecyInterface
      */
@@ -47,7 +50,7 @@ class DefaultOrmTest extends TestCase
      */
     protected $serviceLocator;
 
-    protected function setUp()
+    public function setUp(): void
     {
         $this->queryBuilder = $this->prophesize(QueryBuilder::class);
         $this->queryBuilder->select(Argument::any())->willReturn($this->queryBuilder->reveal());
@@ -212,9 +215,10 @@ class DefaultOrmTest extends TestCase
     {
         $entityClass = 'foo.entity.class';
 
-        $metadata = $this->prophesize(ClassMetadata::class)->reveal();
+        $metadata = $this->prophesize(ClassMetadata::class);
         $metadataFactory = $this->prophesize(ClassMetadataFactory::class);
-        $metadataFactory->getMetadataFor($entityClass)->willReturn($metadata);
+        $metadata->getIdentifier()->willReturn(['foo']);
+        $metadataFactory->getMetadataFor($entityClass)->willReturn($metadata->reveal());
 
         $this->objectManager->getMetadataFactory()->willReturn($metadataFactory->reveal());
 

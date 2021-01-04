@@ -11,10 +11,13 @@ namespace LaminasTest\ApiTools\Doctrine\QueryBuilder\Hydrator\Strategy;
 use Laminas\ApiTools\Doctrine\QueryBuilder\Hydrator\Strategy\CollectionLink;
 use Laminas\ServiceManager\ServiceManager;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use stdClass;
 
 class CollectionLinkTest extends TestCase
 {
+    use ProphecyTrait;
+
     private $mockValue;
 
     /**
@@ -22,7 +25,7 @@ class CollectionLinkTest extends TestCase
      */
     private $hydrator;
 
-    protected function setUp()
+    public function setUp(): void
     {
         $this->mockValue = $this->getMockBuilder(stdClass::class)
             ->setMethods(['getTypeClass', 'getMapping', 'getOwner'])

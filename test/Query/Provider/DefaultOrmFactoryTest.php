@@ -13,10 +13,13 @@ use Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider\DefaultOrmFactory;
 use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class DefaultOrmFactoryTest extends TestCase
 {
-    public function testInvokableFactoryReturnsDefaultOrmQueryProvider()
+    use ProphecyTrait;
+
+    public function testInvokableFactoryReturnsDefaultOrmQueryProvider(): void
     {
         $serviceLocator = $this->prophesize(ServiceLocatorInterface::class)->reveal();
 
@@ -24,10 +27,9 @@ class DefaultOrmFactoryTest extends TestCase
         $provider = $factory($serviceLocator);
 
         $this->assertInstanceOf(DefaultOrm::class, $provider);
-        $this->assertAttributeSame($serviceLocator, 'serviceLocator', $provider);
     }
 
-    public function testInvokableFactoryReturnsDefaultOrmQueryProviderWhenCreatedViaAbstractPluginManager()
+    public function testInvokableFactoryReturnsDefaultOrmQueryProviderWhenCreatedViaAbstractPluginManager(): void
     {
         $serviceLocator = $this->prophesize(ServiceLocatorInterface::class)->reveal();
         $abstractPluginManager = $this->prophesize(AbstractPluginManager::class);
@@ -37,6 +39,5 @@ class DefaultOrmFactoryTest extends TestCase
         $provider = $factory($abstractPluginManager->reveal());
 
         $this->assertInstanceOf(DefaultOrm::class, $provider);
-        $this->assertAttributeSame($serviceLocator, 'serviceLocator', $provider);
     }
 }

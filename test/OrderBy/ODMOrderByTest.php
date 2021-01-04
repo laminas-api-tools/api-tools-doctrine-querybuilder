@@ -30,7 +30,7 @@ class ODMOrderByTest extends TestCase
         return $result;
     }
 
-    protected function setUp()
+    public function setUp(): void
     {
         $this->setApplicationConfig(
             include __DIR__ . '/application.config.php'

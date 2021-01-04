@@ -10,6 +10,8 @@ namespace LaminasTest\ApiTools\Doctrine\QueryBuilder\Filter;
 
 use DateTime;
 use Db\Entity;
+use Db\Entity\Album;
+use Db\Entity\Artist;
 use Doctrine\ORM\Tools\SchemaTool;
 use LaminasTest\ApiTools\Doctrine\QueryBuilder\TestCase;
 
@@ -17,37 +19,21 @@ class ORMFilterTest extends TestCase
 {
     protected $objectManager;
 
-    private function countResult($filters, $entity = 'Db\Entity\Artist')
-    {
-        $serviceManager = $this->getApplication()->getServiceManager();
-        $filterManager = $serviceManager->get('LaminasDoctrineQueryBuilderFilterManagerOrm');
-        $objectManager = $this->objectManager;
-
-        $queryBuilder = $objectManager->createQueryBuilder();
-        $queryBuilder->select('row')
-            ->from($entity, 'row');
-
-        $metadata = $objectManager->getMetadataFactory()->getAllMetadata();
-
-        $filterManager->filter($queryBuilder, $metadata[0], $filters);
-
-        $result = $queryBuilder->getQuery()->getResult();
-        return sizeof($result);
-    }
-
-    protected function setUp()
+    public function setUp(): void
     {
         $this->setApplicationConfig(
             include __DIR__ . '/application.config.php'
         );
+
         parent::setUp();
 
-        $serviceManager = $this->getApplication()->getServiceManager();
+        $serviceManager      = $this->getApplication()->getServiceManager();
         $this->objectManager = $serviceManager->get('doctrine.entitymanager.orm_default');
-        $objectManager = $this->objectManager;
+        $objectManager       = $this->objectManager;
 
         $tool = new SchemaTool($objectManager);
-        $res = $tool->createSchema($objectManager->getMetadataFactory()->getAllMetadata());
+
+        $tool->createSchema($objectManager->getMetadataFactory()->getAllMetadata());
 
         $artist1 = new Entity\Artist;
         $artist1->setName('ArtistOne');
@@ -131,7 +117,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(2, $this->countResult($filters));
+        self::assertEquals(2, $this->countResult($filters));
 
         $filters = [
             [
@@ -156,7 +142,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(1, $this->countResult($filters));
+        self::assertEquals(1, $this->countResult($filters));
     }
 
     public function testAndX()
@@ -179,7 +165,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(0, $this->countResult($filters));
+        self::assertEquals(0, $this->countResult($filters));
 
 
         $filters = [
@@ -206,7 +192,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(2, $this->countResult($filters));
+        self::assertEquals(2, $this->countResult($filters));
     }
 
     public function testEquals()
@@ -219,7 +205,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(1, $this->countResult($filters));
+        self::assertEquals(1, $this->countResult($filters));
 
 
         $filters = [
@@ -232,7 +218,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(1, $this->countResult($filters));
+        self::assertEquals(1, $this->countResult($filters));
 
 
         $filters = [
@@ -252,7 +238,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(2, $this->countResult($filters));
+        self::assertEquals(2, $this->countResult($filters));
     }
 
     public function testNotEquals()
@@ -265,7 +251,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(4, $this->countResult($filters));
+        self::assertEquals(4, $this->countResult($filters));
 
 
         $filters = [
@@ -278,7 +264,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(3, $this->countResult($filters));
+        self::assertEquals(3, $this->countResult($filters));
 
 
         $filters = [
@@ -298,7 +284,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(2, $this->countResult($filters));
+        self::assertEquals(2, $this->countResult($filters));
     }
 
     public function testLessThan()
@@ -312,7 +298,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(3, $this->countResult($filters));
+        self::assertEquals(3, $this->countResult($filters));
 
 
         $filters = [
@@ -324,7 +310,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(2, $this->countResult($filters));
+        self::assertEquals(2, $this->countResult($filters));
 
 
         $filters = [
@@ -342,7 +328,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(3, $this->countResult($filters));
+        self::assertEquals(3, $this->countResult($filters));
     }
 
     public function testLessThanOrEquals()
@@ -356,7 +342,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(1, $this->countResult($filters));
+        self::assertEquals(1, $this->countResult($filters));
 
 
         $filters = [
@@ -367,7 +353,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(0, $this->countResult($filters));
+        self::assertEquals(0, $this->countResult($filters));
 
 
         $filters = [
@@ -379,7 +365,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(3, $this->countResult($filters));
+        self::assertEquals(3, $this->countResult($filters));
 
 
         $filters = [
@@ -397,7 +383,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(4, $this->countResult($filters));
+        self::assertEquals(4, $this->countResult($filters));
     }
 
     public function testGreaterThan()
@@ -411,7 +397,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(1, $this->countResult($filters));
+        self::assertEquals(1, $this->countResult($filters));
 
 
         $filters = [
@@ -424,7 +410,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(1, $this->countResult($filters));
+        self::assertEquals(1, $this->countResult($filters));
 
         $filters = [
             [
@@ -443,7 +429,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(1, $this->countResult($filters));
+        self::assertEquals(1, $this->countResult($filters));
     }
 
     public function testGreaterThanOrEquals()
@@ -456,7 +442,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(1, $this->countResult($filters));
+        self::assertEquals(1, $this->countResult($filters));
 
 
         $filters = [
@@ -467,7 +453,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(0, $this->countResult($filters));
+        self::assertEquals(0, $this->countResult($filters));
 
 
         $filters = [
@@ -480,7 +466,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(2, $this->countResult($filters));
+        self::assertEquals(2, $this->countResult($filters));
 
 
         $filters = [
@@ -500,7 +486,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(3, $this->countResult($filters));
+        self::assertEquals(3, $this->countResult($filters));
     }
 
     public function testIsNull()
@@ -515,7 +501,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(1, $this->countResult($filters));
+        self::assertEquals(1, $this->countResult($filters));
 
 
         $filters = [
@@ -526,7 +512,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(1, $this->countResult($filters));
+        self::assertEquals(1, $this->countResult($filters));
 
 
         $filters = [
@@ -543,7 +529,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(2, $this->countResult($filters));
+        self::assertEquals(2, $this->countResult($filters));
     }
 
     public function testIsNotNull()
@@ -555,7 +541,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(4, $this->countResult($filters));
+        self::assertEquals(4, $this->countResult($filters));
 
 
         $filters = [
@@ -566,7 +552,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(4, $this->countResult($filters));
+        self::assertEquals(4, $this->countResult($filters));
 
 
         $filters = [
@@ -583,7 +569,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(5, $this->countResult($filters));
+        self::assertEquals(5, $this->countResult($filters));
     }
 
     public function testIn()
@@ -599,7 +585,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(2, $this->countResult($filters));
+        self::assertEquals(2, $this->countResult($filters));
 
         $filters = [
             [
@@ -610,7 +596,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(1, $this->countResult($filters));
+        self::assertEquals(1, $this->countResult($filters));
 
 
         $filters = [
@@ -623,7 +609,7 @@ class ORMFilterTest extends TestCase
              ],
         ];
 
-        $this->assertEquals(1, $this->countResult($filters));
+        self::assertEquals(1, $this->countResult($filters));
     }
 
     public function testNotIn()
@@ -636,7 +622,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(3, $this->countResult($filters));
+        self::assertEquals(3, $this->countResult($filters));
 
 
         $filters = [
@@ -651,7 +637,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(3, $this->countResult($filters));
+        self::assertEquals(3, $this->countResult($filters));
 
 
         $filters = [
@@ -666,7 +652,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(3, $this->countResult($filters));
+        self::assertEquals(3, $this->countResult($filters));
     }
 
     public function testBetween()
@@ -682,7 +668,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(1, $this->countResult($filters));
+        self::assertEquals(1, $this->countResult($filters));
 
 
         $filters = [
@@ -696,7 +682,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(2, $this->countResult($filters));
+        self::assertEquals(2, $this->countResult($filters));
 
 
         $filters = [
@@ -709,10 +695,10 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(2, $this->countResult($filters));
+        self::assertEquals(2, $this->countResult($filters));
     }
 
-    public function testLike()
+    public function testLike(): void
     {
         $filters = [
             [
@@ -722,8 +708,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(5, $this->countResult($filters));
-
+        self::assertEquals(5, $this->countResult($filters));
 
         $filters = [
             [
@@ -733,8 +718,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(1, $this->countResult($filters));
-
+        self::assertEquals(1, $this->countResult($filters));
 
         $filters = [
             [
@@ -745,8 +729,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(5, $this->countResult($filters));
-
+        self::assertEquals(5, $this->countResult($filters));
 
         $filters = [
             [
@@ -763,10 +746,10 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(4, $this->countResult($filters));
+        self::assertEquals(4, $this->countResult($filters));
     }
 
-    public function testNotLike()
+    public function testNotLike(): void
     {
         $filters = [
             [
@@ -776,7 +759,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(4, $this->countResult($filters));
+        self::assertEquals(4, $this->countResult($filters));
 
 
         $filters = [
@@ -788,7 +771,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(0, $this->countResult($filters));
+        self::assertEquals(0, $this->countResult($filters));
 
 
         $filters = [
@@ -806,7 +789,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(1, $this->countResult($filters));
+        self::assertEquals(1, $this->countResult($filters));
     }
 
     public function testIsMemberOf()
@@ -828,7 +811,7 @@ class ORMFilterTest extends TestCase
                 'value' => $albumOneId,
             ],
         ];
-        $this->assertEquals(1, $this->countResult($filters));
+        self::assertEquals(1, $this->countResult($filters));
 
         $filters = [
             [
@@ -838,7 +821,7 @@ class ORMFilterTest extends TestCase
                 'value' => $albumSixId,
             ],
         ];
-        $this->assertEquals(0, $this->countResult($filters));
+        self::assertEquals(0, $this->countResult($filters));
     }
 
     public function testInnerJoin()
@@ -857,7 +840,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(3, $this->countResult($filters, 'Db\Entity\Album'));
+        self::assertEquals(3, $this->countResult($filters, Album::class));
 
 
         $filters = [
@@ -875,7 +858,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(2, $this->countResult($filters, 'Db\Entity\Album'));
+        self::assertEquals(2, $this->countResult($filters, Album::class));
 
         $filters = [
             [
@@ -888,7 +871,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(2, $this->countResult($filters, 'Db\Entity\Album'));
+        self::assertEquals(2, $this->countResult($filters, Album::class));
     }
 
     public function testLeftJoin()
@@ -907,7 +890,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(3, $this->countResult($filters, 'Db\Entity\Album'));
+        self::assertEquals(3, $this->countResult($filters, Album::class));
 
 
         $filters = [
@@ -925,7 +908,7 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(2, $this->countResult($filters, 'Db\Entity\Album'));
+        self::assertEquals(2, $this->countResult($filters, Album::class));
 
         /**
          * ArtistThree has no shows
@@ -944,6 +927,25 @@ class ORMFilterTest extends TestCase
             ],
         ];
 
-        $this->assertEquals(1, $this->countResult($filters, 'Db\Entity\Album'));
+        self::assertEquals(1, $this->countResult($filters, Album::class));
+    }
+
+    private function countResult($filters, $entity = Artist::class): int
+    {
+        $serviceManager = $this->getApplication()->getServiceManager();
+        $filterManager  = $serviceManager->get('LaminasDoctrineQueryBuilderFilterManagerOrm');
+        $objectManager  = $this->objectManager;
+
+        $queryBuilder = $objectManager->createQueryBuilder();
+        $queryBuilder->select('row')
+                     ->from($entity, 'row');
+
+        $metadata = $objectManager->getMetadataFactory()->getAllMetadata();
+
+        $filterManager->filter($queryBuilder, $metadata[0], $filters);
+
+        $result = $queryBuilder->getQuery()->getResult();
+
+        return \count($result);
     }
 }

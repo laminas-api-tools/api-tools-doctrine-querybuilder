@@ -7,22 +7,23 @@ use Exception;
 
 class Artist
 {
-    /**
-     * Constructor
-     */
+    protected $id;
+
+    protected $name;
+
+    protected $createdAt;
+
+    protected $album;
+
     public function __construct()
     {
         $this->album = new ArrayCollection();
     }
 
-    protected $id;
-
     public function getId()
     {
         return $this->id;
     }
-
-    protected $name;
 
     public function getName()
     {
@@ -36,8 +37,6 @@ class Artist
         return $this;
     }
 
-    protected $createdAt;
-
     public function getCreatedAt()
     {
         return $this->createdAt;
@@ -49,8 +48,6 @@ class Artist
 
         return $this;
     }
-
-    protected $album;
 
     public function getAlbum()
     {
