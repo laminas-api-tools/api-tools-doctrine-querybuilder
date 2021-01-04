@@ -12,6 +12,7 @@ use DateTime;
 use Db\Entity;
 use Db\Entity\Album;
 use Db\Entity\Artist;
+use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\Tools\SchemaTool;
 use LaminasTest\ApiTools\Doctrine\QueryBuilder\TestCase;
 
@@ -19,6 +20,7 @@ use function count;
 
 class ORMFilterTest extends TestCase
 {
+    /** @var ObjectManager */
     protected $objectManager;
 
     public function setUp(): void
@@ -905,7 +907,7 @@ class ORMFilterTest extends TestCase
         self::assertEquals(1, $this->countResult($filters, Album::class));
     }
 
-    private function countResult($filters, $entity = Artist::class): int
+    private function countResult(array $filters, string $entity = Artist::class): int
     {
         $serviceManager = $this->getApplication()->getServiceManager();
         $filterManager  = $serviceManager->get('LaminasDoctrineQueryBuilderFilterManagerOrm');

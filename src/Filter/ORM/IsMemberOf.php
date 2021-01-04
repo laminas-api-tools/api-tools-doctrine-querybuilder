@@ -8,16 +8,12 @@
 
 namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM;
 
-use Doctrine\ORM\QueryBuilder;
-
 use function uniqid;
 
 class IsMemberOf extends AbstractFilter
 {
     /**
-     * @param QueryBuilder $queryBuilder
-     * @param $metadata
-     * @param $option
+     * {@inheritDoc}
      */
     public function filter($queryBuilder, $metadata, $option)
     {

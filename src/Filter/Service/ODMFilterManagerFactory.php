@@ -12,5 +12,5 @@ use Laminas\Mvc\Service\AbstractPluginManagerFactory;
 
 class ODMFilterManagerFactory extends AbstractPluginManagerFactory
 {
-    const PLUGIN_MANAGER_CLASS = ODMFilterManager::class;
+    public const PLUGIN_MANAGER_CLASS = ODMFilterManager::class;
 }

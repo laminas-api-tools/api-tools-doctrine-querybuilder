@@ -15,6 +15,9 @@ use function strtolower;
 
 class Field extends AbstractOrderBy
 {
+    /**
+     * {@inheritDoc}
+     */
     public function orderBy($queryBuilder, $metadata, $option)
     {
         if (! isset($option['alias'])) {

@@ -13,11 +13,11 @@ use DbMongo\Document;
 use LaminasTest\ApiTools\Doctrine\QueryBuilder\TestCase;
 use MongoClient;
 
-use function sizeof;
+use function count;
 
 class ODMFilterTest extends TestCase
 {
-    private function countResult($filters, $entity = 'DbMongo\Document\Meta')
+    private function countResult(array $filters, string $entity = 'DbMongo\Document\Meta'): int
     {
         $serviceManager = $this->getApplication()->getServiceManager();
         $filterManager  = $serviceManager->get('LaminasDoctrineQueryBuilderFilterManagerOdm');
@@ -30,7 +30,7 @@ class ODMFilterTest extends TestCase
         $filterManager->filter($queryBuilder, $metadata[0], $filters);
 
         $result = $queryBuilder->getQuery()->execute();
-        return sizeof($result);
+        return count($result);
     }
 
     public function setUp(): void

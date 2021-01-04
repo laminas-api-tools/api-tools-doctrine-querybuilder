@@ -8,6 +8,7 @@
 
 namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM;
 
+use Doctrine\ORM\QueryBuilder;
 use InvalidArgumentException;
 use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\FilterInterface;
 use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\Service\ORMFilterManager;
@@ -15,6 +16,12 @@ use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\TypeCastInterface;
 
 abstract class AbstractFilter implements FilterInterface
 {
+    /**
+     * @param QueryBuilder $queryBuilder
+     * @param object $metadata
+     * @param array $option
+     * @return void
+     */
     abstract public function filter($queryBuilder, $metadata, $option);
 
     /** @var ORMFilterManager */

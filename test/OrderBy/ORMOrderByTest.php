@@ -17,7 +17,10 @@ use function reset;
 
 class ORMOrderByTest extends TestCase
 {
-    private function fetchResult($orderBy, $entity = 'Db\Entity\Artist')
+    /**
+     * @return mixed
+     */
+    private function fetchResult(iterable $orderBy, string $entity = 'Db\Entity\Artist')
     {
         $serviceManager = $this->getApplication()->getServiceManager();
         $orderByManager = $serviceManager->get('LaminasDoctrineQueryBuilderOrderByManagerOrm');

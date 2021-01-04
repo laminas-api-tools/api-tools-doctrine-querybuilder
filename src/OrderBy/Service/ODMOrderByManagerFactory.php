@@ -12,5 +12,5 @@ use Laminas\Mvc\Service\AbstractPluginManagerFactory;
 
 class ODMOrderByManagerFactory extends AbstractPluginManagerFactory
 {
-    const PLUGIN_MANAGER_CLASS = ODMOrderByManager::class;
+    public const PLUGIN_MANAGER_CLASS = ODMOrderByManager::class;
 }

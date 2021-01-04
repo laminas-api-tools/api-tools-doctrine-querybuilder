@@ -15,6 +15,9 @@ use function strtolower;
 
 class OrX extends AbstractFilter
 {
+    /**
+     * {@inheritDoc}
+     */
     public function filter($queryBuilder, $metadata, $option)
     {
         if (isset($option['where'])) {

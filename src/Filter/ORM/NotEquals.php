@@ -12,6 +12,9 @@ use function uniqid;
 
 class NotEquals extends AbstractFilter
 {
+    /**
+     * {@inheritDoc}
+     */
     public function filter($queryBuilder, $metadata, $option)
     {
         if (isset($option['where'])) {

@@ -12,31 +12,34 @@ use DateTime;
 use DateTimeImmutable;
 use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\TypeCastInterface;
 
-use function settype;
-
 class TypeCaster implements TypeCastInterface
 {
     /**
      * {@inheritDoc}
      */
-    public function typeCastField($metadata, string $field, $value, ?string $format = null, bool $doNotTypecastDatetime = false)
-    {
+    public function typeCastField(
+        $metadata,
+        string $field,
+        $value,
+        ?string $format = null,
+        bool $doNotTypecastDatetime = false
+    ) {
         if (! isset($metadata->fieldMappings[$field])) {
             return $value;
         }
 
         switch ($metadata->fieldMappings[$field]['type']) {
             case 'int':
-                settype($value, 'integer');
+                $value = (int) $value;
                 break;
             case 'boolean':
-                settype($value, 'boolean');
+                $value = (bool) $value;
                 break;
             case 'float':
-                settype($value, 'float');
+                $value = (float) $value;
                 break;
             case 'string':
-                settype($value, 'string');
+                $value = (string) $value;
                 break;
             case 'bin_data_custom':
                 break;

@@ -24,8 +24,12 @@ use function method_exists;
  */
 class CollectionLinkHydratorV3 extends AbstractCollectionStrategy implements StrategyInterface
 {
+    /** @var ServiceManager */
     protected $serviceManager;
 
+    /**
+     * @return self
+     */
     public function setServiceManager(ServiceManager $serviceManager)
     {
         $this->serviceManager = $serviceManager;
@@ -33,11 +37,17 @@ class CollectionLinkHydratorV3 extends AbstractCollectionStrategy implements Str
         return $this;
     }
 
+    /**
+     * @return ServiceManager
+     */
     public function getServiceManager()
     {
         return $this->serviceManager;
     }
 
+    /**
+     * @param object $value
+     */
     public function extract($value, ?object $object = null)
     {
         $config = $this->getServiceManager()->get('config');
@@ -82,6 +92,9 @@ class CollectionLinkHydratorV3 extends AbstractCollectionStrategy implements Str
         return $link;
     }
 
+    /**
+     * @param mixed $value
+     */
     public function hydrate($value, ?array $data = null)
     {
         // Hydration is not supported for collections.

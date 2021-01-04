@@ -29,6 +29,9 @@ class ODMFilterManager extends AbstractPluginManager
     /** @var string */
     protected $instanceOf = FilterInterface::class;
 
+    /**
+     * @param iterable $filters
+     */
     public function filter(QueryBuilder $queryBuilder, Metadata $metadata, $filters)
     {
         foreach ($filters as $option) {

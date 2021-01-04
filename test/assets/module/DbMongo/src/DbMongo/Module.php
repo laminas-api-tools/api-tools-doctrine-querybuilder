@@ -7,12 +7,12 @@ use Laminas\Loader\StandardAutoloader;
 
 class Module implements ApiToolsProviderInterface
 {
-    public function getConfig()
+    public function getConfig(): array
     {
         return include __DIR__ . '/../../config/module.config.php';
     }
 
-    public function getAutoloaderConfig()
+    public function getAutoloaderConfig(): array
     {
         return [
             StandardAutoloader::class => [

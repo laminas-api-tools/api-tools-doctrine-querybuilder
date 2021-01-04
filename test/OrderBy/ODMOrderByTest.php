@@ -15,7 +15,10 @@ use MongoClient;
 
 class ODMOrderByTest extends TestCase
 {
-    private function fetchResult($orderBy, $entity = 'DbMongo\Document\Meta')
+    /**
+     * @return mixed
+     */
+    private function fetchResult(iterable $orderBy, string $entity = 'DbMongo\Document\Meta')
     {
         $serviceManager = $this->getApplication()->getServiceManager();
         $orderByManager = $serviceManager->get('LaminasDoctrineQueryBuilderOrderByManagerOdm');

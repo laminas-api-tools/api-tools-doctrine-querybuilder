@@ -12,5 +12,5 @@ use Laminas\Mvc\Service\AbstractPluginManagerFactory;
 
 class ORMFilterManagerFactory extends AbstractPluginManagerFactory
 {
-    const PLUGIN_MANAGER_CLASS = ORMFilterManager::class;
+    public const PLUGIN_MANAGER_CLASS = ORMFilterManager::class;
 }

@@ -25,6 +25,11 @@ class ODMOrderByManager extends AbstractPluginManager
     /** @var string */
     protected $instanceOf = OrderByInterface::class;
 
+    /**
+     * @param object $metadata
+     * @param iterable $orderBy
+     * @return void
+     */
     public function orderBy(QueryBuilder $queryBuilder, $metadata, $orderBy)
     {
         foreach ($orderBy as $option) {

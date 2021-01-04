@@ -10,6 +10,7 @@ namespace LaminasTest\ApiTools\Doctrine\QueryBuilder\Hydrator\Strategy;
 
 use laminas\apitools\doctrine\querybuilder\hydrator\strategy\collectionlink;
 use Laminas\ServiceManager\ServiceManager;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use stdClass;
@@ -18,6 +19,7 @@ class CollectionLinkTest extends TestCase
 {
     use ProphecyTrait;
 
+    /** @var stdClass|MockObject */
     private $mockValue;
 
     /** @var collectionlink */
@@ -72,7 +74,7 @@ class CollectionLinkTest extends TestCase
         $this->hydrator->setServiceManager($mock->reveal());
     }
 
-    public function mappingDataProvider()
+    public function mappingDataProvider(): array
     {
         return [
             // OneToMany relation

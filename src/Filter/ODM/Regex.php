@@ -12,6 +12,9 @@ use MongoRegex;
 
 class Regex extends AbstractFilter
 {
+    /**
+     * {@inheritDoc}
+     */
     public function filter($queryBuilder, $metadata, $option)
     {
         $queryType = 'addAnd';

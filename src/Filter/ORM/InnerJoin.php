@@ -12,6 +12,9 @@ use Exception;
 
 class InnerJoin extends AbstractFilter
 {
+    /**
+     * {@inheritDoc}
+     */
     public function filter($queryBuilder, $metadata, $option)
     {
         if (! isset($option['field']) || ! $option['field']) {

@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:disable
 
 namespace Db\Entity;
 

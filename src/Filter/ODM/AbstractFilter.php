@@ -8,11 +8,18 @@
 
 namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ODM;
 
+use Doctrine\ODM\MongoDB\Query\Builder;
 use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\FilterInterface;
 use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\TypeCastInterface;
 
 abstract class AbstractFilter implements FilterInterface
 {
+    /**
+     * @param Builder $queryBuilder
+     * @param object $metadata
+     * @param array $option
+     * @return void
+     */
     abstract public function filter($queryBuilder, $metadata, $option);
 
     /** @var TypeCastInterface */
@@ -45,8 +52,13 @@ abstract class AbstractFilter implements FilterInterface
      * @param string|int|float $value
      * @return mixed
      */
-    protected function typeCastField($metadata, string $field, $value, ?string $format = null, bool $doNotTypecastDatetime = false)
-    {
+    protected function typeCastField(
+        $metadata,
+        string $field,
+        $value,
+        ?string $format = null,
+        bool $doNotTypecastDatetime = false
+    ) {
         return $this->getTypeCaster()->typeCastField($metadata, $field, $value, $format, $doNotTypecastDatetime);
     }
 }

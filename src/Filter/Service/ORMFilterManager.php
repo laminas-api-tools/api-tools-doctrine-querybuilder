@@ -28,6 +28,10 @@ class ORMFilterManager extends AbstractPluginManager
     /** @var string */
     protected $instanceOf = FilterInterface::class;
 
+    /**
+     * @param object $metadata
+     * @param iterable $filters
+     */
     public function filter(QueryBuilder $queryBuilder, $metadata, $filters)
     {
         foreach ($filters as $option) {

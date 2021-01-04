@@ -15,5 +15,11 @@ interface TypeCastInterface
      * @param string|int|float $value
      * @return mixed
      */
-    public function typeCastField($metadata, string $field, $value, ?string $format = null, bool $doNotTypecastDatetime = false);
+    public function typeCastField(
+        $metadata,
+        string $field,
+        $value,
+        ?string $format = null,
+        bool $doNotTypecastDatetime = false
+    );
 }

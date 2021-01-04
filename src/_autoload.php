@@ -19,7 +19,9 @@ use function interface_exists;
  * is added in v3.
  */
 if (interface_exists(HydratorPluginManagerInterface::class, true)) {
-    class_alias(Hydrator\Strategy\CollectionLinkHydratorV3::class, hydrator\strategy\collectionlink::class, true);
+    // phpcs:ignore
+    class_alias(Hydrator\Strategy\CollectionLinkHydratorV3::class, Hydrator\Strategy\Collectionlink::class, true);
 } else {
-    class_alias(Hydrator\Strategy\CollectionLinkHydratorV2::class, hydrator\strategy\collectionlink::class, true);
+    // phpcs:ignore
+    class_alias(Hydrator\Strategy\CollectionLinkHydratorV2::class, Hydrator\Strategy\Collectionlink::class, true);
 }

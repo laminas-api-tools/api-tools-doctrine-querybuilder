@@ -16,6 +16,7 @@ use stdClass;
 
 class ORMTypeCasterTest extends TestCase
 {
+    /** @var TypeCaster */
     private $typeCaster;
 
     protected function setUp(): void
