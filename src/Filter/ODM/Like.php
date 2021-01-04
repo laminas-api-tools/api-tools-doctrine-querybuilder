@@ -10,6 +10,8 @@ namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ODM;
 
 use MongoRegex;
 
+use function str_replace;
+
 class Like extends AbstractFilter
 {
     public function filter($queryBuilder, $metadata, $option)

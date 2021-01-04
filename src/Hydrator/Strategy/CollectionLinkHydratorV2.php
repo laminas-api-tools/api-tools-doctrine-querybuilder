@@ -14,6 +14,8 @@ use Laminas\Filter\FilterChain;
 use Laminas\Hydrator\Strategy\StrategyInterface;
 use Laminas\ServiceManager\ServiceManager;
 
+use function method_exists;
+
 /**
  * A field-specific hydrator for collections.
  *
@@ -41,13 +43,14 @@ class CollectionLinkHydratorV2 extends AbstractCollectionStrategy implements Str
     public function extract($value)
     {
         $config = $this->getServiceManager()->get('config');
-        if (! method_exists($value, 'getTypeClass')
+        if (
+            ! method_exists($value, 'getTypeClass')
             || ! isset($config['api-tools-hal']['metadata_map'][$value->getTypeClass()->name])
         ) {
             return;
         }
 
-        $config = $config['api-tools-hal']['metadata_map'][$value->getTypeClass()->name];
+        $config  = $config['api-tools-hal']['metadata_map'][$value->getTypeClass()->name];
         $mapping = $value->getMapping();
 
         $filter = new FilterChain();
@@ -66,7 +69,7 @@ class CollectionLinkHydratorV2 extends AbstractCollectionStrategy implements Str
 
         $filterValue = [
             'field' => $mapping['mappedBy'] ? : $mapping['inversedBy'],
-            'type' => isset($mapping['joinTable']) ? 'ismemberof' : 'eq',
+            'type'  => isset($mapping['joinTable']) ? 'ismemberof' : 'eq',
             'value' => $value->getOwner()->getId(),
         ];
 

@@ -16,7 +16,6 @@ class DefaultOrmFactory
     /**
      * Create and return DefaultOrm instance.
      *
-     * @param ContainerInterface $container
      * @return DefaultOrm
      */
     public function __invoke(ContainerInterface $container)

@@ -10,6 +10,9 @@ namespace Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy\ORM;
 
 use Exception;
 
+use function in_array;
+use function strtolower;
+
 class Field extends AbstractOrderBy
 {
     public function orderBy($queryBuilder, $metadata, $option)

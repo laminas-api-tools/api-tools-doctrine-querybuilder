@@ -8,6 +8,8 @@
 
 namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM;
 
+use function uniqid;
+
 class LessThan extends AbstractFilter
 {
     public function filter($queryBuilder, $metadata, $option)

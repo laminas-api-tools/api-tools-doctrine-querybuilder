@@ -15,6 +15,8 @@ use Db\Entity\Artist;
 use Doctrine\ORM\Tools\SchemaTool;
 use LaminasTest\ApiTools\Doctrine\QueryBuilder\TestCase;
 
+use function count;
+
 class ORMFilterTest extends TestCase
 {
     protected $objectManager;
@@ -35,61 +37,61 @@ class ORMFilterTest extends TestCase
 
         $tool->createSchema($objectManager->getMetadataFactory()->getAllMetadata());
 
-        $artist1 = new Entity\Artist;
+        $artist1 = new Entity\Artist();
         $artist1->setName('ArtistOne');
         $artist1->setCreatedAt(new DateTime('2011-12-18 13:17:17'));
         $objectManager->persist($artist1);
 
-        $artist2 = new Entity\Artist;
+        $artist2 = new Entity\Artist();
         $artist2->setName('ArtistTwo');
         $artist2->setCreatedAt(new DateTime('2014-12-18 13:17:17'));
         $objectManager->persist($artist2);
 
-        $artist3 = new Entity\Artist;
+        $artist3 = new Entity\Artist();
         $artist3->setName('ArtistThree');
         $artist3->setCreatedAt(new DateTime('2012-12-18 13:17:17'));
         $objectManager->persist($artist3);
 
-        $artist4 = new Entity\Artist;
+        $artist4 = new Entity\Artist();
         $artist4->setName('ArtistFour');
         $artist4->setCreatedAt(new DateTime('2013-12-18 13:17:17'));
         $objectManager->persist($artist4);
 
-        $artist5 = new Entity\Artist;
+        $artist5 = new Entity\Artist();
         $artist5->setName('ArtistFive');
         $objectManager->persist($artist5);
 
-        $album1 = new Entity\Album;
+        $album1 = new Entity\Album();
         $album1->setName('AlbumOne');
         $album1->setCreatedAt(new DateTime('2013-12-18 13:17:17'));
         $album1->setArtist($artist1);
         $objectManager->persist($album1);
 
-        $album2 = new Entity\Album;
+        $album2 = new Entity\Album();
         $album2->setName('AlbumTwo');
         $album2->setCreatedAt(new DateTime('2013-12-18 13:17:17'));
         $album2->setArtist($artist1);
         $objectManager->persist($album2);
 
-        $album3 = new Entity\Album;
+        $album3 = new Entity\Album();
         $album3->setName('AlbumThree');
         $album3->setCreatedAt(new DateTime('2013-12-18 13:17:17'));
         $album3->setArtist($artist1);
         $objectManager->persist($album3);
 
-        $album4 = new Entity\Album;
+        $album4 = new Entity\Album();
         $album4->setName('AlbumFour');
         $album4->setCreatedAt(new DateTime('2013-12-18 13:17:17'));
         $album4->setArtist($artist2);
         $objectManager->persist($album4);
 
-        $album5 = new Entity\Album;
+        $album5 = new Entity\Album();
         $album5->setName('AlbumFive');
         $album5->setCreatedAt(new DateTime('2013-12-18 13:17:17'));
         $album5->setArtist($artist2);
         $objectManager->persist($album5);
 
-        $album6 = new Entity\Album;
+        $album6 = new Entity\Album();
         $album6->setName('AlbumSix');
         $album6->setCreatedAt(new DateTime('2013-12-18 13:17:17'));
         $objectManager->persist($album6);
@@ -101,16 +103,16 @@ class ORMFilterTest extends TestCase
     {
         $filters = [
             [
-                'type' => 'orx',
+                'type'       => 'orx',
                 'conditions' => [
                     [
                         'field' => 'name',
-                        'type' => 'eq',
+                        'type'  => 'eq',
                         'value' => 'ArtistOne',
                     ],
                     [
                         'field' => 'name',
-                        'type' => 'eq',
+                        'type'  => 'eq',
                         'value' => 'ArtistTwo',
                     ],
                 ],
@@ -121,22 +123,22 @@ class ORMFilterTest extends TestCase
 
         $filters = [
             [
-                'type' => 'orx',
+                'type'       => 'orx',
                 'conditions' => [
                     [
                         'field' => 'name',
-                        'type' => 'eq',
+                        'type'  => 'eq',
                         'value' => 'ArtistOne',
                     ],
                     [
                         'field' => 'name',
-                        'type' => 'eq',
+                        'type'  => 'eq',
                         'value' => 'ArtistTwo',
                     ],
                 ],
             ],
             [
-                'type' => 'eq',
+                'type'  => 'eq',
                 'field' => 'createdAt',
                 'value' => '2014-12-18 13:17:17',
             ],
@@ -149,16 +151,16 @@ class ORMFilterTest extends TestCase
     {
         $filters = [
             [
-                'type' => 'andx',
+                'type'       => 'andx',
                 'conditions' => [
                     [
                         'field' => 'name',
-                        'type' => 'eq',
+                        'type'  => 'eq',
                         'value' => 'ArtistOne',
                     ],
                     [
                         'field' => 'name',
-                        'type' => 'eq',
+                        'type'  => 'eq',
                         'value' => 'ArtistTwo',
                     ],
                 ],
@@ -167,26 +169,25 @@ class ORMFilterTest extends TestCase
 
         self::assertEquals(0, $this->countResult($filters));
 
-
         $filters = [
             [
-                'type' => 'andx',
+                'type'       => 'andx',
                 'conditions' => [
                     [
                         'field' => 'createdAt',
-                        'type' => 'eq',
+                        'type'  => 'eq',
                         'value' => '2014-12-18 13:17:17',
                     ],
                     [
                         'field' => 'name',
-                        'type' => 'eq',
+                        'type'  => 'eq',
                         'value' => 'ArtistTwo',
                     ],
                 ],
             ],
             [
                 'where' => 'or',
-                'type' => 'eq',
+                'type'  => 'eq',
                 'field' => 'name',
                 'value' => 'ArtistOne',
             ],
@@ -200,40 +201,38 @@ class ORMFilterTest extends TestCase
         $filters = [
             [
                 'field' => 'name',
-                'type' => 'eq',
+                'type'  => 'eq',
                 'value' => 'ArtistOne',
             ],
         ];
 
         self::assertEquals(1, $this->countResult($filters));
 
-
         $filters = [
             [
-                'field' => 'createdAt',
-                'where' => 'and',
-                'type' => 'eq',
-                'value' => '2014-12-18 13:17:17',
+                'field'  => 'createdAt',
+                'where'  => 'and',
+                'type'   => 'eq',
+                'value'  => '2014-12-18 13:17:17',
                 'format' => 'Y-m-d H:i:s',
             ],
         ];
 
         self::assertEquals(1, $this->countResult($filters));
 
-
         $filters = [
             [
-                'field' => 'createdAt',
-                'where' => 'or',
-                'type' => 'eq',
-                'value' => '2014-12-18 13:17:17',
+                'field'  => 'createdAt',
+                'where'  => 'or',
+                'type'   => 'eq',
+                'value'  => '2014-12-18 13:17:17',
                 'format' => 'Y-m-d H:i:s',
             ],
             [
-                'field' => 'createdAt',
-                'where' => 'or',
-                'type' => 'eq',
-                'value' => '2012-12-18 13:17:17',
+                'field'  => 'createdAt',
+                'where'  => 'or',
+                'type'   => 'eq',
+                'value'  => '2012-12-18 13:17:17',
                 'format' => 'Y-m-d H:i:s',
             ],
         ];
@@ -246,40 +245,38 @@ class ORMFilterTest extends TestCase
         $filters = [
             [
                 'field' => 'name',
-                'type' => 'neq',
+                'type'  => 'neq',
                 'value' => 'ArtistOne',
             ],
         ];
 
         self::assertEquals(4, $this->countResult($filters));
 
-
         $filters = [
             [
-                'field' => 'createdAt',
-                'where' => 'or',
-                'type' => 'neq',
-                'value' => '2014-12-18 13:17:17',
+                'field'  => 'createdAt',
+                'where'  => 'or',
+                'type'   => 'neq',
+                'value'  => '2014-12-18 13:17:17',
                 'format' => 'Y-m-d H:i:s',
             ],
         ];
 
         self::assertEquals(3, $this->countResult($filters));
 
-
         $filters = [
             [
-                'field' => 'createdAt',
-                'where' => 'and',
-                'type' => 'neq',
-                'value' => '2014-12-18 13:17:17',
+                'field'  => 'createdAt',
+                'where'  => 'and',
+                'type'   => 'neq',
+                'value'  => '2014-12-18 13:17:17',
                 'format' => 'Y-m-d H:i:s',
             ],
             [
-                'field' => 'createdAt',
-                'where' => 'and',
-                'type' => 'neq',
-                'value' => '2012-12-18 13:17:17',
+                'field'  => 'createdAt',
+                'where'  => 'and',
+                'type'   => 'neq',
+                'value'  => '2012-12-18 13:17:17',
                 'format' => 'Y-m-d H:i:s',
             ],
         ];
@@ -291,39 +288,37 @@ class ORMFilterTest extends TestCase
     {
         $filters = [
             [
-                'field' => 'createdAt',
-                'type' => 'lt',
-                'value' => '2014-01-01',
+                'field'  => 'createdAt',
+                'type'   => 'lt',
+                'value'  => '2014-01-01',
                 'format' => 'Y-m-d',
             ],
         ];
 
         self::assertEquals(3, $this->countResult($filters));
 
-
         $filters = [
             [
                 'field' => 'createdAt',
                 'where' => 'and',
-                'type' => 'lt',
+                'type'  => 'lt',
                 'value' => '2013-12-18 13:17:17',
             ],
         ];
 
         self::assertEquals(2, $this->countResult($filters));
 
-
         $filters = [
             [
                 'field' => 'createdAt',
                 'where' => 'or',
-                'type' => 'lt',
+                'type'  => 'lt',
                 'value' => '2013-12-18 13:17:17',
             ],
             [
                 'field' => 'name',
                 'where' => 'or',
-                'type' => 'eq',
+                'type'  => 'eq',
                 'value' => 'ArtistTwo',
             ],
         ];
@@ -335,50 +330,47 @@ class ORMFilterTest extends TestCase
     {
         $filters = [
             [
-                'field' => 'createdAt',
-                'type' => 'lte',
-                'value' => '2011-12-20',
+                'field'  => 'createdAt',
+                'type'   => 'lte',
+                'value'  => '2011-12-20',
                 'format' => 'Y-m-d',
             ],
         ];
 
         self::assertEquals(1, $this->countResult($filters));
 
-
         $filters = [
             [
                 'field' => 'createdAt',
-                'type' => 'lte',
+                'type'  => 'lte',
                 'value' => '2011-12-18 13:17:16',
             ],
         ];
 
         self::assertEquals(0, $this->countResult($filters));
 
-
         $filters = [
             [
                 'field' => 'createdAt',
                 'where' => 'and',
-                'type' => 'lte',
+                'type'  => 'lte',
                 'value' => '2013-12-18 13:17:17',
             ],
         ];
 
         self::assertEquals(3, $this->countResult($filters));
 
-
         $filters = [
             [
                 'field' => 'createdAt',
                 'where' => 'or',
-                'type' => 'lte',
+                'type'  => 'lte',
                 'value' => '2013-12-18 13:17:17',
             ],
             [
                 'field' => 'name',
                 'where' => 'or',
-                'type' => 'eq',
+                'type'  => 'eq',
                 'value' => 'ArtistTwo',
             ],
         ];
@@ -390,22 +382,21 @@ class ORMFilterTest extends TestCase
     {
         $filters = [
             [
-                'field' => 'createdAt',
-                'type' => 'gt',
-                'value' => '2014-01-01',
+                'field'  => 'createdAt',
+                'type'   => 'gt',
+                'value'  => '2014-01-01',
                 'format' => 'Y-m-d',
             ],
         ];
 
         self::assertEquals(1, $this->countResult($filters));
 
-
         $filters = [
             [
-                'field' => 'createdAt',
-                'where' => 'or',
-                'type' => 'gt',
-                'value' => '2013-12-18 13:17:17',
+                'field'  => 'createdAt',
+                'where'  => 'or',
+                'type'   => 'gt',
+                'value'  => '2013-12-18 13:17:17',
                 'format' => 'Y-m-d H:i:s',
             ],
         ];
@@ -414,17 +405,17 @@ class ORMFilterTest extends TestCase
 
         $filters = [
             [
-                'field' => 'createdAt',
-                'where' => 'and',
-                'type' => 'gt',
-                'value' => '2013-12-18 13:17:17',
+                'field'  => 'createdAt',
+                'where'  => 'and',
+                'type'   => 'gt',
+                'value'  => '2013-12-18 13:17:17',
                 'format' => 'Y-m-d H:i:s',
             ],
             [
-                'field' => 'createdAt',
-                'where' => 'and',
-                'type' => 'gt',
-                'value' => '2012-12-18 13:17:17',
+                'field'  => 'createdAt',
+                'where'  => 'and',
+                'type'   => 'gt',
+                'value'  => '2012-12-18 13:17:17',
                 'format' => 'Y-m-d H:i:s',
             ],
         ];
@@ -437,51 +428,48 @@ class ORMFilterTest extends TestCase
         $filters = [
             [
                 'field' => 'createdAt',
-                'type' => 'gte',
+                'type'  => 'gte',
                 'value' => '2014-12-18 13:17:17',
             ],
         ];
 
         self::assertEquals(1, $this->countResult($filters));
 
-
         $filters = [
             [
                 'field' => 'createdAt',
-                'type' => 'gte',
+                'type'  => 'gte',
                 'value' => '2014-12-18 13:17:18',
             ],
         ];
 
         self::assertEquals(0, $this->countResult($filters));
 
-
         $filters = [
             [
-                'field' => 'createdAt',
-                'where' => 'and',
-                'type' => 'gte',
-                'value' => '2013-12-18 13:17:17',
+                'field'  => 'createdAt',
+                'where'  => 'and',
+                'type'   => 'gte',
+                'value'  => '2013-12-18 13:17:17',
                 'format' => 'Y-m-d H:i:s',
             ],
         ];
 
         self::assertEquals(2, $this->countResult($filters));
 
-
         $filters = [
             [
-                'field' => 'createdAt',
-                'where' => 'or',
-                'type' => 'gte',
-                'value' => '2013-12-18 13:17:17',
+                'field'  => 'createdAt',
+                'where'  => 'or',
+                'type'   => 'gte',
+                'value'  => '2013-12-18 13:17:17',
                 'format' => 'Y-m-d H:i:s',
             ],
             [
-                'field' => 'createdAt',
-                'where' => 'or',
-                'type' => 'gte',
-                'value' => '2012-12-18 13:17:17',
+                'field'  => 'createdAt',
+                'where'  => 'or',
+                'type'   => 'gte',
+                'value'  => '2012-12-18 13:17:17',
                 'format' => 'Y-m-d H:i:s',
             ],
         ];
@@ -492,39 +480,37 @@ class ORMFilterTest extends TestCase
     public function testIsNull()
     {
         $serviceManager = $this->getApplication()->getServiceManager();
-        $objectManager = $serviceManager->get('doctrine.entitymanager.orm_default');
+        $objectManager  = $serviceManager->get('doctrine.entitymanager.orm_default');
 
         $filters = [
             [
                 'field' => 'createdAt',
-                'type' => 'isnull',
+                'type'  => 'isnull',
             ],
         ];
 
         self::assertEquals(1, $this->countResult($filters));
-
 
         $filters = [
             [
                 'field' => 'createdAt',
                 'where' => 'and',
-                'type' => 'isnull',
+                'type'  => 'isnull',
             ],
         ];
 
         self::assertEquals(1, $this->countResult($filters));
 
-
         $filters = [
             [
                 'field' => 'createdAt',
                 'where' => 'or',
-                'type' => 'isnull',
+                'type'  => 'isnull',
             ],
             [
                 'field' => 'name',
                 'where' => 'or',
-                'type' => 'eq',
+                'type'  => 'eq',
                 'value' => 'ArtistOne',
             ],
         ];
@@ -537,34 +523,32 @@ class ORMFilterTest extends TestCase
         $filters = [
             [
                 'field' => 'createdAt',
-                'type' => 'isnotnull',
+                'type'  => 'isnotnull',
             ],
         ];
 
         self::assertEquals(4, $this->countResult($filters));
-
 
         $filters = [
             [
                 'field' => 'createdAt',
                 'where' => 'and',
-                'type' => 'isnotnull',
+                'type'  => 'isnotnull',
             ],
         ];
 
         self::assertEquals(4, $this->countResult($filters));
 
-
         $filters = [
             [
                 'field' => 'createdAt',
                 'where' => 'or',
-                'type' => 'isnotnull',
+                'type'  => 'isnotnull',
             ],
             [
                 'field' => 'name',
                 'where' => 'or',
-                'type' => 'eq',
+                'type'  => 'eq',
                 'value' => 'ArtistFive',
             ],
         ];
@@ -576,8 +560,8 @@ class ORMFilterTest extends TestCase
     {
         $filters = [
             [
-                'field' => 'name',
-                'type' => 'in',
+                'field'  => 'name',
+                'type'   => 'in',
                 'values' => [
                     'ArtistOne',
                     'ArtistTwo',
@@ -589,24 +573,23 @@ class ORMFilterTest extends TestCase
 
         $filters = [
             [
-                'field' => 'createdAt',
-                'where' => 'and',
-                'type' => 'in',
+                'field'  => 'createdAt',
+                'where'  => 'and',
+                'type'   => 'in',
                 'values' => ['2011-12-18 13:17:17'],
             ],
         ];
 
         self::assertEquals(1, $this->countResult($filters));
 
-
         $filters = [
             [
-                'field' => 'createdAt',
-                'where' => 'or',
-                'type' => 'in',
+                'field'  => 'createdAt',
+                'where'  => 'or',
+                'type'   => 'in',
                 'values' => ['2011-12-18 13:17:17'],
                 'format' => 'Y-m-d H:i:s',
-             ],
+            ],
         ];
 
         self::assertEquals(1, $this->countResult($filters));
@@ -616,35 +599,33 @@ class ORMFilterTest extends TestCase
     {
         $filters = [
             [
-                'field' => 'name',
-                'type' => 'notin',
+                'field'  => 'name',
+                'type'   => 'notin',
                 'values' => ['ArtistOne', 'ArtistTwo'],
             ],
         ];
 
         self::assertEquals(3, $this->countResult($filters));
 
-
         $filters = [
             [
-                'field' => 'createdAt',
-                'where' => 'and',
-                'type' => 'notin',
+                'field'  => 'createdAt',
+                'where'  => 'and',
+                'type'   => 'notin',
                 'values' => [
                     '2011-12-18 13:17:17',
                     'format' => 'Y-m-d H:i:s',
-                ]
+                ],
             ],
         ];
 
         self::assertEquals(3, $this->countResult($filters));
 
-
         $filters = [
             [
-                'field' => 'createdAt',
-                'where' => 'or',
-                'type' => 'notin',
+                'field'  => 'createdAt',
+                'where'  => 'or',
+                'type'   => 'notin',
                 'values' => [
                     '2011-12-18 13:17:17',
                 ],
@@ -659,38 +640,36 @@ class ORMFilterTest extends TestCase
     {
         $filters = [
             [
-                'field' => 'createdAt',
-                'where' => 'and',
-                'type' => 'between',
-                'from' => '2012-12-15',
-                'to' => '2013-01-01',
+                'field'  => 'createdAt',
+                'where'  => 'and',
+                'type'   => 'between',
+                'from'   => '2012-12-15',
+                'to'     => '2013-01-01',
                 'format' => 'Y-m-d',
             ],
         ];
 
         self::assertEquals(1, $this->countResult($filters));
 
-
         $filters = [
             [
-                'field' => 'createdAt',
-                'where' => 'or',
-                'type' => 'between',
-                'from' => '2010-12-15',
-                'to' => '2013-01-01',
+                'field'  => 'createdAt',
+                'where'  => 'or',
+                'type'   => 'between',
+                'from'   => '2010-12-15',
+                'to'     => '2013-01-01',
                 'format' => 'Y-m-d',
             ],
         ];
 
         self::assertEquals(2, $this->countResult($filters));
 
-
         $filters = [
             [
-                'field' => 'createdAt',
-                'type' => 'between',
-                'from' => '2010-12-15',
-                'to' => '2013-01-01',
+                'field'  => 'createdAt',
+                'type'   => 'between',
+                'from'   => '2010-12-15',
+                'to'     => '2013-01-01',
                 'format' => 'Y-m-d',
             ],
         ];
@@ -703,7 +682,7 @@ class ORMFilterTest extends TestCase
         $filters = [
             [
                 'field' => 'name',
-                'type' => 'like',
+                'type'  => 'like',
                 'value' => 'Artist%',
             ],
         ];
@@ -713,7 +692,7 @@ class ORMFilterTest extends TestCase
         $filters = [
             [
                 'field' => 'name',
-                'type' => 'like',
+                'type'  => 'like',
                 'value' => '%Two',
             ],
         ];
@@ -724,7 +703,7 @@ class ORMFilterTest extends TestCase
             [
                 'field' => 'name',
                 'where' => 'and',
-                'type' => 'like',
+                'type'  => 'like',
                 'value' => '%Art%',
             ],
         ];
@@ -735,13 +714,13 @@ class ORMFilterTest extends TestCase
             [
                 'field' => 'name',
                 'where' => 'or',
-                'type' => 'like',
+                'type'  => 'like',
                 'value' => 'ArtistT%',
             ],
             [
                 'field' => 'name',
                 'where' => 'or',
-                'type' => 'like',
+                'type'  => 'like',
                 'value' => 'ArtistF%',
             ],
         ];
@@ -754,37 +733,35 @@ class ORMFilterTest extends TestCase
         $filters = [
             [
                 'field' => 'name',
-                'type' => 'notlike',
+                'type'  => 'notlike',
                 'value' => '%Two',
             ],
         ];
 
         self::assertEquals(4, $this->countResult($filters));
 
-
         $filters = [
             [
                 'field' => 'name',
                 'where' => 'and',
-                'type' => 'notlike',
+                'type'  => 'notlike',
                 'value' => '%Art%',
             ],
         ];
 
         self::assertEquals(0, $this->countResult($filters));
 
-
         $filters = [
             [
                 'field' => 'name',
                 'where' => 'and',
-                'type' => 'notlike',
+                'type'  => 'notlike',
                 'value' => 'ArtistT%',
             ],
             [
                 'field' => 'name',
                 'where' => 'and',
-                'type' => 'notlike',
+                'type'  => 'notlike',
                 'value' => 'ArtistF%',
             ],
         ];
@@ -805,7 +782,7 @@ class ORMFilterTest extends TestCase
 
         $filters = [
             [
-                'type' => 'ismemberof',
+                'type'  => 'ismemberof',
                 'where' => 'and',
                 'field' => 'album',
                 'value' => $albumOneId,
@@ -815,7 +792,7 @@ class ORMFilterTest extends TestCase
 
         $filters = [
             [
-                'type' => 'ismemberof',
+                'type'  => 'ismemberof',
                 'where' => 'and',
                 'field' => 'album',
                 'value' => $albumSixId,
@@ -828,32 +805,31 @@ class ORMFilterTest extends TestCase
     {
         $filters = [
             [
-                'type' => 'innerjoin',
+                'type'  => 'innerjoin',
                 'alias' => 'a',
                 'field' => 'artist',
             ],
             [
                 'alias' => 'a',
                 'field' => 'name',
-                'type' => 'eq',
+                'type'  => 'eq',
                 'value' => 'ArtistOne',
             ],
         ];
 
         self::assertEquals(3, $this->countResult($filters, Album::class));
 
-
         $filters = [
             [
-                'type' => 'innerjoin',
+                'type'        => 'innerjoin',
                 'parentAlias' => 'row',
-                'alias' => 'a',
-                'field' => 'artist',
+                'alias'       => 'a',
+                'field'       => 'artist',
             ],
             [
                 'alias' => 'a',
                 'field' => 'name',
-                'type' => 'eq',
+                'type'  => 'eq',
                 'value' => 'ArtistTwo',
             ],
         ];
@@ -862,12 +838,12 @@ class ORMFilterTest extends TestCase
 
         $filters = [
             [
-                'type' => 'innerjoin',
-                'parentAlias' => 'row',
-                'alias' => 'a',
-                'field' => 'artist',
+                'type'          => 'innerjoin',
+                'parentAlias'   => 'row',
+                'alias'         => 'a',
+                'field'         => 'artist',
                 'conditionType' => 'WITH',
-                'condition' => "a.name = 'ArtistTwo'",
+                'condition'     => "a.name = 'ArtistTwo'",
             ],
         ];
 
@@ -878,32 +854,31 @@ class ORMFilterTest extends TestCase
     {
         $filters = [
             [
-                'type' => 'leftjoin',
+                'type'  => 'leftjoin',
                 'alias' => 'a',
                 'field' => 'artist',
             ],
             [
                 'alias' => 'a',
                 'field' => 'name',
-                'type' => 'eq',
+                'type'  => 'eq',
                 'value' => 'ArtistOne',
             ],
         ];
 
         self::assertEquals(3, $this->countResult($filters, Album::class));
 
-
         $filters = [
             [
-                'type' => 'leftjoin',
+                'type'        => 'leftjoin',
                 'parentAlias' => 'row',
-                'alias' => 'a',
-                'field' => 'artist',
+                'alias'       => 'a',
+                'field'       => 'artist',
             ],
             [
                 'alias' => 'a',
                 'field' => 'name',
-                'type' => 'eq',
+                'type'  => 'eq',
                 'value' => 'ArtistTwo',
             ],
         ];
@@ -915,13 +890,13 @@ class ORMFilterTest extends TestCase
          */
         $filters = [
             [
-                'type' => 'leftjoin',
+                'type'        => 'leftjoin',
                 'parentAlias' => 'row',
-                'alias' => 'a',
-                'field' => 'artist',
+                'alias'       => 'a',
+                'field'       => 'artist',
             ],
             [
-                'type' => 'isnull',
+                'type'  => 'isnull',
                 'field' => 'id',
                 'alias' => 'a',
             ],
@@ -946,6 +921,6 @@ class ORMFilterTest extends TestCase
 
         $result = $queryBuilder->getQuery()->getResult();
 
-        return \count($result);
+        return count($result);
     }
 }

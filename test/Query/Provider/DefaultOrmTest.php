@@ -23,31 +23,23 @@ use Laminas\ServiceManager\ServiceLocatorInterface;
 use Laminas\Stdlib\Parameters;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
-use Prophecy\Prophecy\ProphecyInterface;
 use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ProphecyInterface;
 
 class DefaultOrmTest extends TestCase
 {
     use ProphecyTrait;
 
-    /**
-     * @var DefaultOrm|ProphecyInterface
-     */
+    /** @var DefaultOrm|ProphecyInterface */
     protected $provider;
 
-    /**
-     * @var QueryBuilder|ProphecyInterface
-     */
+    /** @var QueryBuilder|ProphecyInterface */
     protected $queryBuilder;
 
-    /**
-     * @var ObjectManager|ProphecyInterface
-     */
+    /** @var ObjectManager|ProphecyInterface */
     protected $objectManager;
 
-    /**
-     * @var ServiceLocatorInterface|ProphecyInterface
-     */
+    /** @var ServiceLocatorInterface|ProphecyInterface */
     protected $serviceLocator;
 
     public function setUp(): void
@@ -191,7 +183,7 @@ class DefaultOrmTest extends TestCase
         $this->serviceLocator->get(ORMFilterManager::class)->willReturn($filterManager->reveal());
 
         $resourceEvent = $this->getResourceEvent([
-            'filter' => 'foo-filter',
+            'filter'   => 'foo-filter',
             'order-by' => 'foo-order-by',
         ]);
 
@@ -236,7 +228,7 @@ class DefaultOrmTest extends TestCase
      * @param array|null $params
      * @return ResourceEvent|ProphecyInterface
      */
-    protected function getResourceEvent(array $params = null)
+    protected function getResourceEvent(?array $params = null)
     {
         $request = $this->prophesize(Request::class);
         $request->getQuery()->willReturn(new Parameters($params));

@@ -12,11 +12,8 @@ interface TypeCastInterface
 {
     /**
      * @param object $metadata
-     * @param string $field
      * @param string|int|float $value
-     * @param string|null $format
-     * @param bool $doNotTypecastDatetime
      * @return mixed
      */
-    public function typeCastField($metadata, string $field, $value, string $format = null, bool $doNotTypecastDatetime = false);
+    public function typeCastField($metadata, string $field, $value, ?string $format = null, bool $doNotTypecastDatetime = false);
 }

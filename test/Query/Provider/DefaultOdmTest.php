@@ -30,24 +30,16 @@ class DefaultOdmTest extends TestCase
 {
     use ProphecyTrait;
 
-    /**
-     * @var DefaultOdm|ProphecyInterface
-     */
+    /** @var DefaultOdm|ProphecyInterface */
     protected $provider;
 
-    /**
-     * @var QueryBuilder|ProphecyInterface
-     */
+    /** @var QueryBuilder|ProphecyInterface */
     protected $queryBuilder;
 
-    /**
-     * @var ObjectManager|ProphecyInterface
-     */
+    /** @var ObjectManager|ProphecyInterface */
     protected $objectManager;
 
-    /**
-     * @var ServiceLocatorInterface|ProphecyInterface
-     */
+    /** @var ServiceLocatorInterface|ProphecyInterface */
     protected $serviceLocator;
 
     public function setUp(): void
@@ -77,7 +69,7 @@ class DefaultOdmTest extends TestCase
     {
         $entityClass = 'foo.entity.class';
 
-        $metadata = $this->prophesize(ClassMetadata::class)->reveal();
+        $metadata        = $this->prophesize(ClassMetadata::class)->reveal();
         $metadataFactory = $this->prophesize(ClassMetadataFactory::class);
         $metadataFactory->getMetadataFor($entityClass)->willReturn($metadata);
 
@@ -102,7 +94,7 @@ class DefaultOdmTest extends TestCase
     {
         $entityClass = 'foo.entity.class';
 
-        $metadata = $this->prophesize(ClassMetadata::class)->reveal();
+        $metadata        = $this->prophesize(ClassMetadata::class)->reveal();
         $metadataFactory = $this->prophesize(ClassMetadataFactory::class);
         $metadataFactory->getMetadataFor($entityClass)->willReturn($metadata);
 
@@ -131,7 +123,7 @@ class DefaultOdmTest extends TestCase
     {
         $entityClass = 'foo.entity.class';
 
-        $metadata = $this->prophesize(ClassMetadata::class)->reveal();
+        $metadata        = $this->prophesize(ClassMetadata::class)->reveal();
         $metadataFactory = $this->prophesize(ClassMetadataFactory::class);
         $metadataFactory->getMetadataFor($entityClass)->willReturn($metadata);
 
@@ -156,7 +148,7 @@ class DefaultOdmTest extends TestCase
     {
         $entityClass = 'foo.entity.class';
 
-        $metadata = $this->prophesize(ClassMetadata::class)->reveal();
+        $metadata        = $this->prophesize(ClassMetadata::class)->reveal();
         $metadataFactory = $this->prophesize(ClassMetadataFactory::class);
         $metadataFactory->getMetadataFor($entityClass)->willReturn($metadata);
 
@@ -185,7 +177,7 @@ class DefaultOdmTest extends TestCase
     {
         $entityClass = 'foo.entity.class';
 
-        $metadata = $this->prophesize(ClassMetadata::class)->reveal();
+        $metadata        = $this->prophesize(ClassMetadata::class)->reveal();
         $metadataFactory = $this->prophesize(ClassMetadataFactory::class);
         $metadataFactory->getMetadataFor($entityClass)->willReturn($metadata);
 
@@ -204,7 +196,7 @@ class DefaultOdmTest extends TestCase
         $this->serviceLocator->get(ODMFilterManager::class)->willReturn($filterManager->reveal());
 
         $resourceEvent = $this->getResourceEvent([
-            'filter' => 'foo-filter',
+            'filter'   => 'foo-filter',
             'order-by' => 'foo-order-by',
         ]);
 
@@ -243,7 +235,7 @@ class DefaultOdmTest extends TestCase
      * @param array|null $params
      * @return ResourceEvent|ProphecyInterface
      */
-    protected function getResourceEvent(array $params = null)
+    protected function getResourceEvent(?array $params = null)
     {
         $request = $this->prophesize(Request::class);
         $request->getQuery()->willReturn(new Parameters($params));

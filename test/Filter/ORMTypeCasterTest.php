@@ -10,8 +10,8 @@ namespace LaminasTest\ApiTools\Doctrine\QueryBuilder\Filter;
 
 use DateTime;
 use DateTimeImmutable;
-use PHPUnit\Framework\TestCase;
 use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM\TypeCaster;
+use PHPUnit\Framework\TestCase;
 use stdClass;
 
 class ORMTypeCasterTest extends TestCase
@@ -25,16 +25,16 @@ class ORMTypeCasterTest extends TestCase
 
     public function testTypeCastingToString()
     {
-        $metadata = new stdClass();
+        $metadata                = new stdClass();
         $metadata->fieldMappings = [
             'field' => [
-                'type' => 'string'
+                'type' => 'string',
             ],
         ];
 
-        $field = 'field';
-        $value = 1;
-        $format = null;
+        $field                 = 'field';
+        $value                 = 1;
+        $format                = null;
         $doNotTypecastDateTime = false;
 
         $result = $this->typeCaster->typeCastField($metadata, $field, $value, $format, $doNotTypecastDateTime);
@@ -44,16 +44,16 @@ class ORMTypeCasterTest extends TestCase
 
     public function testTypeCastingToInteger()
     {
-        $metadata = new stdClass();
+        $metadata                = new stdClass();
         $metadata->fieldMappings = [
             'field' => [
-                'type' => 'integer'
+                'type' => 'integer',
             ],
         ];
 
-        $field = 'field';
-        $value = '2144211244';
-        $format = null;
+        $field                 = 'field';
+        $value                 = '2144211244';
+        $format                = null;
         $doNotTypecastDateTime = false;
 
         $result = $this->typeCaster->typeCastField($metadata, $field, $value, $format, $doNotTypecastDateTime);
@@ -62,16 +62,16 @@ class ORMTypeCasterTest extends TestCase
 
     public function testTypeCastingToSmallint()
     {
-        $metadata = new stdClass();
+        $metadata                = new stdClass();
         $metadata->fieldMappings = [
             'field' => [
-                'type' => 'smallint'
+                'type' => 'smallint',
             ],
         ];
 
-        $field = 'field';
-        $value = '2';
-        $format = null;
+        $field                 = 'field';
+        $value                 = '2';
+        $format                = null;
         $doNotTypecastDateTime = false;
 
         $result = $this->typeCaster->typeCastField($metadata, $field, $value, $format, $doNotTypecastDateTime);
@@ -80,38 +80,38 @@ class ORMTypeCasterTest extends TestCase
 
     public function testTypeCastingToBoolean()
     {
-        $metadata = new stdClass();
+        $metadata                = new stdClass();
         $metadata->fieldMappings = [
             'field' => [
-                'type' => 'boolean'
+                'type' => 'boolean',
             ],
         ];
 
-        $field = 'field';
-        $value = 'abc';
-        $format = null;
+        $field                 = 'field';
+        $value                 = 'abc';
+        $format                = null;
         $doNotTypecastDateTime = false;
 
         $result = $this->typeCaster->typeCastField($metadata, $field, $value, $format, $doNotTypecastDateTime);
         $this->assertSame(true, $result);
 
-        $value = 0;
+        $value  = 0;
         $result = $this->typeCaster->typeCastField($metadata, $field, $value, $format, $doNotTypecastDateTime);
         $this->assertSame(false, $result);
     }
 
     public function testTypeCastingToDecimal()
     {
-        $metadata = new stdClass();
+        $metadata                = new stdClass();
         $metadata->fieldMappings = [
             'field' => [
-                'type' => 'decimal'
+                'type' => 'decimal',
             ],
         ];
 
-        $field = 'field';
-        $value = '1.141';
-        $format = null;
+        $field                 = 'field';
+        $value                 = '1.141';
+        $format                = null;
         $doNotTypecastDateTime = false;
 
         $result = $this->typeCaster->typeCastField($metadata, $field, $value, $format, $doNotTypecastDateTime);
@@ -120,16 +120,16 @@ class ORMTypeCasterTest extends TestCase
 
     public function testTypeCastingToFloat()
     {
-        $metadata = new stdClass();
+        $metadata                = new stdClass();
         $metadata->fieldMappings = [
             'field' => [
-                'type' => 'float'
+                'type' => 'float',
             ],
         ];
 
-        $field = 'field';
-        $value = '1.242';
-        $format = null;
+        $field                 = 'field';
+        $value                 = '1.242';
+        $format                = null;
         $doNotTypecastDateTime = false;
 
         $result = $this->typeCaster->typeCastField($metadata, $field, $value, $format, $doNotTypecastDateTime);
@@ -138,16 +138,16 @@ class ORMTypeCasterTest extends TestCase
 
     public function testTypeCastingToDate()
     {
-        $metadata = new stdClass();
+        $metadata                = new stdClass();
         $metadata->fieldMappings = [
             'field' => [
-                'type' => 'date'
+                'type' => 'date',
             ],
         ];
 
-        $field = 'field';
-        $value = '2019-09-01';
-        $format = null;
+        $field                 = 'field';
+        $value                 = '2019-09-01';
+        $format                = null;
         $doNotTypecastDateTime = false;
 
         $result = $this->typeCaster->typeCastField($metadata, $field, $value, $format, $doNotTypecastDateTime);
@@ -158,16 +158,16 @@ class ORMTypeCasterTest extends TestCase
 
     public function testNoTypeCastingToDateWhenFlaggedSo()
     {
-        $metadata = new stdClass();
+        $metadata                = new stdClass();
         $metadata->fieldMappings = [
             'field' => [
-                'type' => 'date'
+                'type' => 'date',
             ],
         ];
 
-        $field = 'field';
-        $value = '2019-09-01';
-        $format = null;
+        $field                 = 'field';
+        $value                 = '2019-09-01';
+        $format                = null;
         $doNotTypecastDateTime = true;
 
         $result = $this->typeCaster->typeCastField($metadata, $field, $value, $format, $doNotTypecastDateTime);
@@ -176,16 +176,16 @@ class ORMTypeCasterTest extends TestCase
 
     public function testTypeCastingToDateImmutable()
     {
-        $metadata = new stdClass();
+        $metadata                = new stdClass();
         $metadata->fieldMappings = [
             'field' => [
-                'type' => 'date_immutable'
+                'type' => 'date_immutable',
             ],
         ];
 
-        $field = 'field';
-        $value = '2019-09-01';
-        $format = null;
+        $field                 = 'field';
+        $value                 = '2019-09-01';
+        $format                = null;
         $doNotTypecastDateTime = false;
 
         $result = $this->typeCaster->typeCastField($metadata, $field, $value, $format, $doNotTypecastDateTime);
@@ -196,16 +196,16 @@ class ORMTypeCasterTest extends TestCase
 
     public function testNoTypeCastingToDateImmutableWhenFlaggedSo()
     {
-        $metadata = new stdClass();
+        $metadata                = new stdClass();
         $metadata->fieldMappings = [
             'field' => [
-                'type' => 'date_immutable'
+                'type' => 'date_immutable',
             ],
         ];
 
-        $field = 'field';
-        $value = '2019-09-01';
-        $format = null;
+        $field                 = 'field';
+        $value                 = '2019-09-01';
+        $format                = null;
         $doNotTypecastDateTime = true;
 
         $result = $this->typeCaster->typeCastField($metadata, $field, $value, $format, $doNotTypecastDateTime);
@@ -214,16 +214,16 @@ class ORMTypeCasterTest extends TestCase
 
     public function testTypeCastingToTime()
     {
-        $metadata = new stdClass();
+        $metadata                = new stdClass();
         $metadata->fieldMappings = [
             'field' => [
-                'type' => 'time'
+                'type' => 'time',
             ],
         ];
 
-        $field = 'field';
-        $value = '12:01:55';
-        $format = null;
+        $field                 = 'field';
+        $value                 = '12:01:55';
+        $format                = null;
         $doNotTypecastDateTime = false;
 
         $result = $this->typeCaster->typeCastField($metadata, $field, $value, $format, $doNotTypecastDateTime);
@@ -233,16 +233,16 @@ class ORMTypeCasterTest extends TestCase
 
     public function testNoTypeCastingToTimeWhenFlaggedSo()
     {
-        $metadata = new stdClass();
+        $metadata                = new stdClass();
         $metadata->fieldMappings = [
             'field' => [
-                'type' => 'time'
+                'type' => 'time',
             ],
         ];
 
-        $field = 'field';
-        $value = '12:01:55';
-        $format = null;
+        $field                 = 'field';
+        $value                 = '12:01:55';
+        $format                = null;
         $doNotTypecastDateTime = true;
 
         $result = $this->typeCaster->typeCastField($metadata, $field, $value, $format, $doNotTypecastDateTime);
@@ -251,16 +251,16 @@ class ORMTypeCasterTest extends TestCase
 
     public function testTypeCastingToTimeImmutable()
     {
-        $metadata = new stdClass();
+        $metadata                = new stdClass();
         $metadata->fieldMappings = [
             'field' => [
-                'type' => 'time_immutable'
+                'type' => 'time_immutable',
             ],
         ];
 
-        $field = 'field';
-        $value = '12:01:55';
-        $format = null;
+        $field                 = 'field';
+        $value                 = '12:01:55';
+        $format                = null;
         $doNotTypecastDateTime = false;
 
         $result = $this->typeCaster->typeCastField($metadata, $field, $value, $format, $doNotTypecastDateTime);
@@ -270,16 +270,16 @@ class ORMTypeCasterTest extends TestCase
 
     public function testNoTypeCastingToTimeImmutableWhenFlaggedSo()
     {
-        $metadata = new stdClass();
+        $metadata                = new stdClass();
         $metadata->fieldMappings = [
             'field' => [
-                'type' => 'time_immutable'
+                'type' => 'time_immutable',
             ],
         ];
 
-        $field = 'field';
-        $value = '12:01:55';
-        $format = null;
+        $field                 = 'field';
+        $value                 = '12:01:55';
+        $format                = null;
         $doNotTypecastDateTime = true;
 
         $result = $this->typeCaster->typeCastField($metadata, $field, $value, $format, $doNotTypecastDateTime);
@@ -288,16 +288,16 @@ class ORMTypeCasterTest extends TestCase
 
     public function testTypeCastingToDateTime()
     {
-        $metadata = new stdClass();
+        $metadata                = new stdClass();
         $metadata->fieldMappings = [
             'field' => [
-                'type' => 'datetime'
+                'type' => 'datetime',
             ],
         ];
 
-        $field = 'field';
-        $value = '2019-09-01 12:03:44';
-        $format = null;
+        $field                 = 'field';
+        $value                 = '2019-09-01 12:03:44';
+        $format                = null;
         $doNotTypecastDateTime = false;
 
         $result = $this->typeCaster->typeCastField($metadata, $field, $value, $format, $doNotTypecastDateTime);
@@ -308,16 +308,16 @@ class ORMTypeCasterTest extends TestCase
 
     public function testNoTypeCastingToDateTimeWhenFlaggedSo()
     {
-        $metadata = new stdClass();
+        $metadata                = new stdClass();
         $metadata->fieldMappings = [
             'field' => [
-                'type' => 'datetime'
+                'type' => 'datetime',
             ],
         ];
 
-        $field = 'field';
-        $value = '2019-09-01 12:03:44';
-        $format = null;
+        $field                 = 'field';
+        $value                 = '2019-09-01 12:03:44';
+        $format                = null;
         $doNotTypecastDateTime = true;
 
         $result = $this->typeCaster->typeCastField($metadata, $field, $value, $format, $doNotTypecastDateTime);
@@ -326,16 +326,16 @@ class ORMTypeCasterTest extends TestCase
 
     public function testTypeCastingToDateTimeImmutable()
     {
-        $metadata = new stdClass();
+        $metadata                = new stdClass();
         $metadata->fieldMappings = [
             'field' => [
-                'type' => 'datetime_immutable'
+                'type' => 'datetime_immutable',
             ],
         ];
 
-        $field = 'field';
-        $value = '2019-09-01 12:03:44';
-        $format = null;
+        $field                 = 'field';
+        $value                 = '2019-09-01 12:03:44';
+        $format                = null;
         $doNotTypecastDateTime = false;
 
         $result = $this->typeCaster->typeCastField($metadata, $field, $value, $format, $doNotTypecastDateTime);
@@ -346,16 +346,16 @@ class ORMTypeCasterTest extends TestCase
 
     public function testNoTypeCastingToDateTimeImmutableWhenFlaggedSo()
     {
-        $metadata = new stdClass();
+        $metadata                = new stdClass();
         $metadata->fieldMappings = [
             'field' => [
-                'type' => 'datetime_immutable'
+                'type' => 'datetime_immutable',
             ],
         ];
 
-        $field = 'field';
-        $value = '2019-09-01 12:03:44';
-        $format = null;
+        $field                 = 'field';
+        $value                 = '2019-09-01 12:03:44';
+        $format                = null;
         $doNotTypecastDateTime = true;
 
         $result = $this->typeCaster->typeCastField($metadata, $field, $value, $format, $doNotTypecastDateTime);
@@ -364,16 +364,16 @@ class ORMTypeCasterTest extends TestCase
 
     public function testTypeCastingForUnknownFieldType()
     {
-        $metadata = new stdClass();
+        $metadata                = new stdClass();
         $metadata->fieldMappings = [
             'field' => [
-                'type' => 'some random type'
+                'type' => 'some random type',
             ],
         ];
 
-        $field = 'field';
-        $value = '2019-09-01 12:03:44';
-        $format = null;
+        $field                 = 'field';
+        $value                 = '2019-09-01 12:03:44';
+        $format                = null;
         $doNotTypecastDateTime = false;
 
         $result = $this->typeCaster->typeCastField($metadata, $field, $value, $format, $doNotTypecastDateTime);

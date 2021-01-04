@@ -11,16 +11,19 @@ namespace LaminasTest\ApiTools\Doctrine\QueryBuilder\Filter;
 use DateTime;
 use DbMongo\Document;
 use LaminasTest\ApiTools\Doctrine\QueryBuilder\TestCase;
+use MongoClient;
+
+use function sizeof;
 
 class ODMFilterTest extends TestCase
 {
     private function countResult($filters, $entity = 'DbMongo\Document\Meta')
     {
         $serviceManager = $this->getApplication()->getServiceManager();
-        $filterManager = $serviceManager->get('LaminasDoctrineQueryBuilderFilterManagerOdm');
-        $objectManager = $serviceManager->get('doctrine.documentmanager.odm_default');
-        $queryBuilder = $objectManager->createQueryBuilder($entity);
-        # NOTE:  the metadata is an array with one element in testing :\
+        $filterManager  = $serviceManager->get('LaminasDoctrineQueryBuilderFilterManagerOdm');
+        $objectManager  = $serviceManager->get('doctrine.documentmanager.odm_default');
+        $queryBuilder   = $objectManager->createQueryBuilder($entity);
+        // NOTE:  the metadata is an array with one element in testing :\
 
         $metadata = $objectManager->getMetadataFactory()->getAllMetadata();
 
@@ -40,38 +43,38 @@ class ODMFilterTest extends TestCase
         $config = $this->getApplication()->getConfig();
         $config = $config['doctrine']['connection']['odm_default'];
 
-        $connection = new \MongoClient('mongodb://' . $config['server'] . ':' . $config['port']);
-        $db = $connection->{$config['dbname']};
+        $connection = new MongoClient('mongodb://' . $config['server'] . ':' . $config['port']);
+        $db         = $connection->{$config['dbname']};
         $collection = $db->meta;
         $collection->remove();
 
         $serviceManager = $this->getApplication()->getServiceManager();
-        $objectManager = $serviceManager->get('doctrine.documentmanager.odm_default');
+        $objectManager  = $serviceManager->get('doctrine.documentmanager.odm_default');
 
-        $meta1 = new Document\Meta;
+        $meta1 = new Document\Meta();
         $meta1->setName('MetaOne');
         $meta1->setDescription('Foo');
         $meta1->setCreatedAt(new DateTime('2011-12-18 13:17:17'));
         $objectManager->persist($meta1);
 
-        $meta2 = new Document\Meta;
+        $meta2 = new Document\Meta();
         $meta2->setName('MetaTwo');
         $meta2->setDescription('Bar');
         $meta2->setCreatedAt(new DateTime('2014-12-18 13:17:17'));
         $objectManager->persist($meta2);
 
-        $meta3 = new Document\Meta;
+        $meta3 = new Document\Meta();
         $meta3->setName('MetaThree');
         $meta3->setDescription('Baz');
         $meta3->setCreatedAt(new DateTime('2012-12-18 13:17:17'));
         $objectManager->persist($meta3);
 
-        $meta4 = new Document\Meta;
+        $meta4 = new Document\Meta();
         $meta4->setName('MetaFour');
         $meta4->setCreatedAt(new DateTime('2013-12-18 13:17:17'));
         $objectManager->persist($meta4);
 
-        $meta5 = new Document\Meta;
+        $meta5 = new Document\Meta();
         $meta5->setName('MetaFive');
         $objectManager->persist($meta5);
 
@@ -86,33 +89,31 @@ class ODMFilterTest extends TestCase
 
         $this->assertEquals(1, $this->countResult($filters));
 
-
         $filters = [
             [
-                'field' => 'createdAt',
-                'where' => 'and',
-                'type' => 'eq',
-                'value' => '2014-12-18 13:17:17',
+                'field'  => 'createdAt',
+                'where'  => 'and',
+                'type'   => 'eq',
+                'value'  => '2014-12-18 13:17:17',
                 'format' => 'Y-m-d H:i:s',
             ],
         ];
 
         $this->assertEquals(1, $this->countResult($filters));
 
-
         $filters = [
             [
-                'field' => 'createdAt',
-                'where' => 'or',
-                'type' => 'eq',
-                'value' => '2014-12-18 13:17:17',
+                'field'  => 'createdAt',
+                'where'  => 'or',
+                'type'   => 'eq',
+                'value'  => '2014-12-18 13:17:17',
                 'format' => 'Y-m-d H:i:s',
             ],
             [
-                'field' => 'createdAt',
-                'where' => 'or',
-                'type' => 'eq',
-                'value' => '2012-12-18 13:17:17',
+                'field'  => 'createdAt',
+                'where'  => 'or',
+                'type'   => 'eq',
+                'value'  => '2012-12-18 13:17:17',
                 'format' => 'Y-m-d H:i:s',
             ],
         ];
@@ -128,33 +129,31 @@ class ODMFilterTest extends TestCase
 
         $this->assertEquals(4, $this->countResult($filters));
 
-
         $filters = [
             [
-                'field' => 'createdAt',
-                'where' => 'or',
-                'type' => 'neq',
-                'value' => '2014-12-18 13:17:17',
+                'field'  => 'createdAt',
+                'where'  => 'or',
+                'type'   => 'neq',
+                'value'  => '2014-12-18 13:17:17',
                 'format' => 'Y-m-d H:i:s',
             ],
         ];
 
         $this->assertEquals(4, $this->countResult($filters));
 
-
         $filters = [
             [
-                'field' => 'createdAt',
-                'where' => 'and',
-                'type' => 'neq',
-                'value' => '2014-12-18 13:17:17',
+                'field'  => 'createdAt',
+                'where'  => 'and',
+                'type'   => 'neq',
+                'value'  => '2014-12-18 13:17:17',
                 'format' => 'Y-m-d H:i:s',
             ],
             [
-                'field' => 'createdAt',
-                'where' => 'and',
-                'type' => 'neq',
-                'value' => '2012-12-18 13:17:17',
+                'field'  => 'createdAt',
+                'where'  => 'and',
+                'type'   => 'neq',
+                'value'  => '2012-12-18 13:17:17',
                 'format' => 'Y-m-d H:i:s',
             ],
         ];
@@ -166,39 +165,37 @@ class ODMFilterTest extends TestCase
     {
         $filters = [
             [
-                'field' => 'createdAt',
-                'type' => 'lt',
-                'value' => '2014-01-01',
+                'field'  => 'createdAt',
+                'type'   => 'lt',
+                'value'  => '2014-01-01',
                 'format' => 'Y-m-d',
             ],
         ];
 
         $this->assertEquals(3, $this->countResult($filters));
 
-
         $filters = [
             [
                 'field' => 'createdAt',
                 'where' => 'and',
-                'type' => 'lt',
+                'type'  => 'lt',
                 'value' => '2013-12-18 13:17:17',
             ],
         ];
 
         $this->assertEquals(2, $this->countResult($filters));
 
-
         $filters = [
             [
                 'field' => 'createdAt',
                 'where' => 'or',
-                'type' => 'lt',
+                'type'  => 'lt',
                 'value' => '2013-12-18 13:17:17',
             ],
             [
                 'field' => 'name',
                 'where' => 'or',
-                'type' => 'eq',
+                'type'  => 'eq',
                 'value' => 'MetaTwo',
             ],
         ];
@@ -210,50 +207,47 @@ class ODMFilterTest extends TestCase
     {
         $filters = [
             [
-                'field' => 'createdAt',
-                'type' => 'lte',
-                'value' => '2011-12-20',
+                'field'  => 'createdAt',
+                'type'   => 'lte',
+                'value'  => '2011-12-20',
                 'format' => 'Y-m-d',
             ],
         ];
 
         $this->assertEquals(1, $this->countResult($filters));
 
-
         $filters = [
             [
                 'field' => 'createdAt',
-                'type' => 'lte',
+                'type'  => 'lte',
                 'value' => '2011-12-18 13:17:16',
             ],
         ];
 
         $this->assertEquals(0, $this->countResult($filters));
 
-
         $filters = [
             [
                 'field' => 'createdAt',
                 'where' => 'and',
-                'type' => 'lte',
+                'type'  => 'lte',
                 'value' => '2013-12-18 13:17:17',
             ],
         ];
 
         $this->assertEquals(3, $this->countResult($filters));
 
-
         $filters = [
             [
                 'field' => 'createdAt',
                 'where' => 'or',
-                'type' => 'lte',
+                'type'  => 'lte',
                 'value' => '2013-12-18 13:17:17',
             ],
             [
                 'field' => 'name',
                 'where' => 'or',
-                'type' => 'eq',
+                'type'  => 'eq',
                 'value' => 'MetaTwo',
             ],
         ];
@@ -265,42 +259,40 @@ class ODMFilterTest extends TestCase
     {
         $filters = [
             [
-                'field' => 'createdAt',
-                'type' => 'gt',
-                'value' => '2014-01-01',
+                'field'  => 'createdAt',
+                'type'   => 'gt',
+                'value'  => '2014-01-01',
                 'format' => 'Y-m-d',
             ],
         ];
 
         $this->assertEquals(1, $this->countResult($filters));
 
-
         $filters = [
             [
-                'field' => 'createdAt',
-                'where' => 'or',
-                'type' => 'gt',
-                'value' => '2013-12-18 13:17:17',
+                'field'  => 'createdAt',
+                'where'  => 'or',
+                'type'   => 'gt',
+                'value'  => '2013-12-18 13:17:17',
                 'format' => 'Y-m-d H:i:s',
             ],
         ];
 
         $this->assertEquals(1, $this->countResult($filters));
 
-
         $filters = [
             [
-                'field' => 'createdAt',
-                'where' => 'and',
-                'type' => 'gt',
-                'value' => '2013-12-18 13:17:17',
+                'field'  => 'createdAt',
+                'where'  => 'and',
+                'type'   => 'gt',
+                'value'  => '2013-12-18 13:17:17',
                 'format' => 'Y-m-d H:i:s',
             ],
             [
-                'field' => 'createdAt',
-                'where' => 'and',
-                'type' => 'gt',
-                'value' => '2012-12-18 13:17:17',
+                'field'  => 'createdAt',
+                'where'  => 'and',
+                'type'   => 'gt',
+                'value'  => '2012-12-18 13:17:17',
                 'format' => 'Y-m-d H:i:s',
             ],
         ];
@@ -313,31 +305,29 @@ class ODMFilterTest extends TestCase
         $filters = [
             [
                 'field' => 'createdAt',
-                'type' => 'gte',
+                'type'  => 'gte',
                 'value' => '2014-12-18 13:17:17',
             ],
         ];
 
         $this->assertEquals(1, $this->countResult($filters));
 
-
         $filters = [
             [
                 'field' => 'createdAt',
-                'type' => 'gte',
+                'type'  => 'gte',
                 'value' => '2014-12-18 13:17:18',
             ],
         ];
 
         $this->assertEquals(0, $this->countResult($filters));
 
-
         $filters = [
             [
-                'field' => 'createdAt',
-                'where' => 'and',
-                'type' => 'gte',
-                'value' => '2013-12-18 13:17:17',
+                'field'  => 'createdAt',
+                'where'  => 'and',
+                'type'   => 'gte',
+                'value'  => '2013-12-18 13:17:17',
                 'format' => 'Y-m-d H:i:s',
             ],
         ];
@@ -346,17 +336,17 @@ class ODMFilterTest extends TestCase
 
         $filters = [
             [
-                'field' => 'createdAt',
-                'where' => 'or',
-                'type' => 'gte',
-                'value' => '2013-12-18 13:17:17',
+                'field'  => 'createdAt',
+                'where'  => 'or',
+                'type'   => 'gte',
+                'value'  => '2013-12-18 13:17:17',
                 'format' => 'Y-m-d H:i:s',
             ],
             [
-                'field' => 'createdAt',
-                'where' => 'or',
-                'type' => 'gte',
-                'value' => '2012-12-18 13:17:17',
+                'field'  => 'createdAt',
+                'where'  => 'or',
+                'type'   => 'gte',
+                'value'  => '2012-12-18 13:17:17',
                 'format' => 'Y-m-d H:i:s',
             ],
         ];
@@ -369,7 +359,7 @@ class ODMFilterTest extends TestCase
         $filters = [
             [
                 'field' => 'createdAt',
-                'type' => 'isnull',
+                'type'  => 'isnull',
             ],
         ];
 
@@ -379,7 +369,7 @@ class ODMFilterTest extends TestCase
             [
                 'field' => 'createdAt',
                 'where' => 'and',
-                'type' => 'isnull',
+                'type'  => 'isnull',
             ],
         ];
 
@@ -388,7 +378,7 @@ class ODMFilterTest extends TestCase
         $filters = [
             [
                 'field' => 'description',
-                'type' => 'isnull',
+                'type'  => 'isnull',
             ],
         ];
 
@@ -398,12 +388,12 @@ class ODMFilterTest extends TestCase
             [
                 'field' => 'description',
                 'where' => 'and',
-                'type' => 'isnull',
+                'type'  => 'isnull',
             ],
             [
                 'field' => 'createdAt',
                 'where' => 'and',
-                'type' => 'isnull',
+                'type'  => 'isnull',
             ],
         ];
 
@@ -413,12 +403,12 @@ class ODMFilterTest extends TestCase
             [
                 'field' => 'createdAt',
                 'where' => 'or',
-                'type' => 'isnull',
+                'type'  => 'isnull',
             ],
             [
                 'field' => 'name',
                 'where' => 'or',
-                'type' => 'eq',
+                'type'  => 'eq',
                 'value' => 'MetaOne',
             ],
         ];
@@ -428,7 +418,7 @@ class ODMFilterTest extends TestCase
         $filters = [
             [
                 'field' => 'nonExistingField',
-                'type' => 'isnull',
+                'type'  => 'isnull',
             ],
         ];
 
@@ -440,7 +430,7 @@ class ODMFilterTest extends TestCase
         $filters = [
             [
                 'field' => 'createdAt',
-                'type' => 'isnotnull',
+                'type'  => 'isnotnull',
             ],
         ];
 
@@ -450,7 +440,7 @@ class ODMFilterTest extends TestCase
             [
                 'field' => 'createdAt',
                 'where' => 'and',
-                'type' => 'isnotnull',
+                'type'  => 'isnotnull',
             ],
         ];
 
@@ -459,7 +449,7 @@ class ODMFilterTest extends TestCase
         $filters = [
             [
                 'field' => 'description',
-                'type' => 'isnotnull',
+                'type'  => 'isnotnull',
             ],
         ];
 
@@ -469,12 +459,12 @@ class ODMFilterTest extends TestCase
             [
                 'field' => 'description',
                 'where' => 'and',
-                'type' => 'isnotnull',
+                'type'  => 'isnotnull',
             ],
             [
                 'field' => 'createdAt',
                 'where' => 'and',
-                'type' => 'isnotnull',
+                'type'  => 'isnotnull',
             ],
         ];
 
@@ -484,12 +474,12 @@ class ODMFilterTest extends TestCase
             [
                 'field' => 'createdAt',
                 'where' => 'or',
-                'type' => 'isnotnull',
+                'type'  => 'isnotnull',
             ],
             [
                 'field' => 'name',
                 'where' => 'or',
-                'type' => 'eq',
+                'type'  => 'eq',
                 'value' => 'MetaFive',
             ],
         ];
@@ -499,7 +489,7 @@ class ODMFilterTest extends TestCase
         $filters = [
             [
                 'field' => 'nonExistingField',
-                'type' => 'isnotnull',
+                'type'  => 'isnotnull',
             ],
         ];
 
@@ -512,8 +502,8 @@ class ODMFilterTest extends TestCase
 
         $filters = [
             [
-                'field' => 'name',
-                'type' => 'in',
+                'field'  => 'name',
+                'type'   => 'in',
                 'values' => [
                     'MetaOne',
                     'MetaTwo',
@@ -523,29 +513,27 @@ class ODMFilterTest extends TestCase
 
         $this->assertEquals(2, $this->countResult($filters));
 
-
         $filters = [
             [
-                'field' => 'name',
-                'type' => 'in',
+                'field'  => 'name',
+                'type'   => 'in',
                 'values' => [
                     'MetaOne',
                 ],
-                'where' => 'and',
+                'where'  => 'and',
             ],
         ];
 
         $this->assertEquals(1, $this->countResult($filters));
 
-
         $filters = [
             [
-                'field' => 'name',
-                'type' => 'in',
+                'field'  => 'name',
+                'type'   => 'in',
                 'values' => [
                     'MetaOne',
                 ],
-                'where' => 'or',
+                'where'  => 'or',
             ],
         ];
 
@@ -557,8 +545,8 @@ class ODMFilterTest extends TestCase
     {
         $filters = [
             [
-                'field' => 'name',
-                'type' => 'notin',
+                'field'  => 'name',
+                'type'   => 'notin',
                 'values' => [
                     'MetaOne',
                     'MetaTwo',
@@ -568,13 +556,12 @@ class ODMFilterTest extends TestCase
 
         $this->assertEquals(3, $this->countResult($filters));
 
-
         // Test date field
         $filters = [
             [
-                'field' => 'name',
-                'where' => 'and',
-                'type' => 'notin',
+                'field'  => 'name',
+                'where'  => 'and',
+                'type'   => 'notin',
                 'values' => [
                     'MetaOne',
                 ],
@@ -583,12 +570,11 @@ class ODMFilterTest extends TestCase
 
         $this->assertEquals(4, $this->countResult($filters));
 
-
         $filters = [
             [
-                'field' => 'name',
-                'where' => 'or',
-                'type' => 'notin',
+                'field'  => 'name',
+                'where'  => 'or',
+                'type'   => 'notin',
                 'values' => [
                     'MetaTwo',
                 ],
@@ -603,38 +589,36 @@ class ODMFilterTest extends TestCase
     {
         $filters = [
             [
-                'field' => 'createdAt',
-                'where' => 'and',
-                'type' => 'between',
-                'from' => '2012-12-15',
-                'to' => '2013-01-01',
+                'field'  => 'createdAt',
+                'where'  => 'and',
+                'type'   => 'between',
+                'from'   => '2012-12-15',
+                'to'     => '2013-01-01',
                 'format' => 'Y-m-d',
             ],
         ];
 
         $this->assertEquals(1, $this->countResult($filters));
 
-
         $filters = [
             [
-                'field' => 'createdAt',
-                'where' => 'or',
-                'type' => 'between',
-                'from' => '2010-12-15',
-                'to' => '2013-01-01',
+                'field'  => 'createdAt',
+                'where'  => 'or',
+                'type'   => 'between',
+                'from'   => '2010-12-15',
+                'to'     => '2013-01-01',
                 'format' => 'Y-m-d',
             ],
         ];
 
         $this->assertEquals(2, $this->countResult($filters));
 
-
         $filters = [
             [
-                'field' => 'createdAt',
-                'type' => 'between',
-                'from' => '2010-12-15',
-                'to' => '2013-01-01',
+                'field'  => 'createdAt',
+                'type'   => 'between',
+                'from'   => '2010-12-15',
+                'to'     => '2013-01-01',
                 'format' => 'Y-m-d',
             ],
         ];
@@ -647,48 +631,45 @@ class ODMFilterTest extends TestCase
         $filters = [
             [
                 'field' => 'name',
-                'type' => 'like',
+                'type'  => 'like',
                 'value' => 'Meta%',
             ],
         ];
 
         $this->assertEquals(5, $this->countResult($filters));
 
-
         $filters = [
             [
                 'field' => 'name',
-                'type' => 'like',
+                'type'  => 'like',
                 'value' => '%Two',
             ],
         ];
 
         $this->assertEquals(1, $this->countResult($filters));
 
-
         $filters = [
             [
                 'field' => 'name',
                 'where' => 'and',
-                'type' => 'like',
+                'type'  => 'like',
                 'value' => '%eta%',
             ],
         ];
 
         $this->assertEquals(5, $this->countResult($filters));
 
-
         $filters = [
             [
                 'field' => 'name',
                 'where' => 'or',
-                'type' => 'like',
+                'type'  => 'like',
                 'value' => 'MetaT%',
             ],
             [
                 'field' => 'name',
                 'where' => 'or',
-                'type' => 'like',
+                'type'  => 'like',
                 'value' => 'MetaF%',
             ],
         ];
@@ -701,31 +682,29 @@ class ODMFilterTest extends TestCase
         $filters = [
             [
                 'field' => 'name',
-                'type' => 'regex',
+                'type'  => 'regex',
                 'value' => '/.*T.*$/',
             ],
         ];
 
         $this->assertEquals(2, $this->countResult($filters));
-
 
         $filters = [
             [
                 'field' => 'name',
                 'where' => 'or',
-                'type' => 'regex',
+                'type'  => 'regex',
                 'value' => '/.*T.*$/',
             ],
         ];
 
         $this->assertEquals(2, $this->countResult($filters));
 
-
         $filters = [
             [
                 'field' => 'name',
                 'where' => 'and',
-                'type' => 'regex',
+                'type'  => 'regex',
                 'value' => '/.*T.*$/',
             ],
         ];

@@ -12,12 +12,14 @@ use DateTime;
 use DateTimeImmutable;
 use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\TypeCastInterface;
 
+use function settype;
+
 class TypeCaster implements TypeCastInterface
 {
     /**
      * {@inheritDoc}
      */
-    public function typeCastField($metadata, string $field, $value, string $format = null, bool $doNotTypecastDatetime = false)
+    public function typeCastField($metadata, string $field, $value, ?string $format = null, bool $doNotTypecastDatetime = false)
     {
         if (! isset($metadata->fieldMappings[$field])) {
             return $value;

@@ -21,7 +21,7 @@ class Module implements DependencyIndicatorInterface
 
     public function init(ModuleManager $moduleManager)
     {
-        $serviceManager  = $moduleManager->getEvent()->getParam('ServiceManager');
+        $serviceManager = $moduleManager->getEvent()->getParam('ServiceManager');
         /** @var ServiceListener $serviceListener */
         $serviceListener = $serviceManager->get('ServiceListener');
 

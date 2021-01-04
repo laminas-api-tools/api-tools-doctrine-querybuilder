@@ -18,15 +18,12 @@ use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class DefaultOdm extends AbstractQueryProvider implements QueryProviderInterface
 {
-    /**
-     * @var ServiceLocatorInterface
-     */
+    /** @var ServiceLocatorInterface */
     protected $serviceLocator;
 
     /**
      * Set service locator
      *
-     * @param ServiceLocatorInterface $serviceLocator
      * @return self
      */
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
@@ -83,9 +80,7 @@ class DefaultOdm extends AbstractQueryProvider implements QueryProviderInterface
      */
     public function getPaginatedQuery($queryBuilder)
     {
-        $adapter = new DoctrineOdmAdapter($queryBuilder);
-
-        return $adapter;
+        return new DoctrineOdmAdapter($queryBuilder);
     }
 
     /**
@@ -96,9 +91,7 @@ class DefaultOdm extends AbstractQueryProvider implements QueryProviderInterface
     {
         $queryBuilder = $this->getObjectManager()->createQueryBuilder();
         $queryBuilder->find($entityClass);
-        $count = $queryBuilder->getQuery()->execute()->count();
-
-        return $count;
+        return $queryBuilder->getQuery()->execute()->count();
     }
 
     /**

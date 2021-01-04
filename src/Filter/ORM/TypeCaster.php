@@ -9,14 +9,17 @@
 namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM;
 
 use DateTime;
+use DateTimeImmutable;
 use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\TypeCastInterface;
+
+use function settype;
 
 class TypeCaster implements TypeCastInterface
 {
     /**
      * {@inheritDoc}
      */
-    public function typeCastField($metadata, string $field, $value, string $format = null, bool $doNotTypecastDatetime = false)
+    public function typeCastField($metadata, string $field, $value, ?string $format = null, bool $doNotTypecastDatetime = false)
     {
         if (! isset($metadata->fieldMappings[$field])) {
             return $value;
@@ -28,7 +31,7 @@ class TypeCaster implements TypeCastInterface
                 break;
             case 'integer':
             case 'smallint':
-                #case 'bigint':  // Don't try to manipulate bigints?
+                // case 'bigint':  // Don't try to manipulate bigints?
                 settype($value, 'integer');
                 break;
             case 'boolean':
@@ -50,12 +53,12 @@ class TypeCaster implements TypeCastInterface
                 break;
             case 'date_immutable':
                 // For dates set time to midnight
-                if ($value && !$doNotTypecastDatetime) {
-                    if (!$format) {
+                if ($value && ! $doNotTypecastDatetime) {
+                    if (! $format) {
                         $format = 'Y-m-d';
                     }
-                    $value = \DateTimeImmutable::createFromFormat($format, $value);
-                    $value = \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $value->format('Y-m-d') . ' 00:00:00');
+                    $value = DateTimeImmutable::createFromFormat($format, $value);
+                    $value = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $value->format('Y-m-d') . ' 00:00:00');
                 }
                 break;
             case 'time':
@@ -67,11 +70,11 @@ class TypeCaster implements TypeCastInterface
                 }
                 break;
             case 'time_immutable':
-                if ($value && !$doNotTypecastDatetime) {
-                    if (!$format) {
+                if ($value && ! $doNotTypecastDatetime) {
+                    if (! $format) {
                         $format = 'H:i:s';
                     }
-                    $value = \DateTimeImmutable::createFromFormat($format, $value);
+                    $value = DateTimeImmutable::createFromFormat($format, $value);
                 }
                 break;
             case 'datetime':
@@ -83,11 +86,11 @@ class TypeCaster implements TypeCastInterface
                 }
                 break;
             case 'datetime_immutable':
-                if ($value && !$doNotTypecastDatetime) {
-                    if (!$format) {
+                if ($value && ! $doNotTypecastDatetime) {
+                    if (! $format) {
                         $format = 'Y-m-d H:i:s';
                     }
-                    $value = \DateTimeImmutable::createFromFormat($format, $value);
+                    $value = DateTimeImmutable::createFromFormat($format, $value);
                 }
                 break;
             default:

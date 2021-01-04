@@ -22,7 +22,7 @@ class Equals extends AbstractFilter
             }
         }
 
-        $format = isset($option['format']) ? $option['format'] : null;
+        $format = $option['format'] ?? null;
 
         $value = $this->typeCastField($metadata, $option['field'], $option['value'], $format);
 

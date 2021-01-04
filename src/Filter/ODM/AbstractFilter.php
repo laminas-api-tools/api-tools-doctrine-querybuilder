@@ -15,9 +15,7 @@ abstract class AbstractFilter implements FilterInterface
 {
     abstract public function filter($queryBuilder, $metadata, $option);
 
-    /**
-     * @var TypeCastInterface
-     */
+    /** @var TypeCastInterface */
     protected $typeCaster;
 
     public function __construct(array $params = [])
@@ -26,7 +24,6 @@ abstract class AbstractFilter implements FilterInterface
     }
 
     /**
-     * @param TypeCastInterface $typeCaster
      * @return $this
      */
     public function setTypeCaster(TypeCastInterface $typeCaster)
@@ -45,13 +42,10 @@ abstract class AbstractFilter implements FilterInterface
 
     /**
      * @param object $metadata
-     * @param string $field
      * @param string|int|float $value
-     * @param string|null $format
-     * @param bool $doNotTypecastDatetime
      * @return mixed
      */
-    protected function typeCastField($metadata, string $field, $value, string $format = null, bool $doNotTypecastDatetime = false)
+    protected function typeCastField($metadata, string $field, $value, ?string $format = null, bool $doNotTypecastDatetime = false)
     {
         return $this->getTypeCaster()->typeCastField($metadata, $field, $value, $format, $doNotTypecastDatetime);
     }

@@ -17,14 +17,10 @@ abstract class AbstractFilter implements FilterInterface
 {
     abstract public function filter($queryBuilder, $metadata, $option);
 
-    /**
-     * @var ORMFilterManager
-     */
+    /** @var ORMFilterManager */
     protected $filterManager;
 
-    /**
-     * @var TypeCastInterface
-     */
+    /** @var TypeCastInterface */
     protected $typeCaster;
 
     public function __construct(array $params = [])
@@ -34,7 +30,6 @@ abstract class AbstractFilter implements FilterInterface
     }
 
     /**
-     * @param ORMFilterManager $filterManager
      * @return $this
      */
     public function setFilterManager(ORMFilterManager $filterManager)
@@ -52,7 +47,6 @@ abstract class AbstractFilter implements FilterInterface
     }
 
     /**
-     * @param TypeCastInterface $typeCaster
      * @return $this
      */
     public function setTypeCaster(TypeCastInterface $typeCaster)
@@ -96,6 +90,6 @@ abstract class AbstractFilter implements FilterInterface
             return $params[0];
         }
 
-        throw new InvalidArgumentException('Missing or invalid filter manager provided to ' . __CLASS__);
+        throw new InvalidArgumentException('Missing or invalid filter manager provided to ' . self::class);
     }
 }

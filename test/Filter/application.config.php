@@ -7,7 +7,7 @@
  */
 
 return [
-    'modules' => [
+    'modules'                 => [
         'DoctrineModule',
         'DoctrineORMModule',
         'DoctrineMongoODMModule',
@@ -19,10 +19,10 @@ return [
         'config_glob_paths' => [
             __DIR__ . '/local.php',
         ],
-        'module_paths' => [
+        'module_paths'      => [
             __DIR__ . '/../vendor',
-            'DbMongo' => __DIR__ . '/../assets/module/DbMongo',
-            'Db' => __DIR__ . '/../assets/module/Db',
+            'DbMongo'                                => __DIR__ . '/../assets/module/DbMongo',
+            'Db'                                     => __DIR__ . '/../assets/module/Db',
             'Laminas\ApiTools\Doctrine\QueryBuilder' => __DIR__ . '/../../',
         ],
     ],

@@ -6,14 +6,16 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
+use Doctrine\DBAL\Driver\PDOSqlite\Driver;
+
 return [
     'doctrine' => [
         'connection' => [
             'orm_default' => [
                 'configuration' => 'orm_default',
                 'eventmanager'  => 'orm_default',
-                'driverClass'   => \Doctrine\DBAL\Driver\PDOSqlite\Driver::class,
-                'params' => [
+                'driverClass'   => Driver::class,
+                'params'        => [
                     'memory' => true,
                 ],
             ],

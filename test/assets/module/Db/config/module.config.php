@@ -8,7 +8,7 @@ use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
     'api-tools-doctrine-querybuilder-filter-orm' => [
-        'aliases' => [
+        'aliases'   => [
             'eq'        => Filter\ORM\Equals::class,
             'neq'       => Filter\ORM\NotEquals::class,
             'lt'        => Filter\ORM\LessThan::class,
@@ -44,7 +44,7 @@ return [
         ],
     ],
     'api-tools-doctrine-querybuilder-filter-odm' => [
-        'aliases' => [
+        'aliases'   => [
             'eq'        => Filter\ODM\Equals::class,
             'neq'       => Filter\ODM\NotEquals::class,
             'lt'        => Filter\ODM\LessThan::class,
@@ -75,9 +75,9 @@ return [
             Filter\ODM\Regex::class               => InvokableFactory::class,
         ],
     ],
-    'doctrine' => [
+    'doctrine'                                   => [
         'driver' => [
-           'db_driver' => [
+            'db_driver'   => [
                 'class' => XmlDriver::class,
                 'paths' => [__DIR__ . '/xml'],
             ],
@@ -88,27 +88,27 @@ return [
             ],
         ],
     ],
-    'view_manager' => [
+    'view_manager'                               => [
         'display_not_found_reason' => true,
-        'display_exceptions' => true,
-        'json_exceptions' => [
-            'display' => true,
-            'ajax_only' => true,
+        'display_exceptions'       => true,
+        'json_exceptions'          => [
+            'display'    => true,
+            'ajax_only'  => true,
             'show_trace' => true,
         ],
-        'doctype'            => 'HTML5',
-        'not_found_template' => 'error/404',
-        'exception_template' => 'error/index',
-        'template_map' => [
+        'doctype'                  => 'HTML5',
+        'not_found_template'       => 'error/404',
+        'exception_template'       => 'error/index',
+        'template_map'             => [
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ],
-        'template_path_stack' => [
+        'template_path_stack'      => [
             __DIR__ . '/../view',
         ],
-        'strategies' => [
+        'strategies'               => [
             'ViewJsonStrategy',
         ],
     ],

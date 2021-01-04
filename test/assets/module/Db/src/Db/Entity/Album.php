@@ -2,6 +2,8 @@
 
 namespace Db\Entity;
 
+use DateTime;
+
 class Album
 {
     protected $id;
@@ -34,7 +36,7 @@ class Album
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTime $value)
+    public function setCreatedAt(DateTime $value)
     {
         $this->createdAt = $value;
 

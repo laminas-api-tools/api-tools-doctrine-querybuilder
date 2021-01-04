@@ -2,6 +2,7 @@
 
 namespace Db\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Exception;
 
@@ -42,7 +43,7 @@ class Artist
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTime $value)
+    public function setCreatedAt(DateTime $value)
     {
         $this->createdAt = $value;
 

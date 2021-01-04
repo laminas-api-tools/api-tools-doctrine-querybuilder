@@ -7,7 +7,7 @@ use Doctrine\ODM\MongoDB\Mapping\Driver\YamlDriver;
 return [
     'doctrine' => [
         'driver' => [
-            'odm_driver' => [
+            'odm_driver'  => [
                 'class' => YamlDriver::class,
                 'paths' => [__DIR__ . '/yml'],
             ],

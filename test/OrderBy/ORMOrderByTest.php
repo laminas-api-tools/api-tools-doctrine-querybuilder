@@ -13,13 +13,15 @@ use Db\Entity;
 use Doctrine\ORM\Tools\SchemaTool;
 use LaminasTest\ApiTools\Doctrine\QueryBuilder\TestCase;
 
+use function reset;
+
 class ORMOrderByTest extends TestCase
 {
     private function fetchResult($orderBy, $entity = 'Db\Entity\Artist')
     {
         $serviceManager = $this->getApplication()->getServiceManager();
         $orderByManager = $serviceManager->get('LaminasDoctrineQueryBuilderOrderByManagerOrm');
-        $objectManager = $serviceManager->get('doctrine.entitymanager.orm_default');
+        $objectManager  = $serviceManager->get('doctrine.entitymanager.orm_default');
 
         $queryBuilder = $objectManager->createQueryBuilder();
         $queryBuilder->select('row')
@@ -29,8 +31,7 @@ class ORMOrderByTest extends TestCase
 
         $orderByManager->orderBy($queryBuilder, $metadata[0], $orderBy);
 
-        $result = $queryBuilder->getQuery()->getResult();
-        return $result;
+        return $queryBuilder->getQuery()->getResult();
     }
 
     public function setUp(): void
@@ -41,32 +42,32 @@ class ORMOrderByTest extends TestCase
         parent::setUp();
 
         $serviceManager = $this->getApplication()->getServiceManager();
-        $objectManager = $serviceManager->get('doctrine.entitymanager.orm_default');
+        $objectManager  = $serviceManager->get('doctrine.entitymanager.orm_default');
 
         $tool = new SchemaTool($objectManager);
-        $res = $tool->createSchema($objectManager->getMetadataFactory()->getAllMetadata());
+        $res  = $tool->createSchema($objectManager->getMetadataFactory()->getAllMetadata());
 
-        $artist1 = new Entity\Artist;
+        $artist1 = new Entity\Artist();
         $artist1->setName('ABBA');
         $artist1->setCreatedAt(new DateTime('2011-12-18 13:17:17'));
         $objectManager->persist($artist1);
 
-        $artist2 = new Entity\Artist;
+        $artist2 = new Entity\Artist();
         $artist2->setName('Band, The');
         $artist2->setCreatedAt(new DateTime('2014-12-18 13:17:17'));
         $objectManager->persist($artist2);
 
-        $artist3 = new Entity\Artist;
+        $artist3 = new Entity\Artist();
         $artist3->setName('CubanStack');
         $artist3->setCreatedAt(new DateTime('2012-12-18 13:17:17'));
         $objectManager->persist($artist3);
 
-        $artist4 = new Entity\Artist;
+        $artist4 = new Entity\Artist();
         $artist4->setName('Drunk in July');
         $artist4->setCreatedAt(new DateTime('2013-12-18 13:17:17'));
         $objectManager->persist($artist4);
 
-        $artist5 = new Entity\Artist;
+        $artist5 = new Entity\Artist();
         $artist5->setName('Ekoostic Hookah');
         $objectManager->persist($artist5);
 
@@ -77,8 +78,8 @@ class ORMOrderByTest extends TestCase
     {
         $orderBy = [
             [
-                'type' => 'field',
-                'field' => 'name',
+                'type'      => 'field',
+                'field'     => 'name',
                 'direction' => 'desc',
             ],
         ];
@@ -88,11 +89,10 @@ class ORMOrderByTest extends TestCase
 
         $this->assertEquals('Ekoostic Hookah', $artist->getName());
 
-
         $orderBy = [
             [
-                'type' => 'field',
-                'field' => 'name',
+                'type'      => 'field',
+                'field'     => 'name',
                 'direction' => 'asc',
             ],
         ];

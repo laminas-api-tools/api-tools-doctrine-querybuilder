@@ -16,7 +16,6 @@ class DefaultOdmFactory
     /**
      * Create and return DefaultOdm instance.
      *
-     * @param ContainerInterface $container
      * @return DefaultOdm
      */
     public function __invoke(ContainerInterface $container)

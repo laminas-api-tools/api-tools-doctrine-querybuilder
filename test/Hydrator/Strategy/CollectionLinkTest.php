@@ -8,7 +8,7 @@
 
 namespace LaminasTest\ApiTools\Doctrine\QueryBuilder\Hydrator\Strategy;
 
-use Laminas\ApiTools\Doctrine\QueryBuilder\Hydrator\Strategy\CollectionLink;
+use laminas\apitools\doctrine\querybuilder\hydrator\strategy\collectionlink;
 use Laminas\ServiceManager\ServiceManager;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
@@ -20,9 +20,7 @@ class CollectionLinkTest extends TestCase
 
     private $mockValue;
 
-    /**
-     * @var CollectionLink
-     */
+    /** @var collectionlink */
     private $hydrator;
 
     public function setUp(): void
@@ -34,7 +32,7 @@ class CollectionLinkTest extends TestCase
         $this->mockValue->expects($this->any())
             ->method('getTypeClass')
             ->will($this->returnCallback(function () {
-                $mockTypeClass = new stdClass();
+                $mockTypeClass       = new stdClass();
                 $mockTypeClass->name = 'MockValue';
 
                 return $mockTypeClass;
@@ -54,12 +52,11 @@ class CollectionLinkTest extends TestCase
                     return $mockOwner;
                 }));
 
-
         $config = [
             'api-tools-hal' => [
                 'metadata_map' => [
                     $this->mockValue->getTypeClass()->name => [
-                        'route_name' => 'my-route',
+                        'route_name'                              => 'my-route',
                         'api-tools-doctrine-querybuilder-options' => [
                             'filter_key' => 'my-filter-key',
                         ],
@@ -71,7 +68,7 @@ class CollectionLinkTest extends TestCase
         $mock = $this->prophesize(ServiceManager::class);
         $mock->get('config')->willReturn($config);
 
-        $this->hydrator = new CollectionLink();
+        $this->hydrator = new collectionlink();
         $this->hydrator->setServiceManager($mock->reveal());
     }
 
@@ -81,28 +78,28 @@ class CollectionLinkTest extends TestCase
             // OneToMany relation
             [
                 [
-                    'fieldName' => 'posts',
-                    'mappedBy' => 'blog',
-                    'targetEntity' => 'Application\\Model\\Post',
-                    'cascade' => [],
-                    'orphanRemoval' => false,
-                    'fetch' => 2,
-                    'type' => 4,
-                    'inversedBy' => null,
-                    'isOwningSide' => false,
-                    'sourceEntity' => 'Application\\Model\\Blog',
-                    'isCascadeRemove' => false,
+                    'fieldName'        => 'posts',
+                    'mappedBy'         => 'blog',
+                    'targetEntity'     => 'Application\\Model\\Post',
+                    'cascade'          => [],
+                    'orphanRemoval'    => false,
+                    'fetch'            => 2,
+                    'type'             => 4,
+                    'inversedBy'       => null,
+                    'isOwningSide'     => false,
+                    'sourceEntity'     => 'Application\\Model\\Blog',
+                    'isCascadeRemove'  => false,
                     'isCascadePersist' => false,
                     'isCascadeRefresh' => false,
-                    'isCascadeMerge' => false,
-                    'isCascadeDetach' => false,
+                    'isCascadeMerge'   => false,
+                    'isCascadeDetach'  => false,
                 ],
                 [
                     'query' => [
                         'my-filter-key' => [
                             [
                                 'field' => 'blog',
-                                'type' => 'eq',
+                                'type'  => 'eq',
                                 'value' => 123,
                             ],
                         ],
@@ -113,43 +110,43 @@ class CollectionLinkTest extends TestCase
             [
                 [
                     'fieldName' => 'posts',
-                    'joinTable' =>
-                    [
-                        'name' => 'tag_post',
-                        'joinColumns' => [
+                    'joinTable'
+                    => [
+                        'name'               => 'tag_post',
+                        'joinColumns'        => [
                             [
-                                'name' => 'tag_id',
+                                'name'                 => 'tag_id',
                                 'referencedColumnName' => 'id',
-                                'onDelete' => 'CASCADE',
+                                'onDelete'             => 'CASCADE',
                             ],
                         ],
                         'inverseJoinColumns' => [
                             [
-                                'name' => 'post_id',
+                                'name'                 => 'post_id',
                                 'referencedColumnName' => 'id',
-                                'onDelete' => 'CASCADE',
+                                'onDelete'             => 'CASCADE',
                             ],
                         ],
                     ],
-                    'targetEntity' => 'Application\\Model\\Post',
-                    'mappedBy' => null,
-                    'inversedBy' => 'tags',
-                    'cascade' => [],
-                    'orphanRemoval' => false,
-                    'fetch' => 2,
-                    'type' => 8,
-                    'isOwningSide' => true,
-                    'sourceEntity' => 'Application\\Model\\Tag',
-                    'isCascadeRemove' => false,
-                    'isCascadePersist' => false,
-                    'isCascadeRefresh' => false,
-                    'isCascadeMerge' => false,
-                    'isCascadeDetach' => false,
-                    'joinTableColumns' => [
+                    'targetEntity'               => 'Application\\Model\\Post',
+                    'mappedBy'                   => null,
+                    'inversedBy'                 => 'tags',
+                    'cascade'                    => [],
+                    'orphanRemoval'              => false,
+                    'fetch'                      => 2,
+                    'type'                       => 8,
+                    'isOwningSide'               => true,
+                    'sourceEntity'               => 'Application\\Model\\Tag',
+                    'isCascadeRemove'            => false,
+                    'isCascadePersist'           => false,
+                    'isCascadeRefresh'           => false,
+                    'isCascadeMerge'             => false,
+                    'isCascadeDetach'            => false,
+                    'joinTableColumns'           => [
                         'tag_id',
                         'post_id',
                     ],
-                    'isOnDeleteCascade' => true,
+                    'isOnDeleteCascade'          => true,
                     'relationToSourceKeyColumns' => [
                         'tag_id' => 'id',
                     ],
@@ -162,7 +159,7 @@ class CollectionLinkTest extends TestCase
                         'my-filter-key' => [
                             [
                                 'field' => 'tags',
-                                'type' => 'ismemberof',
+                                'type'  => 'ismemberof',
                                 'value' => 123,
                             ],
                         ],
@@ -172,29 +169,29 @@ class CollectionLinkTest extends TestCase
             // ManyToMany inversed relation
             [
                 [
-                    'fieldName' => 'tags',
-                    'joinTable' => [],
-                    'targetEntity' => 'Application\\Model\\Tag',
-                    'mappedBy' => 'posts',
-                    'inversedBy' => null,
-                    'cascade' => [],
-                    'orphanRemoval' => false,
-                    'fetch' => 2,
-                    'type' => 8,
-                    'isOwningSide' => false,
-                    'sourceEntity' => 'Application\\Model\\Post',
-                    'isCascadeRemove' => false,
+                    'fieldName'        => 'tags',
+                    'joinTable'        => [],
+                    'targetEntity'     => 'Application\\Model\\Tag',
+                    'mappedBy'         => 'posts',
+                    'inversedBy'       => null,
+                    'cascade'          => [],
+                    'orphanRemoval'    => false,
+                    'fetch'            => 2,
+                    'type'             => 8,
+                    'isOwningSide'     => false,
+                    'sourceEntity'     => 'Application\\Model\\Post',
+                    'isCascadeRemove'  => false,
                     'isCascadePersist' => false,
                     'isCascadeRefresh' => false,
-                    'isCascadeMerge' => false,
-                    'isCascadeDetach' => false,
+                    'isCascadeMerge'   => false,
+                    'isCascadeDetach'  => false,
                 ],
                 [
                     'query' => [
                         'my-filter-key' => [
                             [
                                 'field' => 'posts',
-                                'type' => 'ismemberof',
+                                'type'  => 'ismemberof',
                                 'value' => 123,
                             ],
                         ],

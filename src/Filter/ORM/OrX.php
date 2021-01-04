@@ -10,6 +10,9 @@ namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
+use function array_merge_recursive;
+use function strtolower;
+
 class OrX extends AbstractFilter
 {
     public function filter($queryBuilder, $metadata, $option)

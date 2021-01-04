@@ -14,11 +14,15 @@ use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\Exception;
 use RuntimeException;
 
+use function get_class;
+use function gettype;
+use function is_object;
+use function sprintf;
+use function strtolower;
+
 class ODMOrderByManager extends AbstractPluginManager
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $instanceOf = OrderByInterface::class;
 
     public function orderBy(QueryBuilder $queryBuilder, $metadata, $orderBy)
@@ -47,7 +51,7 @@ class ODMOrderByManager extends AbstractPluginManager
         if (! $instance instanceof $this->instanceOf) {
             throw new Exception\InvalidServiceException(sprintf(
                 '%s can only create instances of %s; %s is invalid',
-                get_class($this),
+                static::class,
                 $this->instanceOf,
                 is_object($instance) ? get_class($instance) : gettype($instance)
             ));

@@ -9,18 +9,23 @@
 namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\Service;
 
 use Doctrine\ORM\QueryBuilder;
-use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\TypeCastInterface;
-use RuntimeException;
-use Laminas\ServiceManager\AbstractPluginManager;
-use Laminas\ServiceManager\Exception;
 use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\FilterInterface;
 use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM\TypeCaster;
+use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\TypeCastInterface;
+use Laminas\ServiceManager\AbstractPluginManager;
+use Laminas\ServiceManager\Exception;
+use RuntimeException;
+
+use function get_class;
+use function gettype;
+use function is_object;
+use function property_exists;
+use function sprintf;
+use function strtolower;
 
 class ORMFilterManager extends AbstractPluginManager
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $instanceOf = FilterInterface::class;
 
     public function filter(QueryBuilder $queryBuilder, $metadata, $filters)
@@ -33,9 +38,9 @@ class ORMFilterManager extends AbstractPluginManager
             $typeCaster = $this->resolveTypeCaster();
 
             $filter = $this->get(strtolower($option['type']), [
-                0 => $this,
+                0                => $this,
                 'filter_manager' => $this,
-                'type_caster' => $typeCaster,
+                'type_caster'    => $typeCaster,
             ]);
             $filter->filter($queryBuilder, $metadata, $option);
         }
@@ -55,7 +60,7 @@ class ORMFilterManager extends AbstractPluginManager
         if (! $instance instanceof $this->instanceOf) {
             throw new Exception\InvalidServiceException(sprintf(
                 '%s can only create instances of %s; %s is invalid',
-                get_class($this),
+                static::class,
                 $this->instanceOf,
                 is_object($instance) ? get_class($instance) : gettype($instance)
             ));
@@ -85,7 +90,7 @@ class ORMFilterManager extends AbstractPluginManager
      */
     protected function resolveTypeCaster()
     {
-        if (\property_exists($this, 'creationContext')) {
+        if (property_exists($this, 'creationContext')) {
             $serviceLocator = $this->creationContext;
         } else {
             $serviceLocator = $this->getServiceLocator();

@@ -23,7 +23,7 @@ class DefaultOdmFactoryTest extends TestCase
     {
         $serviceLocator = $this->prophesize(ServiceLocatorInterface::class)->reveal();
 
-        $factory = new DefaultOdmFactory();
+        $factory  = new DefaultOdmFactory();
         $provider = $factory($serviceLocator);
 
         $this->assertInstanceOf(DefaultOdm::class, $provider);
@@ -31,11 +31,11 @@ class DefaultOdmFactoryTest extends TestCase
 
     public function testInvokableFactoryReturnsDefaultOdmQueryProviderWhenCreatedViaAbstractPluginManager(): void
     {
-        $serviceLocator = $this->prophesize(ServiceLocatorInterface::class)->reveal();
+        $serviceLocator        = $this->prophesize(ServiceLocatorInterface::class)->reveal();
         $abstractPluginManager = $this->prophesize(AbstractPluginManager::class);
         $abstractPluginManager->getServiceLocator()->willReturn($serviceLocator);
 
-        $factory = new DefaultOdmFactory();
+        $factory  = new DefaultOdmFactory();
         $provider = $factory($abstractPluginManager->reveal());
 
         $this->assertInstanceOf(DefaultOdm::class, $provider);
