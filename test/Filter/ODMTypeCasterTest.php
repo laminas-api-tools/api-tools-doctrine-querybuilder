@@ -18,7 +18,7 @@ class ODMTypeCasterTest extends TestCase
 {
     private $typeCaster;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->typeCaster = new TypeCaster();
     }
