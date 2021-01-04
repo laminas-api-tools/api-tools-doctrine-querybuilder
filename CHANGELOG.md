@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#12](https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/pull/12) adds support for PHP 7.3, 7.4, and 8.0.
 
 ### Changed
 
@@ -18,7 +18,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Nothing.
+- [#12](https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/pull/12) removes support for PHP versions prior to 7.3.
 
 ### Fixed
 
