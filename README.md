@@ -442,3 +442,37 @@ Field:
 ```php
 ['type' => 'field', 'field' => 'fieldName', 'direction' => 'desc']
 ```
+
+Custom MappingTypes
+-------------------
+
+In case you have [custom mapping types](https://www.doctrine-project.org/projects/doctrine-orm/en/latest/cookbook/custom-mapping-types.html) 
+configured you can substitute the TypeCaster with your own implementation.
+
+```php
+namespace My\Custom;
+
+class TypeCaster implements \Laminas\ApiTools\Doctrine\QueryBuilder\Filter\TypeCastInterface
+{
+    public function typeCastField($metadata, $field, $value, $format = null, $doNotTypecastDatetime = false)
+    {
+        // implement your type casting logic
+    }
+}
+```
+
+Make sure the ORM/ODMFilterManager resolves the correct TypeCaster from the `container` f.e. by configuring aliases.
+```php 
+// config/autoload/api-tools-doctrine-querybuilder-global.php
+
+return [
+    'service_manager => [
+        'factories' => [
+            My\Custom\TypeCaster::class => InvokableFactory::class,
+        ],
+        'aliases' => [
+            \Laminas\ApiTools\Doctrine\QueryBuilder\Filter\TypeCastInterface => My\Custom\TypeCaster::class,
+        ],
+    ],
+];
+```
