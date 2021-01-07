@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
+- [#5](https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/pull/5) adds the interface `Laminas\ApiTools\Doctrine\QueryBuilder\Filter\TypeCastInterface` and the default implementations `Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ODM\TypeCaster` and `Laminas\ApiTools\Doctrine\QueryBuilder\ORM\TypeCaster`, extracted from logic originally present in the ORM and ODM `AbstractFilter` implementations. Users can supply their own implementation by aliasing the `Laminas\ApiTools\Doctrine\QueryBuilder\Filter\TypeCastInterface` service to their own implementation. This ability allows users to supply their own type casting rules for their projects.
+
 - [#12](https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/pull/12) adds support for PHP 7.3, 7.4, and 8.0.
 
 ### Changed
