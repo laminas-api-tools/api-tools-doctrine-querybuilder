@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.9.0 - TBD
+## 1.9.0 - 2021-01-07
 
 ### Added
 
@@ -10,21 +10,32 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - [#12](https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/pull/12) adds support for PHP 7.3, 7.4, and 8.0.
 
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
 ### Removed
 
 - [#12](https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/pull/12) removes support for PHP versions prior to 7.3.
 
-### Fixed
 
-- Nothing.
+-----
+
+### Release Notes for [1.9.0](https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/milestone/1)
+
+
+
+### 1.9.0
+
+- Total issues resolved: **2**
+- Total pull requests resolved: **2**
+- Total contributors: **4**
+
+#### Enhancement
+
+ - [12: PHP8 Support](https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/pull/12) thanks to @javabudd
+ - [5: Extract type cast behaviour](https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/pull/5) thanks to @netiul
+ - [1: Extract type cast behaviour](https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/issues/1) thanks to @weierophinney
+
+#### Enhancement,hacktoberfest-accepted
+
+ - [11: PHP 8.0 support](https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/issues/11) thanks to @boesing
 
 ## 1.8.0 - 2019-02-02
 
