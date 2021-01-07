@@ -446,8 +446,11 @@ Field:
 Custom MappingTypes
 -------------------
 
-In case you have [custom mapping types](https://www.doctrine-project.org/projects/doctrine-orm/en/latest/cookbook/custom-mapping-types.html) 
-configured you can substitute the TypeCaster with your own implementation.
+In case you have [custom mapping types](https://www.doctrine-project.org/projects/doctrine-orm/en/latest/cookbook/custom-mapping-types.html)
+configured, you can substitute the supplied `Laminas\ApiTools\Doctrine\QueryBuilder\Filter\TypeCastInterface`
+implementation with your own implementation.
+
+As an example, given a custom type caster implentation as follows:
 
 ```php
 namespace My\Custom;
@@ -461,18 +464,24 @@ class TypeCaster implements \Laminas\ApiTools\Doctrine\QueryBuilder\Filter\TypeC
 }
 ```
 
-Make sure the ORM/ODMFilterManager resolves the correct TypeCaster from the `container` f.e. by configuring aliases.
-```php 
+You will then provide a factory for your implementation, and alias the package `TypeCastInterface` to it:
+
+```php
 // config/autoload/api-tools-doctrine-querybuilder-global.php
+
+use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\TypeCastInterface;
+use Laminas\ServiceManager\Factory\InvokableFactory;
+use My\Custom\TypeCaster;
 
 return [
     'service_manager => [
-        'factories' => [
-            My\Custom\TypeCaster::class => InvokableFactory::class,
-        ],
         'aliases' => [
-            \Laminas\ApiTools\Doctrine\QueryBuilder\Filter\TypeCastInterface => My\Custom\TypeCaster::class,
+            TypeCastInterface::class => TypeCaster::class,
+        ],
+        'factories' => [
+            TypeCaster::class => InvokableFactory::class,
         ],
     ],
 ];
 ```
+
