@@ -6,31 +6,32 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
+use Doctrine\DBAL\Driver\PDOSqlite\Driver;
 use Laminas\ApiTools\Doctrine\QueryBuilder\Filter;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
-    'doctrine' => [
+    'doctrine'                                   => [
         'connection' => [
             'orm_default' => [
                 'configuration' => 'orm_default',
                 'eventmanager'  => 'orm_default',
-                'driverClass'   => 'Doctrine\DBAL\Driver\PDOSqlite\Driver',
-                'params' => [
+                'driverClass'   => Driver::class,
+                'params'        => [
                     'memory' => true,
                 ],
             ],
             'odm_default' => [
-                'server' => 'localhost',
-                'port' => '27017',
-                'user' => '',
+                'server'   => 'localhost',
+                'port'     => '27017',
+                'user'     => '',
                 'password' => '',
-                'dbname' => 'laminas_doctrine_querybuilder_filter_test',
+                'dbname'   => 'laminas_doctrine_querybuilder_filter_test',
             ],
         ],
     ],
     'api-tools-doctrine-querybuilder-filter-orm' => [
-        'aliases' => [
+        'aliases'   => [
             'eq'         => Filter\ORM\Equals::class,
             'neq'        => Filter\ORM\NotEquals::class,
             'lt'         => Filter\ORM\LessThan::class,
@@ -48,7 +49,7 @@ return [
             'orx'        => Filter\ORM\OrX::class,
             'andx'       => Filter\ORM\AndX::class,
             'innerjoin'  => Filter\ORM\InnerJoin::class,
-            'leftjoin'  => Filter\ORM\LeftJoin::class,
+            'leftjoin'   => Filter\ORM\LeftJoin::class,
         ],
         'factories' => [
             Filter\ORM\Equals::class              => InvokableFactory::class,
@@ -72,7 +73,7 @@ return [
         ],
     ],
     'api-tools-doctrine-querybuilder-filter-odm' => [
-        'aliases' => [
+        'aliases'   => [
             'eq'        => Filter\ODM\Equals::class,
             'neq'       => Filter\ODM\NotEquals::class,
             'lt'        => Filter\ODM\LessThan::class,

@@ -10,8 +10,14 @@ namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
+use function array_merge_recursive;
+use function strtolower;
+
 class AndX extends AbstractFilter
 {
+    /**
+     * {@inheritDoc}
+     */
     public function filter($queryBuilder, $metadata, $option)
     {
         if (isset($option['where'])) {

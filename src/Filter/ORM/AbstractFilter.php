@@ -8,84 +8,95 @@
 
 namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM;
 
-use DateTime;
+use Doctrine\ORM\QueryBuilder;
+use InvalidArgumentException;
 use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\FilterInterface;
 use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\Service\ORMFilterManager;
+use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\TypeCastInterface;
 
 abstract class AbstractFilter implements FilterInterface
 {
+    /**
+     * @param QueryBuilder $queryBuilder
+     * @param object $metadata
+     * @param array $option
+     * @return void
+     */
     abstract public function filter($queryBuilder, $metadata, $option);
 
+    /** @var ORMFilterManager */
     protected $filterManager;
 
-    public function __construct($params)
+    /** @var TypeCastInterface */
+    protected $typeCaster;
+
+    public function __construct(array $params = [])
     {
-        $this->setFilterManager($params[0]);
+        $this->setFilterManager($this->extractFilterManagerFromConstructorParams($params));
+        $this->setTypeCaster($params['type_caster'] ?? new TypeCaster());
     }
 
+    /**
+     * @return $this
+     */
     public function setFilterManager(ORMFilterManager $filterManager)
     {
         $this->filterManager = $filterManager;
         return $this;
     }
 
+    /**
+     * @return ORMFilterManager
+     */
     public function getFilterManager()
     {
         return $this->filterManager;
     }
 
+    /**
+     * @return $this
+     */
+    public function setTypeCaster(TypeCastInterface $typeCaster)
+    {
+        $this->typeCaster = $typeCaster;
+        return $this;
+    }
+
+    /**
+     * @return TypeCastInterface
+     */
+    public function getTypeCaster()
+    {
+        return $this->typeCaster;
+    }
+
+    /**
+     * @param object $metadata
+     * @param string $field
+     * @param string|int|float $value
+     * @param string|null $format
+     * @param bool $doNotTypecastDatetime
+     * @return mixed
+     */
     protected function typeCastField($metadata, $field, $value, $format, $doNotTypecastDatetime = false)
     {
-        if (! isset($metadata->fieldMappings[$field])) {
-            return $value;
+        return $this->getTypeCaster()->typeCastField($metadata, $field, $value, $format, $doNotTypecastDatetime);
+    }
+
+    /**
+     * @param array $params
+     * @return ORMFilterManager
+     */
+    private function extractFilterManagerFromConstructorParams(array $params)
+    {
+        if (isset($params['filter_manager']) && $params['filter_manager'] instanceof ORMFilterManager) {
+            return $params['filter_manager'];
         }
 
-        switch ($metadata->fieldMappings[$field]['type']) {
-            case 'string':
-                settype($value, 'string');
-                break;
-            case 'integer':
-            case 'smallint':
-            #case 'bigint':  // Don't try to manipulate bigints?
-                settype($value, 'integer');
-                break;
-            case 'boolean':
-                settype($value, 'boolean');
-                break;
-            case 'decimal':
-            case 'float':
-                settype($value, 'float');
-                break;
-            case 'date':
-                // For dates set time to midnight
-                if ($value && ! $doNotTypecastDatetime) {
-                    if (! $format) {
-                        $format = 'Y-m-d';
-                    }
-                    $value = DateTime::createFromFormat($format, $value);
-                    $value = DateTime::createFromFormat('Y-m-d H:i:s', $value->format('Y-m-d') . ' 00:00:00');
-                }
-                break;
-            case 'time':
-                if ($value && ! $doNotTypecastDatetime) {
-                    if (! $format) {
-                        $format = 'H:i:s';
-                    }
-                    $value = DateTime::createFromFormat($format, $value);
-                }
-                break;
-            case 'datetime':
-                if ($value && ! $doNotTypecastDatetime) {
-                    if (! $format) {
-                        $format = 'Y-m-d H:i:s';
-                    }
-                    $value = DateTime::createFromFormat($format, $value);
-                }
-                break;
-            default:
-                break;
+        if (isset($params[0]) && $params[0] instanceof ORMFilterManager) {
+            return $params[0];
         }
 
-        return $value;
+        throw new InvalidArgumentException('Missing or invalid filter manager provided to ' . self::class);
     }
 }

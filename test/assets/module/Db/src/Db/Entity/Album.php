@@ -1,6 +1,8 @@
-<?php
+<?php // phpcs:disable
 
 namespace Db\Entity;
+
+use DateTime;
 
 class Album
 {
@@ -34,7 +36,7 @@ class Album
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTime $value)
+    public function setCreatedAt(DateTime $value)
     {
         $this->createdAt = $value;
 

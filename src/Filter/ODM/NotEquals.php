@@ -10,6 +10,9 @@ namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ODM;
 
 class NotEquals extends AbstractFilter
 {
+    /**
+     * {@inheritDoc}
+     */
     public function filter($queryBuilder, $metadata, $option)
     {
         $queryType = 'addAnd';
@@ -21,7 +24,7 @@ class NotEquals extends AbstractFilter
             }
         }
 
-        $format = isset($option['format']) ? $option['format'] : null;
+        $format = $option['format'] ?? null;
 
         $value = $this->typeCastField($metadata, $option['field'], $option['value'], $format);
 

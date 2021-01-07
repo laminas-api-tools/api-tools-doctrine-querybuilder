@@ -8,12 +8,12 @@
 
 namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM;
 
+use function uniqid;
+
 class IsMemberOf extends AbstractFilter
 {
     /**
-     * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-     * @param $metadata
-     * @param $option
+     * {@inheritDoc}
      */
     public function filter($queryBuilder, $metadata, $option)
     {

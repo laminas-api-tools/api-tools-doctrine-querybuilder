@@ -10,6 +10,9 @@ namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ODM;
 
 class NotIn extends AbstractFilter
 {
+    /**
+     * {@inheritDoc}
+     */
     public function filter($queryBuilder, $metadata, $option)
     {
         $queryType = 'addAnd';
@@ -21,11 +24,11 @@ class NotIn extends AbstractFilter
             }
         }
 
-        $format = isset($option['format']) ? $option['format'] : null;
+        $format = $option['format'] ?? null;
 
         $queryValues = [];
         foreach ($option['values'] as $value) {
-            $queryValues[] = $this->typeCastField(
+            $queryValues[]             = $this->typeCastField(
                 $metadata,
                 $option['field'],
                 $value,

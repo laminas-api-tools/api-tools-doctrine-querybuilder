@@ -8,8 +8,13 @@
 
 namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM;
 
+use function uniqid;
+
 class NotIn extends AbstractFilter
 {
+    /**
+     * {@inheritDoc}
+     */
     public function filter($queryBuilder, $metadata, $option)
     {
         if (isset($option['where'])) {
@@ -28,11 +33,11 @@ class NotIn extends AbstractFilter
             $option['alias'] = 'row';
         }
 
-        $format = isset($option['format']) ? $option['format'] : null;
+        $format = $option['format'] ?? null;
 
         $queryValues = [];
         foreach ($option['values'] as $value) {
-            $queryValues[] = $this->typeCastField(
+            $queryValues[]             = $this->typeCastField(
                 $metadata,
                 $option['field'],
                 $value,

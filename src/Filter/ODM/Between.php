@@ -10,6 +10,9 @@ namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ODM;
 
 class Between extends AbstractFilter
 {
+    /**
+     * {@inheritDoc}
+     */
     public function filter($queryBuilder, $metadata, $option)
     {
         $queryType = 'addAnd';
@@ -22,7 +25,7 @@ class Between extends AbstractFilter
             }
         }
 
-        $format = isset($option['format']) ? $option['format'] : null;
+        $format = $option['format'] ?? null;
 
         $from = $this->typeCastField($metadata, $option['field'], $option['from'], $format);
         $to   = $this->typeCastField($metadata, $option['field'], $option['to'], $format);

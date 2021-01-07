@@ -14,6 +14,8 @@ use Laminas\Filter\FilterChain;
 use Laminas\Hydrator\Strategy\StrategyInterface;
 use Laminas\ServiceManager\ServiceManager;
 
+use function method_exists;
+
 /**
  * A field-specific hydrator for collections.
  *
@@ -22,8 +24,12 @@ use Laminas\ServiceManager\ServiceManager;
  */
 class CollectionLinkHydratorV3 extends AbstractCollectionStrategy implements StrategyInterface
 {
+    /** @var ServiceManager */
     protected $serviceManager;
 
+    /**
+     * @return self
+     */
     public function setServiceManager(ServiceManager $serviceManager)
     {
         $this->serviceManager = $serviceManager;
@@ -31,21 +37,28 @@ class CollectionLinkHydratorV3 extends AbstractCollectionStrategy implements Str
         return $this;
     }
 
+    /**
+     * @return ServiceManager
+     */
     public function getServiceManager()
     {
         return $this->serviceManager;
     }
 
+    /**
+     * @param object $value
+     */
     public function extract($value, ?object $object = null)
     {
         $config = $this->getServiceManager()->get('config');
-        if (! method_exists($value, 'getTypeClass')
+        if (
+            ! method_exists($value, 'getTypeClass')
             || ! isset($config['api-tools-hal']['metadata_map'][$value->getTypeClass()->name])
         ) {
             return;
         }
 
-        $config = $config['api-tools-hal']['metadata_map'][$value->getTypeClass()->name];
+        $config  = $config['api-tools-hal']['metadata_map'][$value->getTypeClass()->name];
         $mapping = $value->getMapping();
 
         $filter = new FilterChain();
@@ -64,7 +77,7 @@ class CollectionLinkHydratorV3 extends AbstractCollectionStrategy implements Str
 
         $filterValue = [
             'field' => $mapping['mappedBy'] ? : $mapping['inversedBy'],
-            'type' => isset($mapping['joinTable']) ? 'ismemberof' : 'eq',
+            'type'  => isset($mapping['joinTable']) ? 'ismemberof' : 'eq',
             'value' => $value->getOwner()->getId(),
         ];
 
@@ -79,6 +92,9 @@ class CollectionLinkHydratorV3 extends AbstractCollectionStrategy implements Str
         return $link;
     }
 
+    /**
+     * @param mixed $value
+     */
     public function hydrate($value, ?array $data = null)
     {
         // Hydration is not supported for collections.

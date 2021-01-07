@@ -8,8 +8,13 @@
 
 namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM;
 
+use function uniqid;
+
 class Equals extends AbstractFilter
 {
+    /**
+     * {@inheritDoc}
+     */
     public function filter($queryBuilder, $metadata, $option)
     {
         if (isset($option['where'])) {

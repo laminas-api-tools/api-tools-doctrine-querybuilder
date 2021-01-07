@@ -442,3 +442,46 @@ Field:
 ```php
 ['type' => 'field', 'field' => 'fieldName', 'direction' => 'desc']
 ```
+
+Custom MappingTypes
+-------------------
+
+In case you have [custom mapping types](https://www.doctrine-project.org/projects/doctrine-orm/en/latest/cookbook/custom-mapping-types.html)
+configured, you can substitute the supplied `Laminas\ApiTools\Doctrine\QueryBuilder\Filter\TypeCastInterface`
+implementation with your own implementation.
+
+As an example, given a custom type caster implentation as follows:
+
+```php
+namespace My\Custom;
+
+class TypeCaster implements \Laminas\ApiTools\Doctrine\QueryBuilder\Filter\TypeCastInterface
+{
+    public function typeCastField($metadata, $field, $value, $format = null, $doNotTypecastDatetime = false)
+    {
+        // implement your type casting logic
+    }
+}
+```
+
+You will then provide a factory for your implementation, and alias the package `TypeCastInterface` to it:
+
+```php
+// config/autoload/api-tools-doctrine-querybuilder-global.php
+
+use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\TypeCastInterface;
+use Laminas\ServiceManager\Factory\InvokableFactory;
+use My\Custom\TypeCaster;
+
+return [
+    'service_manager => [
+        'aliases' => [
+            TypeCastInterface::class => TypeCaster::class,
+        ],
+        'factories' => [
+            TypeCaster::class => InvokableFactory::class,
+        ],
+    ],
+];
+```
+

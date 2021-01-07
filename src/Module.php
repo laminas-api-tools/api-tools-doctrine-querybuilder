@@ -8,12 +8,16 @@
 
 namespace Laminas\ApiTools\Doctrine\QueryBuilder;
 
+use ArrayAccess;
 use Laminas\ModuleManager\Feature\DependencyIndicatorInterface;
 use Laminas\ModuleManager\Listener\ServiceListener;
 use Laminas\ModuleManager\ModuleManager;
 
 class Module implements DependencyIndicatorInterface
 {
+    /**
+     * @return array|ArrayAccess
+     */
     public function getConfig()
     {
         return include __DIR__ . '/../config/module.config.php';
@@ -21,7 +25,7 @@ class Module implements DependencyIndicatorInterface
 
     public function init(ModuleManager $moduleManager)
     {
-        $serviceManager  = $moduleManager->getEvent()->getParam('ServiceManager');
+        $serviceManager = $moduleManager->getEvent()->getParam('ServiceManager');
         /** @var ServiceListener $serviceListener */
         $serviceListener = $serviceManager->get('ServiceListener');
 

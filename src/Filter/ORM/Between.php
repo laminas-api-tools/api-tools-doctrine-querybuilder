@@ -8,8 +8,14 @@
 
 namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM;
 
+use function sprintf;
+use function uniqid;
+
 class Between extends AbstractFilter
 {
+    /**
+     * {@inheritDoc}
+     */
     public function filter($queryBuilder, $metadata, $option)
     {
         if (isset($option['where'])) {
@@ -28,13 +34,13 @@ class Between extends AbstractFilter
             $option['alias'] = 'row';
         }
 
-        $format = isset($option['format']) ? $option['format'] : null;
+        $format = $option['format'] ?? null;
 
         $from = $this->typeCastField($metadata, $option['field'], $option['from'], $format);
-        $to = $this->typeCastField($metadata, $option['field'], $option['to'], $format);
+        $to   = $this->typeCastField($metadata, $option['field'], $option['to'], $format);
 
         $fromParameter = uniqid('a1');
-        $toParameter = uniqid('a2');
+        $toParameter   = uniqid('a2');
 
         $queryBuilder->$queryType(
             $queryBuilder

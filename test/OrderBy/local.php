@@ -11,27 +11,27 @@ use Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
-    'doctrine' => [
+    'doctrine'                                    => [
         'connection' => [
             'orm_default' => [
                 'configuration' => 'orm_default',
                 'eventmanager'  => 'orm_default',
                 'driverClass'   => Driver::class,
-                'params' => [
+                'params'        => [
                     'memory' => true,
                 ],
             ],
             'odm_default' => [
-                'server' => 'localhost',
-                'port' => '27017',
-                'user' => '',
+                'server'   => 'localhost',
+                'port'     => '27017',
+                'user'     => '',
                 'password' => '',
-                'dbname' => 'laminas_doctrine_querybuilder_filter_test',
+                'dbname'   => 'laminas_doctrine_querybuilder_filter_test',
             ],
         ],
     ],
     'api-tools-doctrine-querybuilder-orderby-orm' => [
-        'aliases' => [
+        'aliases'   => [
             'field' => OrderBy\ORM\Field::class,
         ],
         'factories' => [
@@ -39,7 +39,7 @@ return [
         ],
     ],
     'api-tools-doctrine-querybuilder-orderby-odm' => [
-        'aliases' => [
+        'aliases'   => [
             'field' => OrderBy\ODM\Field::class,
         ],
         'factories' => [

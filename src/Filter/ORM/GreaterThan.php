@@ -8,8 +8,13 @@
 
 namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ORM;
 
+use function uniqid;
+
 class GreaterThan extends AbstractFilter
 {
+    /**
+     * {@inheritDoc}
+     */
     public function filter($queryBuilder, $metadata, $option)
     {
         if (isset($option['where'])) {
@@ -28,7 +33,7 @@ class GreaterThan extends AbstractFilter
             $option['alias'] = 'row';
         }
 
-        $format = isset($option['format']) ? $option['format'] : null;
+        $format = $option['format'] ?? null;
 
         $value = $this->typeCastField($metadata, $option['field'], $option['value'], $format);
 

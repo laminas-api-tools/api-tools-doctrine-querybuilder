@@ -23,7 +23,7 @@ class DefaultOrmFactoryTest extends TestCase
     {
         $serviceLocator = $this->prophesize(ServiceLocatorInterface::class)->reveal();
 
-        $factory = new DefaultOrmFactory();
+        $factory  = new DefaultOrmFactory();
         $provider = $factory($serviceLocator);
 
         $this->assertInstanceOf(DefaultOrm::class, $provider);
@@ -31,11 +31,11 @@ class DefaultOrmFactoryTest extends TestCase
 
     public function testInvokableFactoryReturnsDefaultOrmQueryProviderWhenCreatedViaAbstractPluginManager(): void
     {
-        $serviceLocator = $this->prophesize(ServiceLocatorInterface::class)->reveal();
+        $serviceLocator        = $this->prophesize(ServiceLocatorInterface::class)->reveal();
         $abstractPluginManager = $this->prophesize(AbstractPluginManager::class);
         $abstractPluginManager->getServiceLocator()->willReturn($serviceLocator);
 
-        $factory = new DefaultOrmFactory();
+        $factory  = new DefaultOrmFactory();
         $provider = $factory($abstractPluginManager->reveal());
 
         $this->assertInstanceOf(DefaultOrm::class, $provider);

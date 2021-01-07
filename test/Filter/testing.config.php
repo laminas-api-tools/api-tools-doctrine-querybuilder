@@ -15,7 +15,7 @@ return [
                 'configuration' => 'orm_default',
                 'eventmanager'  => 'orm_default',
                 'driverClass'   => Driver::class,
-                'params' => [
+                'params'        => [
                     'memory' => true,
                 ],
             ],

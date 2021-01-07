@@ -11,17 +11,27 @@ namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\Service;
 use Doctrine\ODM\MongoDB\Mapping\ClassMetadata as Metadata;
 use Doctrine\ODM\MongoDB\Query\Builder as QueryBuilder;
 use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\FilterInterface;
+use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\ODM\TypeCaster;
+use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\TypeCastInterface;
 use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\Exception;
 use RuntimeException;
 
+use function get_class;
+use function gettype;
+use function is_object;
+use function property_exists;
+use function sprintf;
+use function strtolower;
+
 class ODMFilterManager extends AbstractPluginManager
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $instanceOf = FilterInterface::class;
 
+    /**
+     * @param iterable $filters
+     */
     public function filter(QueryBuilder $queryBuilder, Metadata $metadata, $filters)
     {
         foreach ($filters as $option) {
@@ -29,7 +39,13 @@ class ODMFilterManager extends AbstractPluginManager
                 throw new RuntimeException('Array element "type" is required for all filters');
             }
 
-            $filter = $this->get(strtolower($option['type']), [$this]);
+            $typeCaster = $this->resolveTypeCaster();
+
+            $filter = $this->get(strtolower($option['type']), [
+                0                => $this,
+                'filter_manager' => $this,
+                'type_caster'    => $typeCaster,
+            ]);
             $filter->filter($queryBuilder, $metadata, $option);
         }
     }
@@ -48,7 +64,7 @@ class ODMFilterManager extends AbstractPluginManager
         if (! $instance instanceof $this->instanceOf) {
             throw new Exception\InvalidServiceException(sprintf(
                 '%s can only create instances of %s; %s is invalid',
-                get_class($this),
+                static::class,
                 $this->instanceOf,
                 is_object($instance) ? get_class($instance) : gettype($instance)
             ));
@@ -71,5 +87,19 @@ class ODMFilterManager extends AbstractPluginManager
         } catch (Exception\InvalidServiceException $e) {
             throw new Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
+    }
+
+    /**
+     * @return TypeCastInterface
+     */
+    protected function resolveTypeCaster()
+    {
+        if (property_exists($this, 'creationContext')) {
+            $serviceLocator = $this->creationContext;
+        } else {
+            $serviceLocator = $this->getServiceLocator();
+        }
+
+        return $serviceLocator->get(TypeCaster::class);
     }
 }

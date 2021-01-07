@@ -8,6 +8,7 @@
 
 namespace Laminas\ApiTools\Doctrine\QueryBuilder\Query\Provider;
 
+use Doctrine\ODM\MongoDB\Query\Builder;
 use Laminas\ApiTools\Doctrine\QueryBuilder\Filter\Service\ODMFilterManager;
 use Laminas\ApiTools\Doctrine\QueryBuilder\OrderBy\Service\ODMOrderByManager;
 use Laminas\ApiTools\Doctrine\Server\Paginator\Adapter\DoctrineOdmAdapter;
@@ -18,15 +19,12 @@ use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class DefaultOdm extends AbstractQueryProvider implements QueryProviderInterface
 {
-    /**
-     * @var ServiceLocatorInterface
-     */
+    /** @var ServiceLocatorInterface */
     protected $serviceLocator;
 
     /**
      * Set service locator
      *
-     * @param ServiceLocatorInterface $serviceLocator
      * @return self
      */
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
@@ -78,27 +76,23 @@ class DefaultOdm extends AbstractQueryProvider implements QueryProviderInterface
     }
 
     /**
-     * @param $queryBuilder
+     * @param Builder $queryBuilder
      * @return DoctrineOdmAdapter
      */
     public function getPaginatedQuery($queryBuilder)
     {
-        $adapter = new DoctrineOdmAdapter($queryBuilder);
-
-        return $adapter;
+        return new DoctrineOdmAdapter($queryBuilder);
     }
 
     /**
-     * @param $entityClass
+     * @param string $entityClass
      * @return int
      */
     public function getCollectionTotal($entityClass)
     {
         $queryBuilder = $this->getObjectManager()->createQueryBuilder();
         $queryBuilder->find($entityClass);
-        $count = $queryBuilder->getQuery()->execute()->count();
-
-        return $count;
+        return $queryBuilder->getQuery()->execute()->count();
     }
 
     /**

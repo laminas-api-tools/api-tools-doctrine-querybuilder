@@ -17,15 +17,12 @@ use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class DefaultOrm extends AbstractQueryProvider implements QueryProviderInterface
 {
-    /**
-     * @var ServiceLocatorInterface
-     */
+    /** @var ServiceLocatorInterface */
     protected $serviceLocator;
 
     /**
      * Set service locator
      *
-     * @param ServiceLocatorInterface $serviceLocator
      * @return self
      */
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
@@ -50,7 +47,7 @@ class DefaultOrm extends AbstractQueryProvider implements QueryProviderInterface
      */
     public function createQuery(ResourceEvent $event, $entityClass, $parameters)
     {
-        $request = $event->getRequest()->getQuery()->toArray();
+        $request      = $event->getRequest()->getQuery()->toArray();
         $queryBuilder = $this->getObjectManager()->createQueryBuilder();
         $queryBuilder->select('row')
             ->from($entityClass, 'row');

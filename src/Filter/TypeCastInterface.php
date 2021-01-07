@@ -6,11 +6,20 @@
  * @license   https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/blob/master/LICENSE.md New BSD License
  */
 
-namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter\Service;
+namespace Laminas\ApiTools\Doctrine\QueryBuilder\Filter;
 
-use Laminas\Mvc\Service\AbstractPluginManagerFactory;
-
-class ORMFilterManagerFactory extends AbstractPluginManagerFactory
+interface TypeCastInterface
 {
-    public const PLUGIN_MANAGER_CLASS = ORMFilterManager::class;
+    /**
+     * @param object $metadata
+     * @param string|int|float $value
+     * @return mixed
+     */
+    public function typeCastField(
+        $metadata,
+        string $field,
+        $value,
+        ?string $format = null,
+        bool $doNotTypecastDatetime = false
+    );
 }
