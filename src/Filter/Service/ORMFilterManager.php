@@ -31,6 +31,7 @@ class ORMFilterManager extends AbstractPluginManager
     /**
      * @param object $metadata
      * @param iterable $filters
+     * @return void
      */
     public function filter(QueryBuilder $queryBuilder, $metadata, $filters)
     {

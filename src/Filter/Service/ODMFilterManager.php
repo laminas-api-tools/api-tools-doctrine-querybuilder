@@ -31,6 +31,7 @@ class ODMFilterManager extends AbstractPluginManager
 
     /**
      * @param iterable $filters
+     * @return void
      */
     public function filter(QueryBuilder $queryBuilder, Metadata $metadata, $filters)
     {

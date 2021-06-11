@@ -31,7 +31,10 @@ class Artist
         return $this->name;
     }
 
-    public function setName($value)
+    /**
+     * @return static
+     */
+    public function setName(string $value): self
     {
         $this->name = $value;
 
@@ -43,7 +46,10 @@ class Artist
         return $this->createdAt;
     }
 
-    public function setCreatedAt(DateTime $value)
+    /**
+     * @return static
+     */
+    public function setCreatedAt(DateTime $value): self
     {
         $this->createdAt = $value;
 
@@ -82,9 +88,12 @@ class Artist
      * Remove album
      *
      * @param Album $album
+     *
      * @throws Exception
+     *
+     * @return void
      */
-    public function removeAlbum($album)
+    public function removeAlbum($album): void
     {
         if ($album instanceof Album) {
             $this->album[] = $album;

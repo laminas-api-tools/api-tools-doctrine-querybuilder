@@ -78,7 +78,7 @@ class ODMOrderByTest extends TestCase
         $objectManager->flush();
     }
 
-    public function testField()
+    public function testField(): void
     {
         $orderBy = [
             ['type' => 'field', 'field' => 'name', 'direction' => 'asc'],

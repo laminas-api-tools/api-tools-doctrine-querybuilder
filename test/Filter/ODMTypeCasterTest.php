@@ -24,7 +24,7 @@ class ODMTypeCasterTest extends TestCase
         $this->typeCaster = new TypeCaster();
     }
 
-    public function testTypeCastingToInteger()
+    public function testTypeCastingToInteger(): void
     {
         $metadata                = new stdClass();
         $metadata->fieldMappings = [
@@ -42,7 +42,7 @@ class ODMTypeCasterTest extends TestCase
         $this->assertSame(2144211244, $result);
     }
 
-    public function testTypeCastingToBoolean()
+    public function testTypeCastingToBoolean(): void
     {
         $metadata                = new stdClass();
         $metadata->fieldMappings = [
@@ -64,7 +64,7 @@ class ODMTypeCasterTest extends TestCase
         $this->assertSame(false, $result);
     }
 
-    public function testTypeCastingToFloat()
+    public function testTypeCastingToFloat(): void
     {
         $metadata                = new stdClass();
         $metadata->fieldMappings = [
@@ -82,7 +82,7 @@ class ODMTypeCasterTest extends TestCase
         $this->assertSame(1.242, $result);
     }
 
-    public function testTypeCastingToString()
+    public function testTypeCastingToString(): void
     {
         $metadata                = new stdClass();
         $metadata->fieldMappings = [
@@ -101,7 +101,7 @@ class ODMTypeCasterTest extends TestCase
         $this->assertSame('1', $result);
     }
 
-    public function testTypeCastingToDate()
+    public function testTypeCastingToDate(): void
     {
         $metadata                = new stdClass();
         $metadata->fieldMappings = [
@@ -120,7 +120,7 @@ class ODMTypeCasterTest extends TestCase
         $this->assertEquals($result->format('Y-m-d H:i:s'), '2019-09-01 12:19:01');
     }
 
-    public function testNoTypeCastingToDateWhenFlaggedSo()
+    public function testNoTypeCastingToDateWhenFlaggedSo(): void
     {
         $metadata                = new stdClass();
         $metadata->fieldMappings = [
@@ -138,7 +138,7 @@ class ODMTypeCasterTest extends TestCase
         $this->assertSame($result, $value);
     }
 
-    public function testTypeCastingToDateImmutable()
+    public function testTypeCastingToDateImmutable(): void
     {
         $metadata                = new stdClass();
         $metadata->fieldMappings = [
@@ -157,7 +157,7 @@ class ODMTypeCasterTest extends TestCase
         $this->assertEquals($result->format('Y-m-d H:i:s'), '2019-09-01 12:19:01');
     }
 
-    public function testNoTypeCastingToDateImmutableWhenFlaggedSo()
+    public function testNoTypeCastingToDateImmutableWhenFlaggedSo(): void
     {
         $metadata                = new stdClass();
         $metadata->fieldMappings = [
