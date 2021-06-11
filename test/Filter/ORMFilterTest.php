@@ -101,7 +101,7 @@ class ORMFilterTest extends TestCase
         $objectManager->flush();
     }
 
-    public function testOrX()
+    public function testOrX(): void
     {
         $filters = [
             [
@@ -149,7 +149,7 @@ class ORMFilterTest extends TestCase
         self::assertEquals(1, $this->countResult($filters));
     }
 
-    public function testAndX()
+    public function testAndX(): void
     {
         $filters = [
             [
@@ -198,7 +198,7 @@ class ORMFilterTest extends TestCase
         self::assertEquals(2, $this->countResult($filters));
     }
 
-    public function testEquals()
+    public function testEquals(): void
     {
         $filters = [
             [
@@ -242,7 +242,7 @@ class ORMFilterTest extends TestCase
         self::assertEquals(2, $this->countResult($filters));
     }
 
-    public function testNotEquals()
+    public function testNotEquals(): void
     {
         $filters = [
             [
@@ -286,7 +286,7 @@ class ORMFilterTest extends TestCase
         self::assertEquals(2, $this->countResult($filters));
     }
 
-    public function testLessThan()
+    public function testLessThan(): void
     {
         $filters = [
             [
@@ -328,7 +328,7 @@ class ORMFilterTest extends TestCase
         self::assertEquals(3, $this->countResult($filters));
     }
 
-    public function testLessThanOrEquals()
+    public function testLessThanOrEquals(): void
     {
         $filters = [
             [
@@ -380,7 +380,7 @@ class ORMFilterTest extends TestCase
         self::assertEquals(4, $this->countResult($filters));
     }
 
-    public function testGreaterThan()
+    public function testGreaterThan(): void
     {
         $filters = [
             [
@@ -425,7 +425,7 @@ class ORMFilterTest extends TestCase
         self::assertEquals(1, $this->countResult($filters));
     }
 
-    public function testGreaterThanOrEquals()
+    public function testGreaterThanOrEquals(): void
     {
         $filters = [
             [
@@ -479,10 +479,10 @@ class ORMFilterTest extends TestCase
         self::assertEquals(3, $this->countResult($filters));
     }
 
-    public function testIsNull()
+    public function testIsNull(): void
     {
         $serviceManager = $this->getApplication()->getServiceManager();
-        $objectManager  = $serviceManager->get('doctrine.entitymanager.orm_default');
+        $serviceManager->get('doctrine.entitymanager.orm_default');
 
         $filters = [
             [
@@ -520,7 +520,7 @@ class ORMFilterTest extends TestCase
         self::assertEquals(2, $this->countResult($filters));
     }
 
-    public function testIsNotNull()
+    public function testIsNotNull(): void
     {
         $filters = [
             [
@@ -558,7 +558,7 @@ class ORMFilterTest extends TestCase
         self::assertEquals(5, $this->countResult($filters));
     }
 
-    public function testIn()
+    public function testIn(): void
     {
         $filters = [
             [
@@ -597,7 +597,7 @@ class ORMFilterTest extends TestCase
         self::assertEquals(1, $this->countResult($filters));
     }
 
-    public function testNotIn()
+    public function testNotIn(): void
     {
         $filters = [
             [
@@ -638,7 +638,7 @@ class ORMFilterTest extends TestCase
         self::assertEquals(3, $this->countResult($filters));
     }
 
-    public function testBetween()
+    public function testBetween(): void
     {
         $filters = [
             [
@@ -771,7 +771,7 @@ class ORMFilterTest extends TestCase
         self::assertEquals(1, $this->countResult($filters));
     }
 
-    public function testIsMemberOf()
+    public function testIsMemberOf(): void
     {
         $albumOneId = $this->objectManager
             ->getRepository('Db\Entity\Album')
@@ -803,7 +803,7 @@ class ORMFilterTest extends TestCase
         self::assertEquals(0, $this->countResult($filters));
     }
 
-    public function testInnerJoin()
+    public function testInnerJoin(): void
     {
         $filters = [
             [
@@ -852,7 +852,7 @@ class ORMFilterTest extends TestCase
         self::assertEquals(2, $this->countResult($filters, Album::class));
     }
 
-    public function testLeftJoin()
+    public function testLeftJoin(): void
     {
         $filters = [
             [

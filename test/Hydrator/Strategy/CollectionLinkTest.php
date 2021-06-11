@@ -208,7 +208,7 @@ class CollectionLinkTest extends TestCase
      * @param array $mapping
      * @param array $expected
      */
-    public function testStuff(array $mapping, array $expected)
+    public function testStuff(array $mapping, array $expected): void
     {
         $this->mockValue->expects($this->any())
                 ->method('getMapping')

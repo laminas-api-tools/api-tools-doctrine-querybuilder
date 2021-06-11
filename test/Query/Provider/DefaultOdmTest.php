@@ -56,7 +56,7 @@ class DefaultOdmTest extends TestCase
         $this->provider->setObjectManager($this->objectManager->reveal());
     }
 
-    public function testCreateQueryWithoutParams()
+    public function testCreateQueryWithoutParams(): void
     {
         $resourceEvent = $this->getResourceEvent();
 
@@ -65,7 +65,7 @@ class DefaultOdmTest extends TestCase
         $this->assertInstanceOf(QueryBuilder::class, $result);
     }
 
-    public function testCreateQueryWithFilterParameter()
+    public function testCreateQueryWithFilterParameter(): void
     {
         $entityClass = 'foo.entity.class';
 
@@ -90,7 +90,7 @@ class DefaultOdmTest extends TestCase
         $this->assertSame($this->queryBuilder->reveal(), $result);
     }
 
-    public function testCreateQueryWithRenamedFilterParameter()
+    public function testCreateQueryWithRenamedFilterParameter(): void
     {
         $entityClass = 'foo.entity.class';
 
@@ -119,7 +119,7 @@ class DefaultOdmTest extends TestCase
         $this->assertSame($this->queryBuilder->reveal(), $result);
     }
 
-    public function testCreateQueryWithOrderByParameter()
+    public function testCreateQueryWithOrderByParameter(): void
     {
         $entityClass = 'foo.entity.class';
 
@@ -144,7 +144,7 @@ class DefaultOdmTest extends TestCase
         $this->assertSame($this->queryBuilder->reveal(), $result);
     }
 
-    public function testCreateQueryWithRenamedOrderByParameter()
+    public function testCreateQueryWithRenamedOrderByParameter(): void
     {
         $entityClass = 'foo.entity.class';
 
@@ -173,7 +173,7 @@ class DefaultOdmTest extends TestCase
         $this->assertSame($this->queryBuilder->reveal(), $result);
     }
 
-    public function testCreateQueryWithFilterAndOrderByParameters()
+    public function testCreateQueryWithFilterAndOrderByParameters(): void
     {
         $entityClass = 'foo.entity.class';
 
@@ -206,14 +206,14 @@ class DefaultOdmTest extends TestCase
         $this->assertSame($this->queryBuilder->reveal(), $result);
     }
 
-    public function testGetPaginatedQuery()
+    public function testGetPaginatedQuery(): void
     {
         $adapter = $this->provider->getPaginatedQuery($this->queryBuilder->reveal());
 
         $this->assertInstanceOf(DoctrineOdmAdapter::class, $adapter);
     }
 
-    public function testGetCollectionTotal()
+    public function testGetCollectionTotal(): void
     {
         $entityClass = 'foo.entity.class';
 
