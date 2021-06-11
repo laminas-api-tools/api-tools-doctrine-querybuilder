@@ -23,6 +23,7 @@ class Module implements DependencyIndicatorInterface
         return include __DIR__ . '/../config/module.config.php';
     }
 
+    /** @return void */
     public function init(ModuleManager $moduleManager)
     {
         $serviceManager = $moduleManager->getEvent()->getParam('ServiceManager');

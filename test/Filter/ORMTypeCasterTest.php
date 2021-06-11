@@ -24,7 +24,7 @@ class ORMTypeCasterTest extends TestCase
         $this->typeCaster = new TypeCaster();
     }
 
-    public function testTypeCastingToString()
+    public function testTypeCastingToString(): void
     {
         $metadata                = new stdClass();
         $metadata->fieldMappings = [
@@ -43,7 +43,7 @@ class ORMTypeCasterTest extends TestCase
         $this->assertSame('1', $result);
     }
 
-    public function testTypeCastingToInteger()
+    public function testTypeCastingToInteger(): void
     {
         $metadata                = new stdClass();
         $metadata->fieldMappings = [
@@ -61,7 +61,7 @@ class ORMTypeCasterTest extends TestCase
         $this->assertSame(2144211244, $result);
     }
 
-    public function testTypeCastingToSmallint()
+    public function testTypeCastingToSmallint(): void
     {
         $metadata                = new stdClass();
         $metadata->fieldMappings = [
@@ -79,7 +79,7 @@ class ORMTypeCasterTest extends TestCase
         $this->assertSame(2, $result);
     }
 
-    public function testTypeCastingToBoolean()
+    public function testTypeCastingToBoolean(): void
     {
         $metadata                = new stdClass();
         $metadata->fieldMappings = [
@@ -101,7 +101,7 @@ class ORMTypeCasterTest extends TestCase
         $this->assertSame(false, $result);
     }
 
-    public function testTypeCastingToDecimal()
+    public function testTypeCastingToDecimal(): void
     {
         $metadata                = new stdClass();
         $metadata->fieldMappings = [
@@ -119,7 +119,7 @@ class ORMTypeCasterTest extends TestCase
         $this->assertSame(1.141, $result);
     }
 
-    public function testTypeCastingToFloat()
+    public function testTypeCastingToFloat(): void
     {
         $metadata                = new stdClass();
         $metadata->fieldMappings = [
@@ -137,7 +137,7 @@ class ORMTypeCasterTest extends TestCase
         $this->assertSame(1.242, $result);
     }
 
-    public function testTypeCastingToDate()
+    public function testTypeCastingToDate(): void
     {
         $metadata                = new stdClass();
         $metadata->fieldMappings = [
@@ -157,7 +157,7 @@ class ORMTypeCasterTest extends TestCase
         $this->assertEquals($result->format('H:i:s'), '00:00:00');
     }
 
-    public function testNoTypeCastingToDateWhenFlaggedSo()
+    public function testNoTypeCastingToDateWhenFlaggedSo(): void
     {
         $metadata                = new stdClass();
         $metadata->fieldMappings = [
@@ -175,7 +175,7 @@ class ORMTypeCasterTest extends TestCase
         $this->assertSame($result, $value);
     }
 
-    public function testTypeCastingToDateImmutable()
+    public function testTypeCastingToDateImmutable(): void
     {
         $metadata                = new stdClass();
         $metadata->fieldMappings = [
@@ -195,7 +195,7 @@ class ORMTypeCasterTest extends TestCase
         $this->assertEquals($result->format('H:i:s'), '00:00:00');
     }
 
-    public function testNoTypeCastingToDateImmutableWhenFlaggedSo()
+    public function testNoTypeCastingToDateImmutableWhenFlaggedSo(): void
     {
         $metadata                = new stdClass();
         $metadata->fieldMappings = [
@@ -213,7 +213,7 @@ class ORMTypeCasterTest extends TestCase
         $this->assertSame($result, $value);
     }
 
-    public function testTypeCastingToTime()
+    public function testTypeCastingToTime(): void
     {
         $metadata                = new stdClass();
         $metadata->fieldMappings = [
@@ -232,7 +232,7 @@ class ORMTypeCasterTest extends TestCase
         $this->assertEquals($result->format('H:i:s'), '12:01:55');
     }
 
-    public function testNoTypeCastingToTimeWhenFlaggedSo()
+    public function testNoTypeCastingToTimeWhenFlaggedSo(): void
     {
         $metadata                = new stdClass();
         $metadata->fieldMappings = [
@@ -250,7 +250,7 @@ class ORMTypeCasterTest extends TestCase
         $this->assertSame($result, $value);
     }
 
-    public function testTypeCastingToTimeImmutable()
+    public function testTypeCastingToTimeImmutable(): void
     {
         $metadata                = new stdClass();
         $metadata->fieldMappings = [
@@ -269,7 +269,7 @@ class ORMTypeCasterTest extends TestCase
         $this->assertEquals($result->format('H:i:s'), '12:01:55');
     }
 
-    public function testNoTypeCastingToTimeImmutableWhenFlaggedSo()
+    public function testNoTypeCastingToTimeImmutableWhenFlaggedSo(): void
     {
         $metadata                = new stdClass();
         $metadata->fieldMappings = [
@@ -287,7 +287,7 @@ class ORMTypeCasterTest extends TestCase
         $this->assertSame($result, $value);
     }
 
-    public function testTypeCastingToDateTime()
+    public function testTypeCastingToDateTime(): void
     {
         $metadata                = new stdClass();
         $metadata->fieldMappings = [
@@ -307,7 +307,7 @@ class ORMTypeCasterTest extends TestCase
         $this->assertEquals($result->format('H:i:s'), '12:03:44');
     }
 
-    public function testNoTypeCastingToDateTimeWhenFlaggedSo()
+    public function testNoTypeCastingToDateTimeWhenFlaggedSo(): void
     {
         $metadata                = new stdClass();
         $metadata->fieldMappings = [
@@ -325,7 +325,7 @@ class ORMTypeCasterTest extends TestCase
         $this->assertSame($result, $value);
     }
 
-    public function testTypeCastingToDateTimeImmutable()
+    public function testTypeCastingToDateTimeImmutable(): void
     {
         $metadata                = new stdClass();
         $metadata->fieldMappings = [
@@ -345,7 +345,7 @@ class ORMTypeCasterTest extends TestCase
         $this->assertEquals($result->format('H:i:s'), '12:03:44');
     }
 
-    public function testNoTypeCastingToDateTimeImmutableWhenFlaggedSo()
+    public function testNoTypeCastingToDateTimeImmutableWhenFlaggedSo(): void
     {
         $metadata                = new stdClass();
         $metadata->fieldMappings = [
@@ -363,7 +363,7 @@ class ORMTypeCasterTest extends TestCase
         $this->assertSame($result, $value);
     }
 
-    public function testTypeCastingForUnknownFieldType()
+    public function testTypeCastingForUnknownFieldType(): void
     {
         $metadata                = new stdClass();
         $metadata->fieldMappings = [
