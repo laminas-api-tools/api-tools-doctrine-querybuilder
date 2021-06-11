@@ -22,7 +22,7 @@ return [
                 ],
             ],
             'odm_default' => [
-                'server'   => 'localhost',
+                'server'   => 'mongodb',
                 'port'     => '27017',
                 'user'     => '',
                 'password' => '',

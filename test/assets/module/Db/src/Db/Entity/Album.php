@@ -24,7 +24,10 @@ class Album
         return $this->name;
     }
 
-    public function setName($value)
+    /**
+     * @return static
+     */
+    public function setName(string $value): self
     {
         $this->name = $value;
 
@@ -36,7 +39,10 @@ class Album
         return $this->createdAt;
     }
 
-    public function setCreatedAt(DateTime $value)
+    /**
+     * @return static
+     */
+    public function setCreatedAt(DateTime $value): self
     {
         $this->createdAt = $value;
 
@@ -48,7 +54,10 @@ class Album
         return $this->artist;
     }
 
-    public function setArtist($value)
+    /**
+     * @return static
+     */
+    public function setArtist(Artist $value): self
     {
         $this->artist = $value;
 

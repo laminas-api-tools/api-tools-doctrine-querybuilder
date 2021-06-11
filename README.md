@@ -1,9 +1,7 @@
 Laminas Doctrine QueryBuilder
 ========================
 
-[![Build Status](https://travis-ci.com/laminas-api-tools/api-tools-doctrine-querybuilder.svg)](https://travis-ci.com/laminas-api-tools/api-tools-doctrine-querybuilder)
-[![Coverage Status](https://coveralls.io/repos/github/laminas-api-tools/api-tools-doctrine-querybuilder/badge.svg)](https://coveralls.io/github/laminas-api-tools/api-tools-doctrine-querybuilder)
-[![Total Downloads](https://poser.pugx.org/laminas-api-tools/api-tools-doctrine-querybuilder/downloads)](https://packagist.org/packages/laminas-api-tools/api-tools-doctrine-querybuilder)
+[![Build Status](https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/laminas-api-tools/api-tools-doctrine-querybuilder/actions/workflows/continuous-integration.yml)
 
 This library provides query builder directives from array parameters. This library was designed
 to apply filters from an HTTP request to give an API fluent filter and order-by dialects.

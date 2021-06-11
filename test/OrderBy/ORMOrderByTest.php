@@ -48,7 +48,7 @@ class ORMOrderByTest extends TestCase
         $objectManager  = $serviceManager->get('doctrine.entitymanager.orm_default');
 
         $tool = new SchemaTool($objectManager);
-        $res  = $tool->createSchema($objectManager->getMetadataFactory()->getAllMetadata());
+        $tool->createSchema($objectManager->getMetadataFactory()->getAllMetadata());
 
         $artist1 = new Entity\Artist();
         $artist1->setName('ABBA');
@@ -77,7 +77,7 @@ class ORMOrderByTest extends TestCase
         $objectManager->flush();
     }
 
-    public function testField()
+    public function testField(): void
     {
         $orderBy = [
             [

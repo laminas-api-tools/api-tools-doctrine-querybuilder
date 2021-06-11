@@ -81,7 +81,7 @@ class ODMFilterTest extends TestCase
         $objectManager->flush();
     }
 
-    public function testEquals()
+    public function testEquals(): void
     {
         $filters = [
             ['field' => 'name', 'type' => 'eq', 'value' => 'MetaOne'],
@@ -121,7 +121,7 @@ class ODMFilterTest extends TestCase
         $this->assertEquals(2, $this->countResult($filters));
     }
 
-    public function testNotEquals()
+    public function testNotEquals(): void
     {
         $filters = [
             ['field' => 'name', 'type' => 'neq', 'value' => 'MetaOne'],
@@ -161,7 +161,7 @@ class ODMFilterTest extends TestCase
         $this->assertEquals(3, $this->countResult($filters));
     }
 
-    public function testLessThan()
+    public function testLessThan(): void
     {
         $filters = [
             [
@@ -203,7 +203,7 @@ class ODMFilterTest extends TestCase
         $this->assertEquals(3, $this->countResult($filters));
     }
 
-    public function testLessThanOrEquals()
+    public function testLessThanOrEquals(): void
     {
         $filters = [
             [
@@ -255,7 +255,7 @@ class ODMFilterTest extends TestCase
         $this->assertEquals(4, $this->countResult($filters));
     }
 
-    public function testGreaterThan()
+    public function testGreaterThan(): void
     {
         $filters = [
             [
@@ -300,7 +300,7 @@ class ODMFilterTest extends TestCase
         $this->assertEquals(1, $this->countResult($filters));
     }
 
-    public function testGreaterThanOrEquals()
+    public function testGreaterThanOrEquals(): void
     {
         $filters = [
             [
@@ -354,7 +354,7 @@ class ODMFilterTest extends TestCase
         $this->assertEquals(3, $this->countResult($filters));
     }
 
-    public function testIsNull()
+    public function testIsNull(): void
     {
         $filters = [
             [
@@ -425,7 +425,7 @@ class ODMFilterTest extends TestCase
         $this->assertEquals(5, $this->countResult($filters));
     }
 
-    public function testIsNotNull()
+    public function testIsNotNull(): void
     {
         $filters = [
             [
@@ -496,7 +496,7 @@ class ODMFilterTest extends TestCase
         $this->assertEquals(0, $this->countResult($filters));
     }
 
-    public function testIn()
+    public function testIn(): void
     {
         // Date handling in IN and NOTIN doesn't seem to work at all, so just test with strings
 
@@ -541,7 +541,7 @@ class ODMFilterTest extends TestCase
         $this->assertEquals(1, $this->countResult($filters));
     }
 
-    public function testNotIn()
+    public function testNotIn(): void
     {
         $filters = [
             [
@@ -585,7 +585,7 @@ class ODMFilterTest extends TestCase
         $this->assertEquals(4, $this->countResult($filters));
     }
 
-    public function testBetween()
+    public function testBetween(): void
     {
         $filters = [
             [
@@ -626,7 +626,7 @@ class ODMFilterTest extends TestCase
         $this->assertEquals(2, $this->countResult($filters));
     }
 
-    public function testLike()
+    public function testLike(): void
     {
         $filters = [
             [
@@ -677,7 +677,7 @@ class ODMFilterTest extends TestCase
         $this->assertEquals(4, $this->countResult($filters));
     }
 
-    public function testRegex()
+    public function testRegex(): void
     {
         $filters = [
             [
