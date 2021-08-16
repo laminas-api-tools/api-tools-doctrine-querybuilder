@@ -8,7 +8,7 @@
 
 namespace LaminasTest\ApiTools\Doctrine\QueryBuilder\Hydrator\Strategy;
 
-use laminas\apitools\doctrine\querybuilder\hydrator\strategy\collectionlink;
+use Laminas\ApiTools\Doctrine\QueryBuilder\Hydrator\Strategy\Collectionlink;
 use Laminas\ServiceManager\ServiceManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -22,7 +22,7 @@ class CollectionLinkTest extends TestCase
     /** @var stdClass|MockObject */
     private $mockValue;
 
-    /** @var collectionlink */
+    /** @var Collectionlink */
     private $hydrator;
 
     public function setUp(): void
@@ -70,7 +70,7 @@ class CollectionLinkTest extends TestCase
         $mock = $this->prophesize(ServiceManager::class);
         $mock->get('config')->willReturn($config);
 
-        $this->hydrator = new collectionlink();
+        $this->hydrator = new Collectionlink();
         $this->hydrator->setServiceManager($mock->reveal());
     }
 
