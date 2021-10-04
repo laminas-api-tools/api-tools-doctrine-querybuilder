@@ -8,7 +8,7 @@
 
 namespace Laminas\ApiTools\Doctrine\QueryBuilder\Hydrator\Strategy;
 
-use Doctrine\Laminas\Hydrator\Strategy\AbstractCollectionStrategy;
+use DoctrineModule\Stdlib\Hydrator\Strategy\AbstractCollectionStrategy;
 use Laminas\ApiTools\Hal\Link\Link;
 use Laminas\Filter\FilterChain;
 use Laminas\Hydrator\Strategy\StrategyInterface;
