@@ -29,7 +29,7 @@
         }
     },
     "require": {
-        "php": "^7.3 || ~8.0.0",
+        "php": "^7.3 || ~8.0",
         "doctrine/doctrine-module": "^2.1.8 || ^3.0.1 || ^4.1.0",
         "laminas-api-tools/api-tools-api-problem": "^1.2.2",
         "laminas-api-tools/api-tools-doctrine": "^2.1",
